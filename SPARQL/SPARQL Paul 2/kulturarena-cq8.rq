@@ -1,0 +1,16 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <http://example.org/kulturarena/>
+
+SELECT DISTINCT ?artist
+WHERE {
+  {
+    SELECT ?country (MAX(?population) AS ?maxPopulation)
+    WHERE {
+      ?country ex:Einwohner ?population
+  }
+    GROUP BY ?country
+    ORDER BY DESC (xsd:float(?maxPopulation))
+    LIMIT 1
+  }
+  ?artist ex:ausLand ?country.
+}

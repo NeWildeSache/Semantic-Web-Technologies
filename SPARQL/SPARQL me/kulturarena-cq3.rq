@@ -1,0 +1,16 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX : <http://example.org/kulturarena/>
+SELECT ?land ?landname ?count WHERE {
+  ?land :hatName ?landname .
+  {
+  	SELECT ?land (COUNT(distinct ?Konzert) as ?count) WHERE{
+      	?Konzert :hatMusikdarbieter ?darbieter ;
+               :fandStattImJahr ?jahr .
+      	?darbieter :hatName ?name ;
+                 :kommtAus ?land .
+      	FILTER(?jahr="2015"^^xsd:gYear) .
+	} GROUP BY (?land)
+  }
+} 
+

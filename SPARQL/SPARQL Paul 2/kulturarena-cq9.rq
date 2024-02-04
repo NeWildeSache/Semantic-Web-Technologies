@@ -1,0 +1,12 @@
+PREFIX ex: <http://example.org/kulturarena/>
+
+SELECT ?date (AVG(?age) AS ?averageAge)
+WHERE {
+  ?concert ex:hatKuenstler ?artist.
+  ?artist ex:Geburtsjahr ?birthYear.
+  ?concert ex:hatDatum ?date.
+  BIND(abs(?date - ?birthYear) AS ?age)
+}
+GROUP BY ?date
+ORDER BY DESC(?averageAge)
+LIMIT 1

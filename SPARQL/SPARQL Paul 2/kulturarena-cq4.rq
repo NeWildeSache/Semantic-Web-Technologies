@@ -1,0 +1,10 @@
+PREFIX ex: <http://example.org/kulturarena/>
+
+SELECT ?country (COUNT(?concert) AS ?count)
+WHERE {
+  ?concert ex:hatKuenstler ?artist.
+  ?artist ex:ausLand ?country.
+}
+GROUP BY ?country
+ORDER BY DESC(?count)
+LIMIT 1

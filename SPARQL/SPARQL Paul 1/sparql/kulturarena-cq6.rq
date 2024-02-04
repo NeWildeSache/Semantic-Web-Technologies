@@ -1,0 +1,28 @@
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+# CQ6: Die zeitlich direkt aufeinanderfolgenden Konzerte 
+#      welcher Musikdarbieter lagen die meisten Jahre 
+#      auseinander und wieviele Jahre?
+#      (Musikdarbietern-IRI, Abstand)
+SELECT ?mdIRI ?abstand WHERE {
+  ?konzert1 a :Konzert;
+    :hatMusikdarbieter ?mdIRI ;
+    :hatDatum ?datum1 .
+  ?konzert2 a :Konzert;
+    :hatMusikdarbieter ?mdIRI ;
+    :hatDatum ?datum2 .
+  FILTER (?datum1 > ?datum2)
+  FILTER NOT EXISTS {
+    ?konzert3 a :Konzert;
+      :hatMusikdarbieter ?mdIRI ;
+      :hatDatum ?datum3 .
+    FILTER (?datum1 > ?datum3 && ?datum3 > ?datum2)
+  }
+  BIND (xsd:integer(?datum1) - xsd:integer(?datum2) AS ?abstand)
+} 
+GROUP BY ?mdIRI ?abstand
+ORDER BY DESC(?abstand)
+LIMIT 1

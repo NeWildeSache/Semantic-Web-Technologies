@@ -1,0 +1,25 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX : <http://example.org/kulturarena/>
+# CQ6: Die zeitlich direkt aufeinanderfolgenden Konzerte welcher Musikdarbieter lagen die meisten Jahre auseinander und wieviele Jahre?
+# CQ6: Musikdarbietern-IRI, Abstand
+
+SELECT ?darbieter ?abstand WHERE {
+  ?Konzert1 a :Konzert;
+    :hatMusikdarbieter ?darbieter ;
+    :fandStattImJahr ?jahr1 .
+  ?Konzert2 a :Konzert;
+    :hatMusikdarbieter ?darbieter ;
+    :fandStattImJahr ?jahr2 .
+  FILTER (?jahr1 > ?jahr2)
+  FILTER NOT EXISTS {
+    ?Konzert3 a :Konzert;
+      :hatMusikdarbieter ?darbieter ;
+      :hatDatum ?jahr3 .
+    FILTER (?jahr1 > ?jahr3 && ?jahr3 > ?jahr2)
+  }
+  BIND (xsd:integer(?jahr1) - xsd:integer(?jahr2) AS ?abstand)
+} 
+GROUP BY ?darbieter ?abstand
+ORDER BY DESC(?abstand)
+LIMIT 1

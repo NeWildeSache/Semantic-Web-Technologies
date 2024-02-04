@@ -1,0 +1,342 @@
+@prefix : <http://example.org/kulturarena/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://example.org/kulturarena/> .
+
+<http://example.org/kulturarena/> rdf:type owl:Ontology ;
+                                   rdfs:label "Kulturarena Ontologie"@de .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://example.org/kulturarena/hatMusicBrainzArtistId
+:hatMusicBrainzArtistId rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#gYear
+xsd:gYear rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/kulturarena/hatGenre
+:hatGenre rdf:type owl:ObjectProperty ;
+          rdfs:domain :Musikdarbieter ;
+          rdfs:range :Genre ;
+          rdfs:comment "gibt das Genre eines Musikdarbieters an"@de ;
+          rdfs:label "hatGenre"@de .
+
+
+###  http://example.org/kulturarena/hatMitglied
+:hatMitglied rdf:type owl:ObjectProperty ;
+             owl:inverseOf :istMitgliedIn ;
+             rdfs:domain :Musikdarbieter ;
+             rdfs:range :Musiker ;
+             rdfs:comment "gibt an, welche Musiker dem Musikdarbieter angehören"@de ;
+             rdfs:label "hatMitglied"@de .
+
+
+###  http://example.org/kulturarena/hatMusikdarbieter
+:hatMusikdarbieter rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Konzert ;
+                   rdfs:range :Musikdarbieter ;
+                   rdfs:comment "gibt den Musikdarbieter eines Konzerts an"@de ;
+                   rdfs:label "hatMusikdarbieter"@de .
+
+
+###  http://example.org/kulturarena/istMitgliedIn
+:istMitgliedIn rdf:type owl:ObjectProperty ;
+               rdfs:domain :Musiker ;
+               rdfs:range :Musikdarbieter ;
+               rdfs:comment "gibt an, welchem Musikdarbieter ein Musiker angehört"@de ;
+               rdfs:label "istMitgliedIn"@de .
+
+
+###  http://example.org/kulturarena/kommtAus
+:kommtAus rdf:type owl:ObjectProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Musikdarbieter
+                                      :Musikensemble
+                                      :Musiker
+                                      :Solist
+                                    )
+                      ] ;
+          rdfs:range :Land ;
+          rdfs:comment "gibt das Herkunftsland einer Entität an"@de ;
+          rdfs:label "kommtAus"@de .
+
+
+###  http://example.org/kulturarena/wikidataType
+:wikidataType rdf:type owl:ObjectProperty ;
+              rdfs:domain :Musikdarbieter ;
+              rdfs:comment "gibt den Wikidata-Typ einer Entität an"@de ;
+              rdfs:label "wikidataType"@de .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/kulturarena/fandStattImJahr
+:fandStattImJahr rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Konzert ;
+                 rdfs:range xsd:gYear ;
+                 rdfs:comment "gibt an, in welchem Jahr ein Konzert stattfand"@de ;
+                 rdfs:label "fandStattImJahr"@de .
+
+
+###  http://example.org/kulturarena/hatEinwohneranzahl
+:hatEinwohneranzahl rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Land ;
+                    rdfs:range xsd:int ,
+                               xsd:integer .
+
+
+###  http://example.org/kulturarena/hatGeburtsdatum
+:hatGeburtsdatum rdf:type owl:DatatypeProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :Musikdarbieter
+                                             :Musiker
+                                             :Solist
+                                           )
+                             ] ;
+                 rdfs:range xsd:date ;
+                 rdfs:comment "gibt das Geburtsdatum eines Musikers an"@de ;
+                 rdfs:label "hatGeburtsdatum"@de .
+
+
+###  http://example.org/kulturarena/hatGeschlecht
+:hatGeschlecht rdf:type owl:DatatypeProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( :Musikdarbieter
+                                           :Musiker
+                                           :Solist
+                                         )
+                           ] ;
+               rdfs:comment "gibt das Geschlecht eines Musikers an"@de ;
+               rdfs:label "hatGeschlecht"@de .
+
+
+###  http://example.org/kulturarena/hatMusicBrainzArtistID
+:hatMusicBrainzArtistID rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :Musikdarbieter ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "gibt die MusicBrainz-ArtistID eines Musikdarbieters an"@de ;
+                        rdfs:label "hatMusicBrainzArtistID"@de .
+
+
+###  http://example.org/kulturarena/hatName
+:hatName rdf:type owl:DatatypeProperty ;
+         rdfs:domain owl:Thing ;
+         rdfs:comment "gibt Name einer Entität an"@de ;
+         rdfs:label "hatName"@de .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/kulturarena/Genre
+:Genre rdf:type owl:Class ;
+       rdfs:comment "Musikgenre"@de ;
+       rdfs:label "Genre"@de .
+
+
+###  http://example.org/kulturarena/Konzert
+:Konzert rdf:type owl:Class ;
+         rdfs:comment "Auffuehrung eines Musikwerks"@de ;
+         rdfs:label "Konzert"@de .
+
+
+###  http://example.org/kulturarena/Land
+:Land rdf:type owl:Class ;
+      rdfs:comment "politisch selbststaendiges, von Grenzen umgebenes Gebiet"@de ;
+      rdfs:label "Land"@de .
+
+
+###  http://example.org/kulturarena/Musikdarbieter
+:Musikdarbieter rdf:type owl:Class ;
+                rdfs:comment "Musikdarbieter sind Solisten oder Musikensembles"@de ;
+                rdfs:label "Musikdarbieter"@de .
+
+
+###  http://example.org/kulturarena/Musikensemble
+:Musikensemble rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :Musikdarbieter
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :wikidataType ;
+                                                            owl:someValuesFrom [ owl:intersectionOf ( owl:Thing
+                                                                                                      [ rdf:type owl:Class ;
+                                                                                                        owl:complementOf [ rdf:type owl:Class ;
+                                                                                                                           owl:oneOf ( <http://www.wikidata.org/entity/Q5>
+                                                                                                                                     )
+                                                                                                                         ]
+                                                                                                      ]
+                                                                                                    ) ;
+                                                                                 rdf:type owl:Class
+                                                                               ]
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ,
+                                   [ owl:intersectionOf ( :Musikdarbieter
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hatMitglied ;
+                                                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                            owl:onClass :Musiker
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :Musikdarbieter ;
+               owl:disjointWith :Solist ;
+               rdfs:comment "Musikensembles bestehen aus mehreren Musikern"@de ;
+               rdfs:label "Musikensemble"@de .
+
+
+###  http://example.org/kulturarena/Musiker
+:Musiker rdf:type owl:Class ;
+         rdfs:comment "Person, die Musik spielt"@de ;
+         rdfs:label "Musiker"@de .
+
+
+###  http://example.org/kulturarena/Solist
+:Solist rdf:type owl:Class ;
+        owl:equivalentClass [ owl:intersectionOf ( :Musikdarbieter
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :wikidataType ;
+                                                     owl:hasValue <http://www.wikidata.org/entity/Q5>
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] ;
+        rdfs:subClassOf :Musikdarbieter ;
+        rdfs:comment "Solisten sind Musiker, die alleine auftreten."@de ;
+        rdfs:label "Solist"@de .
+
+
+###  http://example.org/kulturarena/internationalesKonzert
+:internationalesKonzert rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :Konzert
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hatMusikdarbieter ;
+                                                                     owl:someValuesFrom [ owl:intersectionOf ( :Musikdarbieter
+                                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                                 owl:onProperty :kommtAus ;
+                                                                                                                 owl:someValuesFrom [ owl:intersectionOf ( :Land
+                                                                                                                                                           [ rdf:type owl:Class ;
+                                                                                                                                                             owl:complementOf [ rdf:type owl:Class ;
+                                                                                                                                                                                owl:oneOf ( :Deutschland
+                                                                                                                                                                                          )
+                                                                                                                                                                              ]
+                                                                                                                                                           ]
+                                                                                                                                                         ) ;
+                                                                                                                                      rdf:type owl:Class
+                                                                                                                                    ]
+                                                                                                               ]
+                                                                                                             ) ;
+                                                                                          rdf:type owl:Class
+                                                                                        ]
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf :Konzert ;
+                        rdfs:comment "Konzert mit Musikdarbietern, die nicht aus Deutschland kommen"@de ;
+                        rdfs:label "internationalesKonzert"@de .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+
+###  http://example.org/kulturarena/AmsterdamKlezmerBand
+:AmsterdamKlezmerBand rdf:type owl:NamedIndividual ,
+                               :Musikdarbieter ;
+                      :hatGenre <http://www.wikidata.org/entity/Q212944> ;
+                      :hatMitglied <http://www.wikidata.org/entity/Q1523765> ;
+                      :kommtAus :Niederlande ;
+                      :wikidataType <http://www.wikidata.org/entity/Q215380> ;
+                      :hatName "Amsterdam Klezmer Band"@de ;
+                      :hatMusicBrainzArtistId "28e27f86-3eba-4e17-9d04-f47b3be48e96" .
+
+
+###  http://example.org/kulturarena/AmsterdamKlezmerBandKonzert2008
+:AmsterdamKlezmerBandKonzert2008 rdf:type owl:NamedIndividual ,
+                                          :Konzert ;
+                                 :hatMusikdarbieter :AmsterdamKlezmerBand ;
+                                 :fandStattImJahr "2008"^^xsd:gYear .
+
+
+###  http://example.org/kulturarena/AndreasDorau
+:AndreasDorau rdf:type owl:NamedIndividual ,
+                       :Musikdarbieter ;
+              :hatGenre <http://www.wikidata.org/entity/Q646679> ;
+              :kommtAus :Deutschland ;
+              :wikidataType <http://www.wikidata.org/entity/Q5> ;
+              :hatGeburtsdatum "1964-01-19T00:00:00Z"^^xsd:dateTime ;
+              :hatGeschlecht "männlich"@de ;
+              :hatName "Andreas Dorau"@de ;
+              :hatMusicBrainzArtistId "d3281dc6-1484-4627-a344-3715347952e0" .
+
+
+###  http://example.org/kulturarena/AndreasDorauKonzert2014
+:AndreasDorauKonzert2014 rdf:type owl:NamedIndividual ,
+                                  :Konzert ;
+                         :hatMusikdarbieter :AndreasDorau ;
+                         :fandStattImJahr "2014"^^xsd:gYear .
+
+
+###  http://example.org/kulturarena/Deutschland
+:Deutschland rdf:type owl:NamedIndividual ,
+                      :Land ;
+             :hatEinwohneranzahl 83149300 ;
+             :hatName "Deutschland"@de .
+
+
+###  http://example.org/kulturarena/Niederlande
+:Niederlande rdf:type owl:NamedIndividual ,
+                      :Land ;
+             :hatEinwohneranzahl 17590672 ;
+             :hatName "Niederlande"@de .
+
+
+###  http://www.wikidata.org/entity/Q1523765
+<http://www.wikidata.org/entity/Q1523765> rdf:type owl:NamedIndividual ,
+                                                   :Musiker ;
+                                          :hatGeschlecht "männlich"@de ;
+                                          :hatName "Gijs Levelt"@de .
+
+
+###  http://www.wikidata.org/entity/Q212944
+<http://www.wikidata.org/entity/Q212944> rdf:type owl:NamedIndividual .
+
+
+###  http://www.wikidata.org/entity/Q215380
+<http://www.wikidata.org/entity/Q215380> rdf:type owl:NamedIndividual .
+
+
+###  http://www.wikidata.org/entity/Q5
+<http://www.wikidata.org/entity/Q5> rdf:type owl:NamedIndividual .
+
+
+###  http://www.wikidata.org/entity/Q646679
+<http://www.wikidata.org/entity/Q646679> rdf:type owl:NamedIndividual .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

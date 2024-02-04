@@ -1,0 +1,10 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX : <http://example.org/kulturarena/>
+SELECT ?darbieter ?genrename ?artistID WHERE{
+  ?darbieter :hatName ?name ;
+             :hatGenre ?genre ;
+             :hatMusicBrainzArtistID ?artistID .
+  FILTER(?name="Yasmine Hamdan"^^xsd:string) .
+  ?genre :hatName ?genrename .
+}

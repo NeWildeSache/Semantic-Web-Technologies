@@ -1,0 +1,17 @@
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+# CQ4: Mit Musikdarbietern aus welchem Land fanden bisher 
+#      die meisten Konzerte statt?
+# (Land-IRI, Land-Name)
+SELECT ?landIRI ?landName WHERE {
+  ?konzert a :Konzert ;
+    :hatMusikdarbieter ?musikdarbieter .
+  ?musikdarbieter :hatLand ?landIRI .
+  ?landIRI rdfs:label ?landName .
+}
+GROUP BY ?landIRI ?landName
+ORDER BY DESC(COUNT(DISTINCT ?konzert))
+LIMIT 1

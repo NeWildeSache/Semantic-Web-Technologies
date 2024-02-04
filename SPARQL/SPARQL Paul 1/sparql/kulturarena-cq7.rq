@@ -1,0 +1,31 @@
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+# CQ7: Wie hoch ist der Frauenanteil und Männeranteil 
+#      unter den Musikdarbietern (Solist*innen und Ensemble-Mitglieder), 
+#      bei denen Daten zum Geschlecht vorliegen, je Jahr?
+#      (Jahr, Frauenanteil, Männeranteil)
+SELECT ?jahr ?frauenanteil ?maenneranteil WHERE {
+  {
+    SELECT ?jahr (COUNT(DISTINCT ?frau) as ?frauenAnzahl) (COUNT(DISTINCT ?mann) AS ?maennerAnzahl) WHERE {
+      ?konzert a :Konzert ;
+        :hatDatum ?jahr ;
+        :hatMusikdarbieter ?musikdarbieter .
+      ?musikdarbieter :hatMitglied ?person .
+      ?person :hatGeschlecht ?geschlecht .
+      OPTIONAL {
+        ?person :hatGeschlecht :weiblich  .
+        BIND (?person as ?frau)
+      }
+      OPTIONAL {
+        ?person :hatGeschlecht :maennlich .
+        BIND (?person as ?mann)
+      }
+    } GROUP BY ?jahr
+  }
+  BIND (?frauenAnzahl / (?frauenAnzahl + ?maennerAnzahl) as ?frauenanteil)
+  BIND (?maennerAnzahl / (?frauenAnzahl + ?maennerAnzahl) as ?maenneranteil)
+} 
+ORDER BY ?jahr

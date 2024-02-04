@@ -1,0 +1,288 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix :     <http://example.org/kulturarena/> .
+
+
+<http://example.org/kulturarena/> a owl:Ontology ;
+    rdfs:label "Kulturarena Ontologie"@de .
+
+
+
+
+# CLASSES
+:Konzert a owl:Class ;
+        rdfs:label "Konzert"@de ;
+        rdfs:comment "Auffuehrung eines Musikwerks"@de.
+
+
+:Musikdarbieter a owl:Class ;
+        rdfs:label "Musikdarbieter"@de ;
+        rdfs:comment "Musikdarbieter sind Solisten oder Musikensembles"@de .
+
+
+:Musikensemble a owl:Class ;
+        rdfs:subClassOf :Musikdarbieter ;
+        rdfs:label "Musikensemble"@de ;
+        rdfs:comment "Musikensembles bestehen aus mehreren Musikern"@de .
+
+
+:Solist a owl:Class ;
+        rdfs:subClassOf :Musikdarbieter ;
+        rdfs:label "Solist"@de ;
+        rdfs:comment "Solisten sind Musiker, die alleine auftreten."@de .
+
+
+:Land a owl:Class ;
+        rdfs:label "Land"@de ;
+        rdfs:comment "politisch selbststaendiges, von Grenzen umgebenes Gebiet"@de .
+
+
+:Frau a owl:Class ;
+        rdfs:label "Frau"@de ;
+        rdfs:comment "weibliche Person"@de .
+
+
+:Mann a owl:Class ;
+        rdfs:label "Mann"@de ;
+        rdfs:comment "maennliche Person"@de .
+
+
+:Genre a owl:Class ;
+        rdfs:label "Genre"@de ;
+        rdfs:comment "Musikgenre"@de .
+
+
+:DiversePerson a owl:Class ;
+        rdfs:label "DiversePerson"@de ;
+        rdfs:comment "Person, die sich weder als männlich noch weiblich identifiziert"@de .
+
+
+:Musiker a owl:Class ;
+        rdfs:label "Musiker"@de ;
+        rdfs:comment "Person, die Musik spielt"@de .
+
+
+
+
+# PROPERTIES
+:istMitgliedIn a owl:ObjectProperty ;
+        rdfs:label "istMitgliedIn"@de ;
+        rdfs:comment "gibt an, welchem Musikdarbieter ein Musiker angehört"@de ;
+        rdfs:domain :Musiker ;
+        rdfs:range :Musikdarbieter  .
+
+
+:hatMitglied a owl:ObjectProperty ;
+        rdfs:label "istMitgliedIn"@de ;
+        rdfs:comment "gibt an, welche Musiker dem Musikdarbieter angehören"@de ;
+        rdfs:domain :Musikdarbieter ;
+        rdfs:range :Musiker .
+
+
+:hatEinwohneranzahl a owl:DatatypeProperty ;
+        rdfs:label "hatEinwohneranzahl"@de ;
+        rdfs:comment "gibt an, wie viele Einwohner ein Land hat"@de ;
+        rdfs:domain :Land ;
+        rdfs:range xsd:Integer .
+
+
+:hatGeschlecht a owl:ObjectProperty ;
+        rdfs:label "hatGeschlecht"@de ;
+        rdfs:comment "gibt das Geschlecht eines Musikers an"@de ;
+        rdfs:domain :Musiker ;
+        rdfs:range [ a owl:Class ;
+                       owl:unionOf (:Mann :Frau :DiversePerson) ] .
+
+
+:hatName a owl:DatatypeProperty ;
+        rdfs:label "hatName"@de ;
+        rdfs:comment "gibt Name einer Entität an"@de ;
+        rdfs:range xsd:string .
+
+
+:fandStattImJahr a owl:DatatypeProperty ;
+        rdfs:label "fandStattImJahr"@de ;
+        rdfs:comment "gibt an, in welchem Jahr ein Konzert stattfand"@de ;
+        rdfs:domain :Konzert ;
+        rdfs:range xsd:gYear .
+
+
+:hatMusikdarbieter a owl:ObjectProperty ;
+        rdfs:label "hatMusikdarbieter"@de ;
+        rdfs:comment "gibt den Musikdarbieter eines Konzerts an"@de ;
+        rdfs:domain :Konzert ;
+        rdfs:range :Musikdarbieter .
+
+
+:kommtAus a owl:ObjectProperty ;
+        rdfs:label "kommtAus"@de ;
+        rdfs:comment "gibt das Herkunftsland einer Entität an"@de ;
+        rdfs:domain [ a owl:Class ;
+                       owl:unionOf (:Musikensemble :Solist :Musiker :Musikdarbieter) ] ;
+        rdfs:range :Land .
+
+
+:hatGenre a owl:ObjectProperty ; 
+        rdfs:label "hatGenre"@de ;
+        rdfs:comment "gibt das Genre eines Musikdarbieters an"@de ;
+        rdfs:domain :Musikdarbieter ;
+        rdfs:range :Genre .
+
+
+:hatMusicBrainzArtistID a owl:DatatypeProperty ;
+        rdfs:label "hatMusicBrainzArtistID"@de ;
+        rdfs:comment "gibt die MusicBrainz-ArtistID eines Musikdarbieters an"@de ;
+        rdfs:domain :Musikdarbieter ;
+        rdfs:range xsd:string .
+
+
+:hatGeburtsdatum a owl:DatatypeProperty ;
+        rdfs:label "hatGeburtsjahr"@de ;
+        rdfs:comment "gibt das Geburtsdatum eines Musikers an"@de ;
+        rdfs:domain :Musiker ;
+        rdfs:range xsd:date .
+
+
+
+
+
+
+
+
+
+
+
+
+# DISJOINTNESS
+[ rdf:type owl:AllDisjointClasses ; 
+owl:members ( 
+:Frau 
+:Mann 
+:DiversePerson 
+:Land
+        :Genre
+        :Konzert
+        :Musikensemble
+
+
+) ] .
+
+
+:Solist owl:disjointWith :Musikensemble .
+
+
+
+
+
+
+
+
+
+# INSTANCES
+
+
+:Deutschland a :Land ;
+        :hatName "Deutschland"@de ;
+        :hatEinwohneranzahl 84358845 .
+:Schweiz a :Land ;
+        :hatName "Schweiz"@de ;
+        :hatEinwohneranzahl 8815385 .
+:Libanon a :Land ;
+        :hatName "Libanon"@de ;
+        :hatEinwohneranzahl 5500000 .
+
+
+:ValeskaSteiner a :Musiker ;
+        :hatGeburtsdatum "1985-10-28"^^xsd:date ;
+	:hatName "Valeska Steiner"@de ;
+    	:hatGeschlecht :Frau .
+:SonjaGlass a :Musiker ;
+        :hatGeburtsdatum "1976-11-30"^^xsd:date ;
+	:hatName "Sonja Glass"@de ;
+    	:hatGeschlecht :Frau .
+:PitBaumgartner a :Musiker ;
+	:hatName "Pit Baumgartner"@de ;
+    	:hatGeschlecht :Mann .
+:HalukSoyoglu a :Musiker ;
+	:hatName "Haluk Soyoglu"@de ;
+    	:hatGeschlecht :Mann .
+:YasmineHamdan a :Musiker ;
+        :hatGeburtsdatum "1976-01-01"^^xsd:date ;
+        :hatName "Yasmine Hamdan"@de ;
+    	:hatGeschlecht :Frau .
+
+
+:Popmusik a :Genre ;
+        :hatName "Popmusik"@de .
+:Jazz a :Genre ;
+        :hatName "Jazz"@de .
+:Electronic a :Genre ;
+        :hatName "Electronic"@de .
+
+
+
+
+:Boy a :Musikdarbieter ;
+        a :Musikensemble ;
+	:hatName "BOY"@de ;
+        :kommtAus :Deutschland ;
+        :kommtAus :Schweiz ;
+        :hatMitglied :ValeskaSteiner ;
+        :hatMitglied :SonjaGlass ;
+        :hatGenre :Popmusik ;
+        :hatMusicBrainzArtistID "2e76bad0-edf3-4a6c-ad79-db87bb5a0d35" .  
+
+:DePhazz a :Musikdarbieter ;
+        a :Musikensemble ;
+	:hatName "De-Phazz"@de ;
+        :kommtAus :Deutschland ;
+        :hatMitglied :PitBaumgartner ;
+        :hatMitglied :HalukSoyoglu ;
+        :hatGenre :Jazz ;
+        :hatGenre :Electronic ;
+        :hatMusicBrainzArtistID "5c47ccd3-3f82-46b9-96b8-efdffc83f269" .
+
+:YasmineHamdan a :Musikdarbieter ;
+        a :Solist ;
+	:hatName "Yasmine Hamdan"@de ;
+        :hatMitglied :YasmineHamdan ;
+        :kommtAus :Libanon ;
+        :hatGenre :Electronic ;
+        :hatMusicBrainzArtistID "9c21e094-2fbe-4ba9-9726-891d90f561a9" .
+
+
+
+:Konzert_Boy_2012 a :Konzert ;
+    :hatMusikdarbieter :Boy ;
+    :fandStattImJahr "2012"^^xsd:gYear .
+
+
+:Konzert_Boy_2016 a :Konzert ;
+    :hatMusikdarbieter :Boy ;
+    :fandStattImJahr "2016"^^xsd:gYear .
+
+
+:Konzert_Dephazz_2001 a :Konzert ;
+    :hatMusikdarbieter :DePhazz ;
+    :fandStattImJahr "2001"^^xsd:gYear .
+
+
+:Konzert_Dephazz_2003 a :Konzert ;
+    :hatMusikdarbieter :DePhazz ;
+    :fandStattImJahr "2003"^^xsd:gYear .
+
+
+:Konzert_DePhazz_2007 a :Konzert ;
+    :hatMusikdarbieter :DePhazz ;
+    :fandStattImJahr "2007"^^xsd:gYear .
+
+
+:Konzert_Yasmine_Hamdan_2015 a :Konzert ;
+    :hatMusikdarbieter :YasmineHamdan ;
+    :fandStattImJahr "2015"^^xsd:gYear .
+
+
+
+

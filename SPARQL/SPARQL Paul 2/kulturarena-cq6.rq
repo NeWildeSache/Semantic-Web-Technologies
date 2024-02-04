@@ -1,0 +1,22 @@
+PREFIX ex: <http://example.org/kulturarena/>
+
+SELECT ?artist ?years
+WHERE {
+	?concert1 ex:hatKuenstler ?artist.
+    ?concert1 ex:hatDatum ?date1.
+ 	BIND (?date1 as ?start)
+	{
+    SELECT ?date1 (MIN(?date2) AS ?end)
+    WHERE {
+      ?concert1 ex:hatKuenstler ?artist.
+      ?concert1 ex:hatDatum ?date1.
+      ?concert2 ex:hatKuenstler ?artist.
+      ?concert2 ex:hatDatum ?date2.
+	  FILTER (?date2 > ?date1)
+	}GROUP BY ?date1
+    }
+  BIND(abs((?end) - (?start)) AS ?years)
+}
+ORDER BY DESC(?years)
+LIMIT 1
+#its uncertain if only one top value is searched or all maximum values or just all values in a descending order

@@ -1,0 +1,30 @@
+PREFIX ex: <http://example.org/>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX :     <http://example.org/kulturarena/>
+
+# CQ9: In welchem Jahr war das durchschnittliche Alter (Jahr des Konzerts minus Jahr der Geburt) 
+# unter den Musikdarbietern (Solist*innen und Ensemble-Mitglieder), bei denen Daten zum Alter vorliegen, am höchsten?
+# (Jahr, Durchschnittsalter)
+
+SELECT ?jahr (AVG(?alter) as ?durchschnittsalter)
+WHERE {
+  {SELECT DISTINCT ?person ?geburtsdatum ?jahr
+  WHERE {
+    {?konzert :hatMusikdarbieter ?person ;
+               :fandStattImJahr ?jahr .
+      ?person a :Solist ;
+               :hatGeburtsdatum ?geburtsdatum . }
+    UNION
+    {?konzert :hatMusikdarbieter ?darbieter ;
+               :fandStattImJahr ?jahr .
+      ?darbieter :hatMitglied ?person .
+      ?person :hatGeburtsdatum ?geburtsdatum . }
+  }}
+  BIND(year(?jahr) - year(?geburtsdatum) as ?alter )
+} 
+GROUP BY ?jahr
+ORDER BY DESC(?durchschnittsalter) 
+LIMIT 1
