@@ -1,6 +1,10 @@
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX http: <http://www.w3.org/2011/http#>
 PREFIX : <http://example.org/kulturarena/>
+
+# CQ4: Mit Musikdarbietern aus welchem Land fanden bisher die meisten Konzerte statt?
+# Land-IRI, Land-Name
+
 SELECT ?land ?landname WHERE{
   SELECT ?land ?landname ?count WHERE {
     ?land :hatName ?landname .

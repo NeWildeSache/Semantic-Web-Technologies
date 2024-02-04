@@ -1,6 +1,7 @@
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX http: <http://www.w3.org/2011/http#>
 PREFIX : <http://example.org/kulturarena/>
+
 # CQ6: Die zeitlich direkt aufeinanderfolgenden Konzerte welcher Musikdarbieter lagen die meisten Jahre auseinander und wieviele Jahre?
 # CQ6: Musikdarbietern-IRI, Abstand
 

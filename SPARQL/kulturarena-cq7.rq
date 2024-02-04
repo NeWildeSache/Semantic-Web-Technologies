@@ -1,0 +1,32 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX : <http://example.org/kulturarena/>
+
+# CQ7: Wie hoch ist der Frauenanteil und Männeranteil unter den Musikdarbietern (Solist*innen und Ensemble-Mitglieder), bei denen Daten zum Geschlecht vorliegen, je Jahr?
+# Jahr, Frauenanteil, Männeranteil
+
+SELECT ?jahr ((COUNT(?weiblicherDarbieter)+COUNT(?weiblichesMitglied)) / (COUNT(?weiblicherDarbieter)+COUNT(?maennlicherDarbieter)+COUNT(?weiblichesMitglied)+COUNT(?maennlichesMitglied)) AS ?frauenanteil) ((COUNT(?maennlicherDarbieter)+COUNT(?maennlichesMitglied)) / (COUNT(?weiblicherDarbieter)+COUNT(?maennlicherDarbieter)+COUNT(?weiblichesMitglied)+COUNT(?maennlichesMitglied)) AS ?männeranteil)
+WHERE {
+  ?Konzert :fandStattImJahr ?jahr .
+  
+  OPTIONAL {
+    ?weiblicherDarbieter :hatGeschlecht "weiblich"@de .
+    ?Konzert :hatMusikdarbieter ?weiblicherDarbieter .
+  }
+  OPTIONAL {
+    ?maennlicherDarbieter :hatGeschlecht "männlich"@de .
+    ?Konzert :hatMusikdarbieter ?maennlicherDarbieter .
+  }
+  OPTIONAL {
+  	?Konzert :hatMusikdarbieter ?darbieter .
+    ?darbieter :hatMitglied ?maennlichesMitglied .
+    ?maennlichesMitglied :hatGeschlecht "männlich"@de .
+  }
+  OPTIONAL {
+  	?Konzert :hatMusikdarbieter ?darbieter .
+    ?darbieter :hatMitglied ?weiblichesMitglied .
+    ?weiblichesMitglied :hatGeschlecht "weiblich"@de .
+  }
+}
+GROUP BY (?jahr)

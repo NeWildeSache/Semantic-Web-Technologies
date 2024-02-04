@@ -1,6 +1,10 @@
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX http: <http://www.w3.org/2011/http#>
 PREFIX : <http://example.org/kulturarena/>
+
+# CQ3: Wieviele Konzerte mit Musikdarbietern aus welchen Ländern fanden im Jahr 2015 statt?
+# Land-IRI, Land-Name, Anzahl
+
 SELECT ?land ?landname ?count WHERE {
   ?land :hatName ?landname .
   {

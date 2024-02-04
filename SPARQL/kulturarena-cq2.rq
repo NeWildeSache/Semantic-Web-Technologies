@@ -1,0 +1,12 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX : <http://example.org/kulturarena/>
+
+# CQ2: Wie oft ist der Musikdarbieter mit dem Namen BOY aufgetreten?
+# Anzahl
+
+SELECT (COUNT(distinct ?Konzert) as ?count) WHERE {
+  ?Konzert :hatMusikdarbieter ?darbieter .
+  ?darbieter :hatName ?name .
+  FILTER(?name="BOY"@de) .
+} 

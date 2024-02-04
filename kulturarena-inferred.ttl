@@ -152,24 +152,32 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Genre
 :Genre rdf:type owl:Class ;
+       rdfs:subClassOf owl:Thing ;
+       owl:disjointWith owl:Nothing ;
        rdfs:comment "Musikgenre"@de ;
        rdfs:label "Genre"@de .
 
 
 ###  http://example.org/kulturarena/Konzert
 :Konzert rdf:type owl:Class ;
+         rdfs:subClassOf owl:Thing ;
+         owl:disjointWith owl:Nothing ;
          rdfs:comment "Auffuehrung eines Musikwerks"@de ;
          rdfs:label "Konzert"@de .
 
 
 ###  http://example.org/kulturarena/Land
 :Land rdf:type owl:Class ;
+      rdfs:subClassOf owl:Thing ;
+      owl:disjointWith owl:Nothing ;
       rdfs:comment "politisch selbststaendiges, von Grenzen umgebenes Gebiet"@de ;
       rdfs:label "Land"@de .
 
 
 ###  http://example.org/kulturarena/Musikdarbieter
 :Musikdarbieter rdf:type owl:Class ;
+                rdfs:subClassOf owl:Thing ;
+                owl:disjointWith owl:Nothing ;
                 rdfs:comment "Musikdarbieter sind Solisten oder Musikensembles"@de ;
                 rdfs:label "Musikdarbieter"@de .
 
@@ -203,13 +211,16 @@ xsd:gYear rdf:type rdfs:Datatype .
                                      rdf:type owl:Class
                                    ] ;
                rdfs:subClassOf :Musikdarbieter ;
-               owl:disjointWith :Solist ;
+               owl:disjointWith :Solist ,
+                                owl:Nothing ;
                rdfs:comment "Musikensembles bestehen aus mehreren Musikern"@de ;
                rdfs:label "Musikensemble"@de .
 
 
 ###  http://example.org/kulturarena/Musiker
 :Musiker rdf:type owl:Class ;
+         rdfs:subClassOf owl:Thing ;
+         owl:disjointWith owl:Nothing ;
          rdfs:comment "Person, die Musik spielt"@de ;
          rdfs:label "Musiker"@de .
 
@@ -225,6 +236,7 @@ xsd:gYear rdf:type rdfs:Datatype .
                               rdf:type owl:Class
                             ] ;
         rdfs:subClassOf :Musikdarbieter ;
+        owl:disjointWith owl:Nothing ;
         rdfs:comment "Solisten sind Musiker, die alleine auftreten."@de ;
         rdfs:label "Solist"@de .
 
@@ -256,25 +268,37 @@ xsd:gYear rdf:type rdfs:Datatype .
                                               rdf:type owl:Class
                                             ] ;
                         rdfs:subClassOf :Konzert ;
+                        owl:disjointWith owl:Nothing ;
                         rdfs:comment "Konzert mit Musikdarbietern, die nicht aus Deutschland kommen"@de ;
                         rdfs:label "internationalesKonzert"@de .
+
+
+###  http://www.w3.org/2002/07/owl#Nothing
+owl:Nothing owl:disjointWith owl:Thing .
 
 
 #################################################################
 #    Individuals
 #################################################################
 
+###  http://example.org/kulturarena/AlJarreau
+:AlJarreau rdf:type owl:NamedIndividual ,
+                    :Musikdarbieter ;
+           :kommtAus :USA ;
+           :hatName "Al Jarreau"@de .
 
-###  http://example.org/kulturarena/Deutschland
-:Deutschland rdf:type owl:NamedIndividual ,
-                      :Land ;
-             :hatEinwohneranzahl 83149300 ;
-             :hatName "Deutschland"@de .
+
+###  http://example.org/kulturarena/AlJarreauKonzert2005
+:AlJarreauKonzert2005 rdf:type owl:NamedIndividual ,
+                               :Konzert ;
+                      :hatMusikdarbieter :AlJarreau ;
+                      :fandStattImJahr "2005"^^xsd:gYear .
 
 
 ###  http://example.org/kulturarena/AmsterdamKlezmerBand
 :AmsterdamKlezmerBand rdf:type owl:NamedIndividual ,
-                               :Musikdarbieter ;
+                               :Musikdarbieter ,
+                               :Musikensemble ;
                       :hatGenre <http://www.wikidata.org/entity/Q212944> ;
                       :hatMitglied <http://www.wikidata.org/entity/Q1523765> ;
                       :kommtAus :Niederlande ;
@@ -292,7 +316,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AndreasDorau
 :AndreasDorau rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Solist ;
               :hatGenre <http://www.wikidata.org/entity/Q646679> ;
               :kommtAus :Deutschland ;
               :wikidataType <http://www.wikidata.org/entity/Q5> ;
@@ -309,24 +334,11 @@ xsd:gYear rdf:type rdfs:Datatype .
                          :fandStattImJahr "2014"^^xsd:gYear .
 
 
-###  http://example.org/kulturarena/AlJarreau
-:AlJarreau rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
-           :kommtAus :USA ;
-           :hatName "Al Jarreau"@de .
-
-
-###  http://example.org/kulturarena/AlJarreauKonzert2005
-:AlJarreauKonzert2005 rdf:type owl:NamedIndividual ,
-                               :Konzert ;
-                      :hatMusikdarbieter :AlJarreau ;
-                      :fandStattImJahr "2005"^^xsd:gYear .
-
-
-###  http://example.org/kulturarena/USA
-:USA rdf:type owl:NamedIndividual ,
-              :Land ;
-     :hatName "USA"@de .
+###  http://example.org/kulturarena/Deutschland
+:Deutschland rdf:type owl:NamedIndividual ,
+                      :Land ;
+             :hatEinwohneranzahl 83149300 ;
+             :hatName "Deutschland"@de .
 
 
 ###  http://example.org/kulturarena/Niederlande
@@ -334,6 +346,12 @@ xsd:gYear rdf:type rdfs:Datatype .
                       :Land ;
              :hatEinwohneranzahl 17590672 ;
              :hatName "Niederlande"@de .
+
+
+###  http://example.org/kulturarena/USA
+:USA rdf:type owl:NamedIndividual ,
+              :Land ;
+     :hatName "USA"@de .
 
 
 ###  http://www.wikidata.org/entity/Q1523765
@@ -344,19 +362,23 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 
 ###  http://www.wikidata.org/entity/Q212944
-<http://www.wikidata.org/entity/Q212944> rdf:type owl:NamedIndividual .
+<http://www.wikidata.org/entity/Q212944> rdf:type owl:NamedIndividual ,
+                                                  :Genre .
 
 
 ###  http://www.wikidata.org/entity/Q215380
-<http://www.wikidata.org/entity/Q215380> rdf:type owl:NamedIndividual .
+<http://www.wikidata.org/entity/Q215380> rdf:type owl:NamedIndividual ,
+                                                  owl:Thing .
 
 
 ###  http://www.wikidata.org/entity/Q5
-<http://www.wikidata.org/entity/Q5> rdf:type owl:NamedIndividual .
+<http://www.wikidata.org/entity/Q5> rdf:type owl:NamedIndividual ,
+                                             owl:Thing .
 
 
 ###  http://www.wikidata.org/entity/Q646679
-<http://www.wikidata.org/entity/Q646679> rdf:type owl:NamedIndividual .
+<http://www.wikidata.org/entity/Q646679> rdf:type owl:NamedIndividual ,
+                                                  :Genre .
 
 
-###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
+###  Generated by the OWL API (version 4.5.26) https://github.com/owlcs/owlapi

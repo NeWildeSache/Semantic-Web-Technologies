@@ -1,0 +1,13 @@
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX : <http://example.org/kulturarena/>
+
+# CQ1: Welche Musikdarbieter (Solist*innen oder Ensembles) traten im Jahr 2015 auf?
+# Musikdarbietern-IRI, Musikdarbietern-Name
+
+SELECT ?darbieter ?name WHERE {
+  ?Konzert :fandStattImJahr ?jahr ;
+           :hatMusikdarbieter ?darbieter .
+  FILTER(?jahr="2015"^^xsd:gYear) .
+  ?darbieter :hatName ?name .
+} 

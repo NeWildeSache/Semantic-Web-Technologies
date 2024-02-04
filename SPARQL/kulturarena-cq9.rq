@@ -11,18 +11,24 @@ PREFIX :     <http://example.org/kulturarena/>
 
 SELECT ?jahr (AVG(?alter) as ?durchschnittsalter)
 WHERE {
-  {SELECT DISTINCT ?person ?geburtsdatum ?jahr
+  {
+  SELECT DISTINCT ?person ?geburtsdatum ?jahr
   WHERE {
-    {?konzert :hatMusikdarbieter ?person ;
-               :fandStattImJahr ?jahr .
-      ?person a :Solist ;
-               :hatGeburtsdatum ?geburtsdatum . }
-    UNION
-    {?konzert :hatMusikdarbieter ?darbieter ;
-               :fandStattImJahr ?jahr .
-      ?darbieter :hatMitglied ?person .
-      ?person :hatGeburtsdatum ?geburtsdatum . }
-  }}
+      OPTIONAL{
+        ?person rdf:type :Musikdarbieter ;
+                :hatGeburtsdatum ?geburtsdatum .
+        ?konzert :hatMusikdarbieter ?person ;
+                 :fandStattImJahr ?jahr .
+      }
+      OPTIONAL{
+      	?person rdf:type :Musiker ;
+               :hatGeburtsdatum ?geburtsdatum .
+        ?konzert :hatMusikdarbieter ?darbieter ;
+                 :fandStattImJahr ?jahr .
+        ?darbieter :hatMitglied ?person .
+      }
+  }
+  }
   BIND(year(?jahr) - year(?geburtsdatum) as ?alter )
 } 
 GROUP BY ?jahr
