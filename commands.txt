@@ -21,7 +21,11 @@ java -jar sparql-generate-2.1.0.jar -q kulturarena-website-konzerte.rqg -o gener
 
 REASONING
 
-
+./robot -vvv \
+ merge --input kulturarena-ontology.ttl \
+ reason --reasoner hermit \
+ --axiom-generators "SubClass EquivalentClass DisjointClasses ClassAssertion" \
+ --output kulturarena-inferred.ttl
 
 
 

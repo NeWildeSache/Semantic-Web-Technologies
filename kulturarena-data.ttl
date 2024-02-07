@@ -132,7 +132,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 
 ###  http://example.org/kulturarena/hatMusicBrainzArtistID
-:hatMusicBrainzArtistID rdf:type owl:DatatypeProperty ;
+:hatMusicBrainzArtistID rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
                         rdfs:domain :Musikdarbieter ;
                         rdfs:range xsd:string ;
                         rdfs:comment "gibt die MusicBrainz-ArtistID eines Musikdarbieters an"@de ;
@@ -140,7 +141,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 
 ###  http://example.org/kulturarena/hatName
-:hatName rdf:type owl:DatatypeProperty ;
+:hatName rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
          rdfs:domain owl:Thing ;
          rdfs:comment "gibt Name einer Entität an"@de ;
          rdfs:label "hatName"@de .
@@ -176,31 +178,19 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Musikensemble
 :Musikensemble rdf:type owl:Class ;
-               owl:equivalentClass [ owl:intersectionOf ( :Musikdarbieter
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :wikidataType ;
-                                                            owl:someValuesFrom [ owl:intersectionOf ( owl:Thing
-                                                                                                      [ rdf:type owl:Class ;
-                                                                                                        owl:complementOf [ rdf:type owl:Class ;
-                                                                                                                           owl:oneOf ( <http://www.wikidata.org/entity/Q5>
-                                                                                                                                     )
-                                                                                                                         ]
-                                                                                                      ]
-                                                                                                    ) ;
-                                                                                 rdf:type owl:Class
-                                                                               ]
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty :wikidataType ;
+                                     owl:someValuesFrom [ rdf:type owl:Class ;
+                                                          owl:complementOf [ rdf:type owl:Class ;
+                                                                             owl:oneOf ( <http://www.wikidata.org/entity/Q5>
+                                                                                       )
+                                                                           ]
+                                                        ]
                                    ] ,
-                                   [ owl:intersectionOf ( :Musikdarbieter
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty :hatMitglied ;
-                                                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                            owl:onClass :Musiker
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :hatMitglied ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :Musiker
                                    ] ;
                rdfs:subClassOf :Musikdarbieter ;
                owl:disjointWith :Solist ;
@@ -231,29 +221,17 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/internationalesKonzert
 :internationalesKonzert rdf:type owl:Class ;
-                        owl:equivalentClass [ owl:intersectionOf ( :Konzert
-                                                                   [ rdf:type owl:Restriction ;
-                                                                     owl:onProperty :hatMusikdarbieter ;
-                                                                     owl:someValuesFrom [ owl:intersectionOf ( :Musikdarbieter
-                                                                                                               [ rdf:type owl:Restriction ;
-                                                                                                                 owl:onProperty :kommtAus ;
-                                                                                                                 owl:someValuesFrom [ owl:intersectionOf ( :Land
-                                                                                                                                                           [ rdf:type owl:Class ;
-                                                                                                                                                             owl:complementOf [ rdf:type owl:Class ;
-                                                                                                                                                                                owl:oneOf ( :Deutschland
-                                                                                                                                                                                          )
-                                                                                                                                                                              ]
-                                                                                                                                                           ]
-                                                                                                                                                         ) ;
-                                                                                                                                      rdf:type owl:Class
-                                                                                                                                    ]
-                                                                                                               ]
-                                                                                                             ) ;
-                                                                                          rdf:type owl:Class
-                                                                                        ]
-                                                                   ]
-                                                                 ) ;
-                                              rdf:type owl:Class
+                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                              owl:onProperty :hatMusikdarbieter ;
+                                              owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :kommtAus ;
+                                                                   owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                                        owl:complementOf [ rdf:type owl:Class ;
+                                                                                                           owl:oneOf ( :Deutschland
+                                                                                                                     )
+                                                                                                         ]
+                                                                                      ]
+                                                                 ]
                                             ] ;
                         rdfs:subClassOf :Konzert ;
                         rdfs:comment "Konzert mit Musikdarbietern, die nicht aus Deutschland kommen"@de ;
@@ -3201,8 +3179,7 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Deutschland
 :Deutschland rdf:type owl:NamedIndividual ,
                       :Land ;
-             :hatEinwohneranzahl 83149300 ,
-                                 83149300 ;
+             :hatEinwohneranzahl 83149300 ;
              :hatName "Deutschland"@de .
 
 
@@ -9650,8 +9627,7 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Niederlande
 :Niederlande rdf:type owl:NamedIndividual ,
                       :Land ;
-             :hatEinwohneranzahl 17590672 ,
-                                 17590672 ;
+             :hatEinwohneranzahl 17590672 ;
              :hatName "Niederlande"@de .
 
 
@@ -16353,4 +16329,4 @@ xsd:gYear rdf:type rdfs:Datatype .
                                            :hatName "Magnus Larsson"@de .
 
 
-###  Generated by the OWL API (version 4.5.26) https://github.com/owlcs/owlapi
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
