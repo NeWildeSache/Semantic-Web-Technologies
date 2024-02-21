@@ -18,21 +18,27 @@ java -jar sparql-generate-2.1.0.jar -q kulturarena-website-konzerte.rqg -o gener
 
 
 
-
 REASONING
 
+apache-jena-fuseki-4.10.0/fuseki-server --conf=kulturarena-fuseki-configuration.ttl
+
 ./robot -vvv \
- merge --input kulturarena-ontology.ttl \
+ merge --input kulturarena-data.ttl \
  reason --reasoner hermit \
  --axiom-generators "SubClass EquivalentClass DisjointClasses ClassAssertion" \
  --output kulturarena-inferred.ttl
 
 
+./robot -vvv \
+      query --input kulturarena-inferred.ttl \
+            --query kulturarena-solist.rq kulturarena-solist.csv
+
+./robot -vvv \
+      query --input kulturarena-inferred.ttl \
+            --query kulturarena-ensemble.rq kulturarena-ensemble.csv
+
+./robot -vvv \
+      query --input kulturarena-inferred.ttl \
+            --query kulturarena-internationales-konzert.rq kulturarena-internationales-konzert.csv
 
 
-http://www.wikidata.org/entity/Q215380
-http://www.wikidata.org/entity/Q3046146
-http://www.wikidata.org/entity/Q2491498
-http://www.wikidata.org/entity/Q5741069
-http://www.wikidata.org/entity/Q9212979
-http://www.wikidata.org/entity/Q2088357
