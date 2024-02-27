@@ -14,7 +14,7 @@ SELECT ?land ?landname ?count WHERE {
       	?darbieter :hatName ?name ;
                  :kommtAus ?land .
       	FILTER(?jahr="2015"^^xsd:gYear) .
-	} GROUP BY (?land)
+	  } GROUP BY (?land)
   }
 } 
 

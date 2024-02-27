@@ -12,9 +12,6 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 INSERT {
 ?knownDarbieter :hatGenre ?genre ;
     :hatMusicBrainzArtistId ?ID ;
-    :wikidataType ?type ;
-    :hatGeschlecht ?geschlechtLabel ;
-    :hatGeburtsdatum ?geburtsdatum ;
     :hatMitglied ?mitglied .
 ?genre a :Genre ; 
     :hatName ?genreLabel.
@@ -36,38 +33,35 @@ WHERE {
   ?land :hatName ?landLabel .
   
   SERVICE <https://query.wikidata.org/sparql> {
-    SELECT DISTINCT ?name ?ID ?genre ?genreLabel ?geschlechtLabel ?geburtsdatum ?mitglied ?mitgliedName ?mitgliedGeschlechtLabel ?mitgliedGeburtsdatum ?mitgliedLand ?mitgliedLandLabel ?mitgliedLandBevoelkerung ?landLabel ?bevoelkerung ?type
+    SELECT DISTINCT ?name ?ID ?genre ?genreLabel ?landLabel ?bevoelkerung ?mitglied ?mitgliedName ?mitgliedGeschlechtLabel ?mitgliedGeburtsdatum ?mitgliedLand ?mitgliedLandLabel ?mitgliedLandBevoelkerung
     WHERE {
       ?darbieter rdfs:label ?name .
       ?darbieter wdt:P434 ?ID .
       ?darbieter wdt:P136 ?genre .
-      OPTIONAL{?darbieter wdt:P27 ?citizenship .
-                ?citizenship wdt:P1082 ?bevoelkerung .}
       OPTIONAL{?darbieter wdt:P495 ?origin .
-            ?origin wdt:P1082 ?bevoelkerung .}
-      ?citizenship rdfs:label ?landLabel .
+            ?origin wdt:P1082 ?bevoelkerung . }
       ?origin rdfs:label ?landLabel .
-      FILTER (?darbieter != wd:Q1403672 )
-      OPTIONAL{?darbieter wdt:P21 ?geschlecht }
-      OPTIONAL{?darbieter wdt:P569 ?geburtsdatum . }
+ 
       OPTIONAL{?darbieter wdt:P527 ?mitglied .
               OPTIONAL{?mitglied wdt:P21 ?mitgliedGeschlecht . }
               OPTIONAL{?mitglied wdt:P569 ?mitgliedGeburtsdatum . }
               OPTIONAL{?mitglied wdt:P27 ?mitgliedLand . 
           				    OPTIONAL{?mitgliedLand wdt:P1082 ?mitgliedLandBevoelkerung}}
               }
+
       ?darbieter wdt:P31 ?type .
+      FILTER (?type != wd:Q5) .
+      FILTER (?darbieter != wd:Q1403672 ) .
 
       SERVICE wikibase:label {
         bd:serviceParam wikibase:language "de".
         ?mitgliedLand rdfs:label ?mitgliedLandLabel .
         ?mitgliedGeschlecht rdfs:label ?mitgliedGeschlechtLabel .
-        ?genre rdfs:label ?genreLabel .
-        ?geschlecht rdfs:label ?geschlechtLabel .
         ?mitglied rdfs:label ?mitgliedName .
+        ?genre rdfs:label ?genreLabel .
       }
       
-  }
-} 
+    } 
+  } 
 }
 

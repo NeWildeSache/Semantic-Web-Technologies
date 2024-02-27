@@ -35,7 +35,13 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/hatGenre
 :hatGenre rdf:type owl:ObjectProperty ;
-          rdfs:domain :Musikdarbieter ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Musikdarbieter
+                                      :Musikensemble
+                                      :Musiker
+                                      :Solist
+                                    )
+                      ] ;
           rdfs:range :Genre ;
           rdfs:comment "gibt das Genre eines Musikdarbieters an"@de ;
           rdfs:label "hatGenre"@de .
@@ -78,13 +84,6 @@ xsd:gYear rdf:type rdfs:Datatype .
           rdfs:range :Land ;
           rdfs:comment "gibt das Herkunftsland einer Entität an"@de ;
           rdfs:label "kommtAus"@de .
-
-
-###  http://example.org/kulturarena/wikidataType
-:wikidataType rdf:type owl:ObjectProperty ;
-              rdfs:domain :Musikdarbieter ;
-              rdfs:comment "gibt den Wikidata-Typ einer Entität an"@de ;
-              rdfs:label "wikidataType"@de .
 
 
 #################################################################
@@ -179,21 +178,13 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Musikensemble
 :Musikensemble rdf:type owl:Class ;
                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                     owl:onProperty :wikidataType ;
-                                     owl:someValuesFrom [ rdf:type owl:Class ;
-                                                          owl:complementOf [ rdf:type owl:Class ;
-                                                                             owl:oneOf ( <http://www.wikidata.org/entity/Q5>
-                                                                                       )
-                                                                           ]
-                                                        ]
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
                                      owl:onProperty :hatMitglied ;
                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                      owl:onClass :Musiker
                                    ] ;
                rdfs:subClassOf :Musikdarbieter ;
-               owl:disjointWith :Solist ;
+               owl:disjointWith :Musiker ,
+                                :Solist ;
                rdfs:comment "Musikensembles bestehen aus mehreren Musikern"@de ;
                rdfs:label "Musikensemble"@de .
 
@@ -207,10 +198,7 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Solist
 :Solist rdf:type owl:Class ;
         owl:equivalentClass [ owl:intersectionOf ( :Musikdarbieter
-                                                   [ rdf:type owl:Restriction ;
-                                                     owl:onProperty :wikidataType ;
-                                                     owl:hasValue <http://www.wikidata.org/entity/Q5>
-                                                   ]
+                                                   :Musiker
                                                  ) ;
                               rdf:type owl:Class
                             ] ;
@@ -272,12 +260,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AbdullahIbrahim
 :AbdullahIbrahim rdf:type owl:NamedIndividual ,
-                          :Musikdarbieter ;
+                          :Musikdarbieter ,
+                          :Musiker ;
                  :hatGenre <http://www.wikidata.org/entity/Q1034231> ,
                            <http://www.wikidata.org/entity/Q105513> ,
                            <http://www.wikidata.org/entity/Q8341> ;
                  :kommtAus :Suedafrika ;
-                 :wikidataType <http://www.wikidata.org/entity/Q5> ;
                  :hatGeburtsdatum "1934-10-09T00:00:00Z"^^xsd:dateTime ;
                  :hatGeschlecht "männlich"@de ;
                  :hatName "Abdullah Ibrahim"@de ;
@@ -505,12 +493,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AlicePhoebeLou
 :AlicePhoebeLou rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q842324> ,
                           <http://www.wikidata.org/entity/Q9759> ;
                 :kommtAus :Deutschland ,
                           :Suedafrika ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1993-07-19T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "weiblich"@de ;
                 :hatName "Alice Phoebe Lou"@de ;
@@ -543,7 +531,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                        :Musikdarbieter ;
               :hatGenre <http://www.wikidata.org/entity/Q186472> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "Alin Coen Band"@de ;
               :hatMusicBrainzArtistId "3a9ee567-e2a5-4c20-b0bb-fe7f47603d52" .
 
@@ -590,8 +577,6 @@ xsd:gYear rdf:type rdfs:Datatype .
               :hatMitglied <http://www.wikidata.org/entity/Q28830325> ,
                            <http://www.wikidata.org/entity/Q28830329> ;
               :kommtAus :Mali ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ,
-                            <http://www.wikidata.org/entity/Q3046146> ;
               :hatName "Amadou & Mariam"@de ;
               :hatMusicBrainzArtistId "1fb60b6c-0f4d-42b4-8a5e-de705ec76660" .
 
@@ -625,7 +610,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       :hatGenre <http://www.wikidata.org/entity/Q212944> ;
                       :hatMitglied <http://www.wikidata.org/entity/Q1523765> ;
                       :kommtAus :Niederlande ;
-                      :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                       :hatName "Amsterdam Klezmer Band"@de ;
                       :hatMusicBrainzArtistId "28e27f86-3eba-4e17-9d04-f47b3be48e96" .
 
@@ -701,10 +685,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AndreasDorau
 :AndreasDorau rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q646679> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1964-01-19T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Andreas Dorau"@de ;
@@ -744,7 +728,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                         :Musikdarbieter ;
                                :hatGenre <http://www.wikidata.org/entity/Q105527> ;
                                :kommtAus :Deutschland ;
-                               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                                :hatName "Andromeda Mega Express Orchestra"@de ;
                                :hatMusicBrainzArtistId "4ac89cc7-331e-4476-b23c-ca3d469224d0" .
 
@@ -758,10 +741,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AngeloBranduardi
 :AngeloBranduardi rdf:type owl:NamedIndividual ,
-                           :Musikdarbieter ;
+                           :Musikdarbieter ,
+                           :Musiker ;
                   :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                   :kommtAus :Italien ;
-                  :wikidataType <http://www.wikidata.org/entity/Q5> ;
                   :hatGeburtsdatum "1950-02-12T00:00:00Z"^^xsd:dateTime ;
                   :hatGeschlecht "männlich"@de ;
                   :hatName "Angelo Branduardi"@de ;
@@ -777,7 +760,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AngéliqueKidjo
 :AngéliqueKidjo rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q180268> ,
                           <http://www.wikidata.org/entity/Q205049> ,
                           <http://www.wikidata.org/entity/Q227045> ,
@@ -785,7 +769,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                           <http://www.wikidata.org/entity/Q8341> ;
                 :kommtAus :Benin ,
                           :Frankreich ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1960-07-14T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "weiblich"@de ;
                 :hatName "Angélique Kidjo"@de ;
@@ -850,10 +833,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AnnaDepenbusch
 :AnnaDepenbusch rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                 :kommtAus :Deutschland ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1977-10-17T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "weiblich"@de ;
                 :hatName "Anna Depenbusch"@de ;
@@ -883,10 +866,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AnnaTernheim
 :AnnaTernheim rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q484641> ;
               :kommtAus :Schweden ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1978-05-31T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "weiblich"@de ;
               :hatName "Anna Ternheim"@de ;
@@ -923,8 +906,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                 <http://www.wikidata.org/entity/Q31975972> ,
                                 <http://www.wikidata.org/entity/Q31976185> ;
                    :kommtAus :Deutschland ;
-                   :wikidataType <http://www.wikidata.org/entity/Q2491498> ,
-                                 <http://www.wikidata.org/entity/Q5741069> ;
                    :hatName "AnnenMayKantereit"@de ;
                    :hatMusicBrainzArtistId "65daba7b-f387-46cc-a0c8-d0191b099586" .
 
@@ -960,10 +941,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                             <http://www.wikidata.org/entity/Q15836145> ,
                             <http://www.wikidata.org/entity/Q54892284> ;
                :kommtAus :Deutschland ;
-               :wikidataType <http://www.wikidata.org/entity/Q1135557> ,
-                             <http://www.wikidata.org/entity/Q19464263> ,
-                             <http://www.wikidata.org/entity/Q215380> ,
-                             <http://www.wikidata.org/entity/Q281643> ;
                :hatName "Antilopen Gang"@de ;
                :hatMusicBrainzArtistId "1cef14f9-b674-4f89-afc2-637652e38484" .
 
@@ -1008,7 +985,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                   :Musikdarbieter ;
          :hatGenre <http://www.wikidata.org/entity/Q1435485> ;
          :kommtAus :Brasilien ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "Ara Ketu"@de ;
          :hatMusicBrainzArtistId "126d22ae-77a0-431c-976e-199501eb5e42" .
 
@@ -1037,7 +1013,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Argentinien
 :Argentinien rdf:type owl:NamedIndividual ,
                       :Land ;
-             :hatEinwohneranzahl 47327407 ;
+             :hatEinwohneranzahl 47327407 ,
+                                 47327407 ;
              :hatName "Argentinien"@de .
 
 
@@ -1047,7 +1024,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                   :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                   :hatMitglied <http://www.wikidata.org/entity/Q713757> ;
                   :kommtAus :Armenien ;
-                  :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                   :hatName "Armenian Navy Band"@de ;
                   :hatMusicBrainzArtistId "5ead7b56-3e5f-49a1-aa27-d15bf05e2bec" .
 
@@ -1089,11 +1065,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AsafAvidan
 :AsafAvidan rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q183504> ,
                       <http://www.wikidata.org/entity/Q43343> ;
             :kommtAus :Israel ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1980-03-23T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Asaf Avidan"@de ;
@@ -1187,10 +1163,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AzizaMustafaZadeh
 :AzizaMustafaZadeh rdf:type owl:NamedIndividual ,
-                            :Musikdarbieter ;
+                            :Musikdarbieter ,
+                            :Musiker ;
                    :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                    :kommtAus :Aserbaidschan ;
-                   :wikidataType <http://www.wikidata.org/entity/Q5> ;
                    :hatGeburtsdatum "1969-12-19T00:00:00Z"^^xsd:dateTime ;
                    :hatGeschlecht "weiblich"@de ;
                    :hatName "Aziza Mustafa Zadeh"@de ;
@@ -1275,7 +1251,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                   <http://www.wikidata.org/entity/Q66375114> ;
      :kommtAus :Deutschland ,
                :Schweiz ;
-     :wikidataType <http://www.wikidata.org/entity/Q9212979> ;
      :hatName "BOY"@de ;
      :hatMusicBrainzArtistId "2e76bad0-edf3-4a6c-ad79-db87bb5a0d35" .
 
@@ -1310,10 +1285,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/BaabaMaal
 :BaabaMaal rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q369820> ;
            :kommtAus :Senegal ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1953-11-12T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "männlich"@de ;
            :hatName "Baaba Maal"@de ;
@@ -1333,7 +1308,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                :hatGenre <http://www.wikidata.org/entity/Q11399> ,
                          <http://www.wikidata.org/entity/Q54365> ;
                :kommtAus :Frankreich ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Babylon Circus"@de ;
                :hatMusicBrainzArtistId "84788caa-d859-4814-bf18-cbfbe277ce73" .
 
@@ -1347,10 +1321,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/BadiAssad
 :BadiAssad rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q8341> ;
            :kommtAus :Brasilien ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1966-12-23T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "weiblich"@de ;
            :hatName "Badi Assad"@de ;
@@ -1487,10 +1461,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/BattistaLena
 :BattistaLena rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q8341> ;
               :kommtAus :Italien ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1960-06-08T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Battista Lena"@de ;
@@ -1541,7 +1515,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                          <http://www.wikidata.org/entity/Q1899471> ,
                          <http://www.wikidata.org/entity/Q4877034> ;
             :kommtAus :Norwegen ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Beady Belle"@de ;
             :hatMusicBrainzArtistId "ff30cc46-5d98-4708-9c96-a217a7b1e0ff" .
 
@@ -1570,7 +1543,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Belgien
 :Belgien rdf:type owl:NamedIndividual ,
                   :Land ;
-         :hatEinwohneranzahl 11584008 ;
+         :hatEinwohneranzahl 11584008 ,
+                             11584008 ;
          :hatName "Belgien"@de .
 
 
@@ -1739,7 +1713,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                      :Musikdarbieter ;
             :hatGenre <http://www.wikidata.org/entity/Q11399> ;
             :kommtAus :Öesterreich ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Bilderbuch"@de ;
             :hatMusicBrainzArtistId "456104db-b21e-46a6-a094-1dd396f4c6a6" .
 
@@ -1774,11 +1747,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/BiréliLagrène
 :BiréliLagrène rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q1092837> ,
                          <http://www.wikidata.org/entity/Q8341> ;
                :kommtAus :Frankreich ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1966-09-04T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "männlich"@de ;
                :hatName "Biréli Lagrène"@de ;
@@ -1853,7 +1826,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                         :Musikdarbieter ;
                :hatGenre <http://www.wikidata.org/entity/Q9794> ;
                :kommtAus :Australien ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Blue King Brown"@de ;
                :hatMusicBrainzArtistId "1b067ec6-d3c7-4c7e-bf05-297c4eb03416" .
 
@@ -1870,7 +1842,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                      :Musikdarbieter ;
             :hatGenre <http://www.wikidata.org/entity/Q11401> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Blumentopf"@de ;
             :hatMusicBrainzArtistId "3eab4de9-a578-4327-8909-f90ffc1b8ae5" .
 
@@ -1888,7 +1859,6 @@ xsd:gYear rdf:type rdfs:Datatype .
           :hatGenre <http://www.wikidata.org/entity/Q842324> ;
           :hatMitglied <http://www.wikidata.org/entity/Q1673149> ;
           :kommtAus :Deutschland ;
-          :wikidataType <http://www.wikidata.org/entity/Q215380> ;
           :hatName "Blumfeld"@de ;
           :hatMusicBrainzArtistId "f1726af1-e797-4679-88d7-2ef6abcbec76" .
 
@@ -1947,7 +1917,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                    :hatGenre <http://www.wikidata.org/entity/Q170611> ;
                    :hatMitglied <http://www.wikidata.org/entity/Q61749519> ;
                    :kommtAus :Deutschland ;
-                   :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                    :hatName "Brandt Brauer Frick"@de ;
                    :hatMusicBrainzArtistId "3aa850f7-7a16-4bc9-8d67-7c16220ca4b3" ,
                                            "bc3f52d8-0748-4003-842b-2a6672c73020" .
@@ -1963,7 +1932,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Brasilien
 :Brasilien rdf:type owl:NamedIndividual ,
                     :Land ;
-           :hatEinwohneranzahl 203062512 ;
+           :hatEinwohneranzahl 203062512 ,
+                               203062512 ;
            :hatName "Brasilien"@de .
 
 
@@ -1988,7 +1958,6 @@ xsd:gYear rdf:type rdfs:Datatype .
          :hatMitglied <http://www.wikidata.org/entity/Q24287231> ,
                       <http://www.wikidata.org/entity/Q58217782> ;
          :kommtAus :Frankreich ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "Bratsch"@de ;
          :hatMusicBrainzArtistId "aa3f9680-c2b2-4afc-8c6f-a5137acdc9a3" .
 
@@ -2097,7 +2066,6 @@ xsd:gYear rdf:type rdfs:Datatype .
           :hatGenre <http://www.wikidata.org/entity/Q775614> ,
                     <http://www.wikidata.org/entity/Q844245> ;
           :kommtAus :Deutschland ;
-          :wikidataType <http://www.wikidata.org/entity/Q215380> ;
           :hatName "Bukahara"@de ;
           :hatMusicBrainzArtistId "ad058e4f-7e24-4db0-b5c2-7fcbcff72e01" .
 
@@ -2248,7 +2216,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                          <http://www.wikidata.org/entity/Q602561> ,
                          <http://www.wikidata.org/entity/Q9778> ;
                :kommtAus :Frankreich ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Caravan Palace"@de ;
                :hatMusicBrainzArtistId "72eabb1a-4d2c-4de6-90f2-671b2cada42b" .
 
@@ -2388,10 +2355,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/CharlieCunningham
 :CharlieCunningham rdf:type owl:NamedIndividual ,
-                            :Musikdarbieter ;
+                            :Musikdarbieter ,
+                            :Musiker ;
                    :hatGenre <http://www.wikidata.org/entity/Q1317816> ;
                    :kommtAus :Großbritannien ;
-                   :wikidataType <http://www.wikidata.org/entity/Q5> ;
                    :hatGeschlecht "männlich"@de ;
                    :hatName "Charlie Cunningham"@de ;
                    :hatMusicBrainzArtistId "73ed4066-c55b-496c-bb1a-1238937a2361" .
@@ -2434,7 +2401,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/ChicoCésar
 :ChicoCésar rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q102932> ,
                       <http://www.wikidata.org/entity/Q1046768> ,
                       <http://www.wikidata.org/entity/Q105527> ,
@@ -2445,7 +2413,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       <http://www.wikidata.org/entity/Q899215> ,
                       <http://www.wikidata.org/entity/Q9794> ;
             :kommtAus :Brasilien ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1964-01-26T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Chico César"@de ;
@@ -2498,7 +2465,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                          <http://www.wikidata.org/entity/Q9794> ;
                :hatMitglied <http://www.wikidata.org/entity/Q51077829> ;
                :kommtAus :Chile ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Chico Trujillo"@de ;
                :hatMusicBrainzArtistId "101d3c29-b414-42d4-aabc-02fd2fbf935d" .
 
@@ -2533,14 +2499,14 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/ChillyGonzales
 :ChillyGonzales rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q37073> ,
                           <http://www.wikidata.org/entity/Q6010> ,
                           <http://www.wikidata.org/entity/Q8341> ,
                           <http://www.wikidata.org/entity/Q9730> ,
                           <http://www.wikidata.org/entity/Q9778> ;
                 :kommtAus :Kanada ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1972-03-20T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "männlich"@de ;
                 :hatName "Chilly Gonzales"@de ;
@@ -2654,10 +2620,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Clueso
 :Clueso rdf:type owl:NamedIndividual ,
-                 :Musikdarbieter ;
+                 :Musikdarbieter ,
+                 :Musiker ;
         :hatGenre <http://www.wikidata.org/entity/Q37073> ;
         :kommtAus :Deutschland ;
-        :wikidataType <http://www.wikidata.org/entity/Q5> ;
         :hatGeburtsdatum "1980-04-09T00:00:00Z"^^xsd:dateTime ;
         :hatGeschlecht "männlich"@de ;
         :hatName "Clueso"@de ;
@@ -2903,13 +2869,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/DangerDan
 :DangerDan rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q11401> ,
                      <http://www.wikidata.org/entity/Q6010> ,
                      <http://www.wikidata.org/entity/Q753679> ;
            :kommtAus :Deutschland ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ,
-                         <http://www.wikidata.org/entity/Q61002> ;
            :hatGeburtsdatum "1983-06-01T00:00:00Z"^^xsd:dateTime ,
                             "1985-06-01T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "männlich"@de ;
@@ -2971,7 +2936,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                   :Musikdarbieter ;
          :hatGenre <http://www.wikidata.org/entity/Q8341> ;
          :kommtAus :Deutschland ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "De-Phazz"@de ;
          :hatMusicBrainzArtistId "5c47ccd3-3f82-46b9-96b8-efdffc83f269" .
 
@@ -3002,7 +2966,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                     :Musikdarbieter ;
            :hatGenre <http://www.wikidata.org/entity/Q193207> ;
            :kommtAus :Portugal ;
-           :wikidataType <http://www.wikidata.org/entity/Q215380> ;
            :hatName "Dead Combo"@de ;
            :hatMusicBrainzArtistId "092ae9e2-60bf-4b66-aa33-9e31754d1924" .
 
@@ -3019,7 +2982,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                      :Musikdarbieter ;
             :hatGenre <http://www.wikidata.org/entity/Q842324> ;
             :kommtAus :Suedafrika ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Dear Reader"@de ;
             :hatMusicBrainzArtistId "dc70bf33-5c52-4699-871b-0008126ba88b" .
 
@@ -3067,7 +3029,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                            <http://www.wikidata.org/entity/Q15441493> ,
                            <http://www.wikidata.org/entity/Q15833010> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "Deine Freunde"@de ;
               :hatMusicBrainzArtistId "d5fcca60-4499-432c-9482-e343813835f7" .
 
@@ -3092,7 +3053,6 @@ xsd:gYear rdf:type rdfs:Datatype .
               :hatGenre <http://www.wikidata.org/entity/Q3840596> ;
               :hatMitglied <http://www.wikidata.org/entity/Q696209> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "Deine Lakaien"@de ;
               :hatMusicBrainzArtistId "28078a34-2f82-42e0-b68e-98ee5f814fc5" .
 
@@ -3164,7 +3124,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                           :Musikdarbieter ;
                  :hatGenre <http://www.wikidata.org/entity/Q54365> ;
                  :kommtAus :Venezuela ;
-                 :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                  :hatName "Desorden Público"@de ;
                  :hatMusicBrainzArtistId "330966e4-cac3-4e19-927e-0fcb14225547" .
 
@@ -3179,7 +3138,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Deutschland
 :Deutschland rdf:type owl:NamedIndividual ,
                       :Land ;
-             :hatEinwohneranzahl 83149300 ;
+             :hatEinwohneranzahl 83149300 ,
+                                 83149300 ;
              :hatName "Deutschland"@de .
 
 
@@ -3306,10 +3266,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Dillon
 :Dillon rdf:type owl:NamedIndividual ,
-                 :Musikdarbieter ;
+                 :Musikdarbieter ,
+                 :Musiker ;
         :hatGenre <http://www.wikidata.org/entity/Q37073> ;
         :kommtAus :Deutschland ;
-        :wikidataType <http://www.wikidata.org/entity/Q5> ;
         :hatGeburtsdatum "1988-04-29T00:00:00Z"^^xsd:dateTime ;
         :hatGeschlecht "weiblich"@de ;
         :hatName "Dillon"@de ;
@@ -3342,7 +3302,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                      :Musikdarbieter ;
             :hatGenre <http://www.wikidata.org/entity/Q37073> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Django 3000"@de ;
             :hatMusicBrainzArtistId "26ad03aa-e30f-4553-b76f-71b115fab2ea" .
 
@@ -3495,11 +3454,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/EdsonCordeiro
 :EdsonCordeiro rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q37073> ,
                          <http://www.wikidata.org/entity/Q8341> ;
                :kommtAus :Brasilien ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1967-02-09T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "männlich"@de ;
                :hatName "Edson Cordeiro"@de ;
@@ -3525,7 +3484,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                   :Musikdarbieter ;
          :hatGenre <http://www.wikidata.org/entity/Q454071> ;
          :kommtAus :Deutschland ;
-         :wikidataType <http://www.wikidata.org/entity/Q9212979> ;
          :hatName "Eins Zwo"@de ;
          :hatMusicBrainzArtistId "c4d700ae-d74a-4202-a93d-ba1e84216cfd" .
 
@@ -3547,7 +3505,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                      <http://www.wikidata.org/entity/Q6207221> ,
                                      <http://www.wikidata.org/entity/Q63439> ;
                         :kommtAus :Deutschland ;
-                        :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                         :hatName "Einstürzende Neubauten"@de ;
                         :hatMusicBrainzArtistId "6e9ac29b-798c-4af7-8d9e-55cdc72a999c" .
 
@@ -3597,7 +3554,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                              <http://www.wikidata.org/entity/Q95199889> ,
                              <http://www.wikidata.org/entity/Q95219961> ;
                 :kommtAus :Deutschland ;
-                :wikidataType <http://www.wikidata.org/entity/Q5741069> ;
                 :hatName "Element of Crime"@de ;
                 :hatMusicBrainzArtistId "40985bd2-6d44-4c86-bd16-35cad449cce3" .
 
@@ -3639,10 +3595,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Elif
 :Elif rdf:type owl:NamedIndividual ,
-               :Musikdarbieter ;
+               :Musikdarbieter ,
+               :Musiker ;
       :hatGenre <http://www.wikidata.org/entity/Q37073> ;
       :kommtAus :Deutschland ;
-      :wikidataType <http://www.wikidata.org/entity/Q5> ;
       :hatGeburtsdatum "1992-12-12T00:00:00Z"^^xsd:dateTime ;
       :hatGeschlecht "weiblich"@de ;
       :hatName "Elif"@de ;
@@ -3658,11 +3614,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/ElinaDuni
 :ElinaDuni rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q8341> ;
            :kommtAus :Albanien ,
                      :Schweiz ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1981-03-10T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "weiblich"@de ;
            :hatName "Elina Duni"@de ;
@@ -3678,10 +3634,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/EmelMathlouthi
 :EmelMathlouthi rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q205560> ;
                 :kommtAus :Tunesien ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1982-01-11T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "weiblich"@de ;
                 :hatName "Emel Mathlouthi"@de ;
@@ -3715,7 +3671,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                     :hatGenre <http://www.wikidata.org/entity/Q211573> ;
                                     :hatMitglied <http://www.wikidata.org/entity/Q94882> ;
                                     :kommtAus :Serbien ;
-                                    :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                                     :hatName "Emir Kusturica & The No Smoking Orchestra"@de ;
                                     :hatMusicBrainzArtistId "76dc461d-2503-4b24-a187-930cfd139243" .
 
@@ -3738,7 +3693,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                           :Musikdarbieter ;
                                  :hatGenre <http://www.wikidata.org/entity/Q436016> ;
                                  :kommtAus :Deutschland ;
-                                 :wikidataType <http://www.wikidata.org/entity/Q2088357> ;
                                  :hatName "Ensemble für frühe Musik Augsburg"@de ;
                                  :hatMusicBrainzArtistId "e58e1103-67ac-4121-8d97-27d79b603be4" .
 
@@ -3976,8 +3930,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                        <http://www.wikidata.org/entity/Q85602153> ,
                        <http://www.wikidata.org/entity/Q85602502> ;
           :kommtAus :BurkinaFaso ;
-          :wikidataType <http://www.wikidata.org/entity/Q215380> ,
-                        <http://www.wikidata.org/entity/Q2393314> ;
           :hatName "Farafina"@de ;
           :hatMusicBrainzArtistId "61e74161-71e4-40d5-bfc0-61313f276d43" .
 
@@ -4001,7 +3953,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                     <http://www.wikidata.org/entity/Q18654675> ,
                                     <http://www.wikidata.org/entity/Q704593> ;
                        :kommtAus :Deutschland ;
-                       :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                        :hatName "Farin Urlaub Racing Team"@de ;
                        :hatMusicBrainzArtistId "57f81560-caef-4059-95ae-f396afe0b6f3" .
 
@@ -4050,12 +4001,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/FatoumataDiawara
 :FatoumataDiawara rdf:type owl:NamedIndividual ,
-                           :Musikdarbieter ;
+                           :Musikdarbieter ,
+                           :Musiker ;
                   :hatGenre <http://www.wikidata.org/entity/Q43343> ,
                             <http://www.wikidata.org/entity/Q7800608> ,
                             <http://www.wikidata.org/entity/Q7972788> ;
                   :kommtAus :Mali ;
-                  :wikidataType <http://www.wikidata.org/entity/Q5> ;
                   :hatGeburtsdatum "1982-01-01T00:00:00Z"^^xsd:dateTime ;
                   :hatGeschlecht "weiblich"@de ;
                   :hatName "Fatoumata Diawara"@de ;
@@ -4088,7 +4039,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                        :Musikdarbieter ;
               :hatGenre <http://www.wikidata.org/entity/Q388296> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "Feindrehstar"@de ;
               :hatMusicBrainzArtistId "f4ab4079-7b57-4bd0-aa0a-2bc3ad31b481" .
 
@@ -4116,10 +4066,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/FelixMeyer
 :FelixMeyer rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q1062400> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1975-01-01T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Felix Meyer"@de ;
@@ -4135,12 +4085,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/FemiKuti
 :FemiKuti rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ;
           :hatGenre <http://www.wikidata.org/entity/Q164444> ,
                     <http://www.wikidata.org/entity/Q388296> ,
                     <http://www.wikidata.org/entity/Q8341> ;
           :kommtAus :Nigeria ;
-          :wikidataType <http://www.wikidata.org/entity/Q5> ;
           :hatGeburtsdatum "1962-06-16T00:00:00Z"^^xsd:dateTime ;
           :hatGeschlecht "männlich"@de ;
           :hatName "Femi Kuti"@de ;
@@ -4160,7 +4110,6 @@ xsd:gYear rdf:type rdfs:Datatype .
             :hatGenre <http://www.wikidata.org/entity/Q11401> ;
             :hatMitglied <http://www.wikidata.org/entity/Q893709> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Fettes Brot"@de ;
             :hatMusicBrainzArtistId "733e7372-5400-4c79-9059-33e2b2262d01" .
 
@@ -4279,7 +4228,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       <http://www.wikidata.org/entity/Q54879064> ,
                       <http://www.wikidata.org/entity/Q56376875> ;
          :kommtAus :Niederlande ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "Flairck"@de ;
          :hatMusicBrainzArtistId "3b9a56f3-9f6c-4896-b4d1-c725a6949b29" .
 
@@ -4293,10 +4241,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/FloMega
 :FloMega rdf:type owl:NamedIndividual ,
-                  :Musikdarbieter ;
+                  :Musikdarbieter ,
+                  :Musiker ;
          :hatGenre <http://www.wikidata.org/entity/Q131272> ;
          :kommtAus :Deutschland ;
-         :wikidataType <http://www.wikidata.org/entity/Q5> ;
          :hatGeburtsdatum "1979-12-07T00:00:00Z"^^xsd:dateTime ;
          :hatGeschlecht "männlich"@de ;
          :hatName "Flo Mega"@de ;
@@ -4468,7 +4416,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Frankreich
 :Frankreich rdf:type owl:NamedIndividual ,
                      :Land ;
-            :hatEinwohneranzahl 67749632 ;
+            :hatEinwohneranzahl 67749632 ,
+                                67749632 ;
             :hatName "Frankreich"@de .
 
 
@@ -4509,10 +4458,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/FredrikaStahl
 :FredrikaStahl rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                :kommtAus :Schweden ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1984-10-24T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "weiblich"@de ;
                :hatName "Fredrika Stahl"@de ;
@@ -4547,7 +4496,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                :hatMitglied <http://www.wikidata.org/entity/Q2087498> ,
                             <http://www.wikidata.org/entity/Q216271> ;
                :kommtAus :Deutschland ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Freundeskreis"@de ;
                :hatMusicBrainzArtistId "1531ee70-dbeb-487f-94ad-3e5bd18fd34a" .
 
@@ -4693,10 +4641,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/GabyMoreno
 :GabyMoreno rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q9759> ;
             :kommtAus :Guatemala ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1981-12-16T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "weiblich"@de ;
             :hatName "Gaby Moreno"@de ;
@@ -4748,10 +4696,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/GayeSuAkyol
 :GayeSuAkyol rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q483740> ;
              :kommtAus :Tuerkei ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1985-01-30T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "weiblich"@de ;
              :hatName "Gaye Su Akyol"@de ;
@@ -4847,7 +4795,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       :Musikdarbieter ;
              :hatGenre <http://www.wikidata.org/entity/Q11399> ;
              :kommtAus :Deutschland ;
-             :wikidataType <http://www.wikidata.org/entity/Q215380> ;
              :hatName "Get Well Soon"@de ;
              :hatMusicBrainzArtistId "7bfdd0ec-adc2-455e-bd1f-eba31d64aa3a" .
 
@@ -4880,10 +4827,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/GiannaNannini
 :GiannaNannini rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q11399> ;
                :kommtAus :Italien ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1954-06-14T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "weiblich"@de ;
                :hatName "Gianna Nannini"@de ;
@@ -4983,11 +4930,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/GlenHansard
 :GlenHansard rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q235858> ,
                        <http://www.wikidata.org/entity/Q842324> ;
              :kommtAus :Irland ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1970-04-21T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "männlich"@de ;
              :hatName "Glen Hansard"@de ;
@@ -5024,10 +4971,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/GoetzAlsmann
 :GoetzAlsmann rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q8341> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1957-07-12T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Götz Alsmann"@de ;
@@ -5100,11 +5047,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/GonzaloRubalcaba
 :GonzaloRubalcaba rdf:type owl:NamedIndividual ,
-                           :Musikdarbieter ;
+                           :Musikdarbieter ,
+                           :Musiker ;
                   :hatGenre <http://www.wikidata.org/entity/Q105527> ,
                             <http://www.wikidata.org/entity/Q8341> ;
                   :kommtAus :Kuba ;
-                  :wikidataType <http://www.wikidata.org/entity/Q5> ;
                   :hatGeburtsdatum "1963-05-27T00:00:00Z"^^xsd:dateTime ;
                   :hatGeschlecht "männlich"@de ;
                   :hatName "Gonzalo Rubalcaba"@de ;
@@ -5172,7 +5119,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                   :Musikdarbieter ;
          :hatGenre <http://www.wikidata.org/entity/Q37073> ;
          :kommtAus :Öesterreich ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "Granada"@de ;
          :hatMusicBrainzArtistId "e739971e-c967-468d-a5ef-5689dd641d24" .
 
@@ -5186,10 +5132,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/GregorMeyle
 :GregorMeyle rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q37073> ;
              :kommtAus :Deutschland ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1978-10-13T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "männlich"@de ;
              :hatName "Gregor Meyle"@de ;
@@ -5276,7 +5222,6 @@ xsd:gYear rdf:type rdfs:Datatype .
         :hatGenre <http://www.wikidata.org/entity/Q817138> ;
         :hatMitglied <http://www.wikidata.org/entity/Q1165366> ;
         :kommtAus :Island ;
-        :wikidataType <http://www.wikidata.org/entity/Q215380> ;
         :hatName "GusGus"@de ;
         :hatMusicBrainzArtistId "f5cff7b2-b19d-4934-8525-b17248b30ab3" .
 
@@ -5318,11 +5263,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/HabibKoité
 :HabibKoité rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q205049> ,
                       <http://www.wikidata.org/entity/Q369820> ;
             :kommtAus :Mali ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1958-01-27T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Habib Koité"@de ;
@@ -5458,10 +5403,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/HelgeSchneider
 :HelgeSchneider rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                 :kommtAus :Deutschland ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1955-08-30T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "männlich"@de ;
                 :hatName "Helge Schneider"@de ;
@@ -5505,10 +5450,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/HindiZahra
 :HindiZahra rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q37073> ;
             :kommtAus :Marokko ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1979-01-20T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "weiblich"@de ;
             :hatName "Hindi Zahra"@de ;
@@ -5524,11 +5469,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/HollyCole
 :HollyCole rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q1092837> ,
                      <http://www.wikidata.org/entity/Q37073> ;
            :kommtAus :Kanada ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1963-11-25T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "weiblich"@de ;
            :hatName "Holly Cole"@de ;
@@ -5565,10 +5510,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/HubertVonGoisern
 :HubertVonGoisern rdf:type owl:NamedIndividual ,
-                           :Musikdarbieter ;
+                           :Musikdarbieter ,
+                           :Musiker ;
                   :hatGenre <http://www.wikidata.org/entity/Q235858> ;
                   :kommtAus :Öesterreich ;
-                  :wikidataType <http://www.wikidata.org/entity/Q5> ;
                   :hatGeburtsdatum "1952-11-17T00:00:00Z"^^xsd:dateTime ;
                   :hatGeschlecht "männlich"@de ;
                   :hatName "Hubert von Goisern"@de ;
@@ -5605,11 +5550,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/HughColtman
 :HughColtman rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q7366> ,
                        <http://www.wikidata.org/entity/Q8341> ;
              :kommtAus :VereinigtesKoenigreich ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1972-05-26T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "männlich"@de ;
              :hatName "Hugh Coltman"@de ;
@@ -5625,12 +5570,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/HughMasekela
 :HughMasekela rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q1034231> ,
                         <http://www.wikidata.org/entity/Q369820> ,
                         <http://www.wikidata.org/entity/Q8341> ;
               :kommtAus :Suedafrika ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1939-04-04T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Hugh Masekela"@de ;
@@ -5649,7 +5594,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                    :Musikdarbieter ;
           :hatGenre <http://www.wikidata.org/entity/Q188450> ;
           :kommtAus :Deutschland ;
-          :wikidataType <http://www.wikidata.org/entity/Q215380> ;
           :hatName "Hundreds"@de ;
           :hatMusicBrainzArtistId "fd021ba4-e4a5-448a-8a3d-7e73f84ec611" .
 
@@ -5677,11 +5621,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/IbrahimFerrer
 :IbrahimFerrer rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q4428744> ,
                          <http://www.wikidata.org/entity/Q837389> ;
                :kommtAus :Kuba ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1927-02-20T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "männlich"@de ;
                :hatName "Ibrahim Ferrer"@de ;
@@ -5697,10 +5641,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/IdaSand
 :IdaSand rdf:type owl:NamedIndividual ,
-                  :Musikdarbieter ;
+                  :Musikdarbieter ,
+                  :Musiker ;
          :hatGenre <http://www.wikidata.org/entity/Q8341> ;
          :kommtAus :Schweden ;
-         :wikidataType <http://www.wikidata.org/entity/Q5> ;
          :hatGeburtsdatum "1977-11-05T00:00:00Z"^^xsd:dateTime ;
          :hatGeschlecht "weiblich"@de ;
          :hatName "Ida Sand"@de ;
@@ -5720,7 +5664,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                     :Musikdarbieter ;
            :hatGenre <http://www.wikidata.org/entity/Q37073> ;
            :kommtAus :Deutschland ;
-           :wikidataType <http://www.wikidata.org/entity/Q215380> ;
            :hatName "Il Civetto"@de ;
            :hatMusicBrainzArtistId "10547811-aba7-4643-b3e9-34a0e8be7aa1" .
 
@@ -5764,7 +5707,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                   :Musikdarbieter ;
          :hatGenre <http://www.wikidata.org/entity/Q837389> ;
          :kommtAus :Kuba ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "Irakere"@de ;
          :hatMusicBrainzArtistId "70365513-39d7-47e3-b898-1f70f607b1fe" .
 
@@ -5792,21 +5734,38 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Island
 :Island rdf:type owl:NamedIndividual ,
                  :Land ;
-        :hatEinwohneranzahl 364260 ;
+        :hatEinwohneranzahl 364260 ,
+                            364260 ;
         :hatName "Island"@de .
 
 
 ###  http://example.org/kulturarena/Israel
 :Israel rdf:type owl:NamedIndividual ,
                  :Land ;
-        :hatEinwohneranzahl 9797120 ;
+        :hatEinwohneranzahl 7412200 ,
+                            8463400 ,
+                            8654900 ,
+                            872700 ,
+                            8796200 ,
+                            8891800 ,
+                            9093000 ,
+                            9840000 ,
+                            7412200 ,
+                            8463400 ,
+                            8654900 ,
+                            872700 ,
+                            8796200 ,
+                            8891800 ,
+                            9093000 ,
+                            9840000 ;
         :hatName "Israel"@de .
 
 
 ###  http://example.org/kulturarena/Italien
 :Italien rdf:type owl:NamedIndividual ,
                   :Land ;
-         :hatEinwohneranzahl 58850717 ;
+         :hatEinwohneranzahl 58850717 ,
+                             58850717 ;
          :hatName "Italien"@de .
 
 
@@ -5844,7 +5803,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                 :Musikdarbieter ;
        :hatGenre <http://www.wikidata.org/entity/Q11399> ;
        :kommtAus :Israel ;
-       :wikidataType <http://www.wikidata.org/entity/Q5741069> ;
        :hatName "Izabo"@de ;
        :hatMusicBrainzArtistId "01ed6162-978a-4c20-a4f0-828af636fda5" .
 
@@ -5976,10 +5934,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JanDelay
 :JanDelay rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ;
           :hatGenre <http://www.wikidata.org/entity/Q37073> ;
           :kommtAus :Deutschland ;
-          :wikidataType <http://www.wikidata.org/entity/Q5> ;
           :hatGeburtsdatum "1976-08-25T00:00:00Z"^^xsd:dateTime ;
           :hatGeschlecht "männlich"@de ;
           :hatName "Jan Delay"@de ;
@@ -5998,7 +5956,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                            :Musikdarbieter ;
                   :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                   :kommtAus :Norwegen ;
-                  :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                   :hatName "Jan Garbarek Group"@de ;
                   :hatMusicBrainzArtistId "ade18e14-d868-44ee-994b-51587e587f72" .
 
@@ -6044,7 +6001,6 @@ xsd:gYear rdf:type rdfs:Datatype .
               :hatGenre <http://www.wikidata.org/entity/Q2994332> ;
               :hatMitglied <http://www.wikidata.org/entity/Q1403698> ;
               :kommtAus :Spanien ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "Jarabe de Palo"@de ;
               :hatMusicBrainzArtistId "38b511a2-76fa-4a1e-9b7a-e2a6efa6399b" .
 
@@ -6250,8 +6206,6 @@ xsd:gYear rdf:type rdfs:Datatype .
           :hatGenre <http://www.wikidata.org/entity/Q164444> ,
                     <http://www.wikidata.org/entity/Q484641> ;
           :kommtAus :Deutschland ;
-          :wikidataType <http://www.wikidata.org/entity/Q1135557> ,
-                        <http://www.wikidata.org/entity/Q2491498> ;
           :hatName "Jeremias"@de ;
           :hatMusicBrainzArtistId "c685e7be-102b-4d4e-889d-6de82d32ba6c" .
 
@@ -6265,12 +6219,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JeremyLoops
 :JeremyLoops rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q11700058> ,
                        <http://www.wikidata.org/entity/Q842324> ;
              :kommtAus :Schweiz ,
                        :Suedafrika ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1984-03-04T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "männlich"@de ;
              :hatName "Jeremy Loops"@de ;
@@ -6300,10 +6254,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JimiTenor
 :JimiTenor rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q9778> ;
            :kommtAus :Finnland ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1965-01-01T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "männlich"@de ;
            :hatName "Jimi Tenor"@de ;
@@ -6411,10 +6365,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JochenDistelmeyer
 :JochenDistelmeyer rdf:type owl:NamedIndividual ,
-                            :Musikdarbieter ;
+                            :Musikdarbieter ,
+                            :Musiker ;
                    :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                    :kommtAus :Deutschland ;
-                   :wikidataType <http://www.wikidata.org/entity/Q5> ;
                    :hatGeburtsdatum "1967-01-01T00:00:00Z"^^xsd:dateTime ;
                    :hatGeschlecht "männlich"@de ;
                    :hatName "Jochen Distelmeyer"@de ;
@@ -6444,14 +6398,14 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JoeZawinul
 :JoeZawinul rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q105527> ,
                       <http://www.wikidata.org/entity/Q131272> ,
                       <http://www.wikidata.org/entity/Q327547> ,
                       <http://www.wikidata.org/entity/Q8341> ;
             :kommtAus :USA ,
                       :Öesterreich ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1932-07-07T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Joe Zawinul"@de ;
@@ -6474,10 +6428,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JohannaBorchert
 :JohannaBorchert rdf:type owl:NamedIndividual ,
-                          :Musikdarbieter ;
+                          :Musikdarbieter ,
+                          :Musiker ;
                  :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                  :kommtAus :Deutschland ;
-                 :wikidataType <http://www.wikidata.org/entity/Q5> ;
                  :hatGeburtsdatum "1983-01-01T00:00:00Z"^^xsd:dateTime ;
                  :hatGeschlecht "weiblich"@de ;
                  :hatName "Johanna Borchert"@de ;
@@ -6493,10 +6447,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JohannaSummer
 :JohannaSummer rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                :kommtAus :Deutschland ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1995-01-01T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "weiblich"@de ;
                :hatName "Johanna Summer"@de ;
@@ -6512,10 +6466,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JohannesOerding
 :JohannesOerding rdf:type owl:NamedIndividual ,
-                          :Musikdarbieter ;
+                          :Musikdarbieter ,
+                          :Musiker ;
                  :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                  :kommtAus :Deutschland ;
-                 :wikidataType <http://www.wikidata.org/entity/Q5> ;
                  :hatGeburtsdatum "1981-12-26T00:00:00Z"^^xsd:dateTime ;
                  :hatGeschlecht "männlich"@de ;
                  :hatName "Johannes Oerding"@de ;
@@ -6535,7 +6489,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                 :hatGenre <http://www.wikidata.org/entity/Q11366> ;
                 :hatMitglied <http://www.wikidata.org/entity/Q731958> ;
                 :kommtAus :Australien ;
-                :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                 :hatName "John Butler Trio"@de ;
                 :hatMusicBrainzArtistId "7952b266-9fd4-4a09-a324-7dc84f11b5fc" .
 
@@ -6627,12 +6580,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JohnnyClegg
 :JohnnyClegg rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q2064394> ,
                        <http://www.wikidata.org/entity/Q37073> ,
                        <http://www.wikidata.org/entity/Q9794> ;
              :kommtAus :Suedafrika ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1953-06-07T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "männlich"@de ;
              :hatName "Johnny Clegg"@de ;
@@ -6662,10 +6615,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Jorane
 :Jorane rdf:type owl:NamedIndividual ,
-                 :Musikdarbieter ;
+                 :Musikdarbieter ,
+                 :Musiker ;
         :hatGenre <http://www.wikidata.org/entity/Q49451> ;
         :kommtAus :Kanada ;
-        :wikidataType <http://www.wikidata.org/entity/Q5> ;
         :hatGeburtsdatum "1975-10-12T00:00:00Z"^^xsd:dateTime ;
         :hatGeschlecht "weiblich"@de ;
         :hatName "Jorane"@de ;
@@ -6695,11 +6648,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JoyDenalane
 :JoyDenalane rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q131272> ,
                        <http://www.wikidata.org/entity/Q846833> ;
              :kommtAus :Deutschland ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1973-06-11T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "weiblich"@de ;
              :hatName "Joy Denalane"@de ;
@@ -6729,10 +6682,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JudithHolofernes
 :JudithHolofernes rdf:type owl:NamedIndividual ,
-                           :Musikdarbieter ;
+                           :Musikdarbieter ,
+                           :Musiker ;
                   :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                   :kommtAus :Deutschland ;
-                  :wikidataType <http://www.wikidata.org/entity/Q5> ;
                   :hatGeburtsdatum "1976-11-12T00:00:00Z"^^xsd:dateTime ;
                   :hatGeschlecht "weiblich"@de ;
                   :hatName "Judith Holofernes"@de ;
@@ -6776,7 +6729,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                    <http://www.wikidata.org/entity/Q3183286> ,
                    <http://www.wikidata.org/entity/Q465172> ;
       :kommtAus :Deutschland ;
-      :wikidataType <http://www.wikidata.org/entity/Q215380> ;
       :hatName "Juli"@de ;
       :hatMusicBrainzArtistId "9a593aff-62c9-40bd-9631-1697798adb63" .
 
@@ -6804,7 +6756,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/JulietaVenegas
 :JulietaVenegas rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q11366> ,
                           <http://www.wikidata.org/entity/Q11399> ,
                           <http://www.wikidata.org/entity/Q186472> ,
@@ -6814,7 +6767,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                           <http://www.wikidata.org/entity/Q723418> ,
                           <http://www.wikidata.org/entity/Q842324> ;
                 :kommtAus :Mexiko ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1970-11-24T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "weiblich"@de ;
                 :hatName "Julieta Venegas"@de ;
@@ -6940,7 +6892,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                 :hatGenre <http://www.wikidata.org/entity/Q183504> ,
                           <http://www.wikidata.org/entity/Q37073> ;
                 :kommtAus :Norwegen ;
-                :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                 :hatName "Kakkmaddafakka"@de ;
                 :hatMusicBrainzArtistId "4ecdfa5d-5516-46ef-8e9b-b15792ed88c3" .
 
@@ -7007,10 +6958,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/KariBremnes
 :KariBremnes rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q3482281> ;
              :kommtAus :Norwegen ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1956-12-09T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "weiblich"@de ;
              :hatName "Kari Bremnes"@de ;
@@ -7072,7 +7023,6 @@ xsd:gYear rdf:type rdfs:Datatype .
               :hatGenre <http://www.wikidata.org/entity/Q43343> ;
               :hatMitglied <http://www.wikidata.org/entity/Q21155073> ;
               :kommtAus :Norwegen ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "Katzenjammer"@de ;
               :hatMusicBrainzArtistId "ad102038-c2a1-4c6b-856f-f671254de54f" .
 
@@ -7111,7 +7061,6 @@ xsd:gYear rdf:type rdfs:Datatype .
          :hatGenre <http://www.wikidata.org/entity/Q487914> ;
          :hatMitglied <http://www.wikidata.org/entity/Q1894418> ;
          :kommtAus :Deutschland ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "Kettcar"@de ;
          :hatMusicBrainzArtistId "315fa94f-3bb5-43db-a28e-406a83e9805c" .
 
@@ -7140,12 +7089,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Khaled
 :Khaled rdf:type owl:NamedIndividual ,
-                 :Musikdarbieter ;
+                 :Musikdarbieter ,
+                 :Musiker ;
         :hatGenre <http://www.wikidata.org/entity/Q37073> ,
                   <http://www.wikidata.org/entity/Q8341> ,
                   <http://www.wikidata.org/entity/Q839029> ;
         :kommtAus :Algerien ;
-        :wikidataType <http://www.wikidata.org/entity/Q5> ;
         :hatGeburtsdatum "1960-02-29T00:00:00Z"^^xsd:dateTime ;
         :hatGeschlecht "männlich"@de ;
         :hatName "Khaled"@de ;
@@ -7224,11 +7173,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/KlausDoldinger
 :KlausDoldinger rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q105527> ,
                           <http://www.wikidata.org/entity/Q8341> ;
                 :kommtAus :Deutschland ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1936-05-12T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "männlich"@de ;
                 :hatName "Klaus Doldinger"@de ;
@@ -7271,7 +7220,6 @@ xsd:gYear rdf:type rdfs:Datatype .
       :hatMitglied <http://www.wikidata.org/entity/Q2370219> ,
                    <http://www.wikidata.org/entity/Q66995884> ;
       :kommtAus :Deutschland ;
-      :wikidataType <http://www.wikidata.org/entity/Q215380> ;
       :hatName "Klee"@de ;
       :hatMusicBrainzArtistId "ed46f02c-0801-40f1-872c-5259ce334476" .
 
@@ -7385,7 +7333,6 @@ xsd:gYear rdf:type rdfs:Datatype .
             :hatGenre <http://www.wikidata.org/entity/Q105637110> ,
                       <http://www.wikidata.org/entity/Q9778> ;
             :kommtAus :Niederlande ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Kraak & Smaak"@de ;
             :hatMusicBrainzArtistId "472fcf2f-eaa2-44a2-8e8f-2ecd23cd0fc7" .
 
@@ -7436,6 +7383,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 :Kuba rdf:type owl:NamedIndividual ,
                :Land ;
       :hatEinwohneranzahl 10985974 ,
+                          11181595 ,
+                          10985974 ,
                           11181595 ;
       :hatName "Kuba"@de .
 
@@ -7494,7 +7443,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                           :Musikdarbieter ;
                  :hatGenre <http://www.wikidata.org/entity/Q11399> ;
                  :kommtAus :Frankreich ;
-                 :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                  :hatName "La Caravane Passe"@de ;
                  :hatMusicBrainzArtistId "d9f213fe-10fe-4f47-a443-2301fae4673c" .
 
@@ -7540,7 +7488,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                        :Musikdarbieter ;
               :hatGenre <http://www.wikidata.org/entity/Q11399> ;
               :kommtAus :Uruguay ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "La Vela Puerca"@de ;
               :hatMusicBrainzArtistId "d7fd77f6-ea1f-41db-8858-12a0ae143432" .
 
@@ -7554,10 +7501,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/LaYegros
 :LaYegros rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ;
           :hatGenre <http://www.wikidata.org/entity/Q723418> ;
           :kommtAus :Argentinien ;
-          :wikidataType <http://www.wikidata.org/entity/Q5> ;
           :hatGeburtsdatum "2000-01-01T00:00:00Z"^^xsd:dateTime ;
           :hatGeschlecht "weiblich"@de ;
           :hatName "La Yegros"@de ;
@@ -7578,8 +7525,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                  <http://www.wikidata.org/entity/Q369820> ;
                        :hatMitglied <http://www.wikidata.org/entity/Q16017572> ;
                        :kommtAus :Suedafrika ;
-                       :wikidataType <http://www.wikidata.org/entity/Q131186> ,
-                                     <http://www.wikidata.org/entity/Q19351429> ;
                        :hatName "Ladysmith Black Mambazo"@de ;
                        :hatMusicBrainzArtistId "c1982570-8efb-4cf7-bb5b-c9c026c0e8f4" .
 
@@ -7758,7 +7703,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                        :Musikdarbieter ;
               :hatGenre <http://www.wikidata.org/entity/Q9794> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "Les Babacools"@de ;
               :hatMusicBrainzArtistId "c9361800-1b3d-4cf1-b8be-32e739a09a3a" .
 
@@ -7780,7 +7724,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                 <http://www.wikidata.org/entity/Q3298943> ,
                                 <http://www.wikidata.org/entity/Q3470453> ;
                    :kommtAus :Frankreich ;
-                   :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                    :hatName "Les Ogres de Barback"@de ;
                    :hatMusicBrainzArtistId "a9a7819b-8c6a-4b9a-a3e9-cad0471963df" .
 
@@ -7931,7 +7874,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                 :Musikdarbieter ;
        :hatGenre <http://www.wikidata.org/entity/Q1317816> ;
        :kommtAus :USA ;
-       :wikidataType <http://www.wikidata.org/entity/Q10648343> ;
        :hatName "Lhasa"@de ;
        :hatMusicBrainzArtistId "a5d95e54-676d-46d1-bbfa-0d41dcb7178b" .
 
@@ -7987,10 +7929,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Liniker
 :Liniker rdf:type owl:NamedIndividual ,
-                  :Musikdarbieter ;
+                  :Musikdarbieter ,
+                  :Musiker ;
          :hatGenre <http://www.wikidata.org/entity/Q131272> ;
          :kommtAus :Brasilien ;
-         :wikidataType <http://www.wikidata.org/entity/Q5> ;
          :hatGeburtsdatum "1995-07-03T00:00:00Z"^^xsd:dateTime ;
          :hatGeschlecht "Transfrau"@de ;
          :hatName "Liniker"@de ;
@@ -8037,7 +7979,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                     :Musikdarbieter ;
            :hatGenre <http://www.wikidata.org/entity/Q842324> ;
            :kommtAus :Israel ;
-           :wikidataType <http://www.wikidata.org/entity/Q215380> ;
            :hatName "Lola Marsh"@de ;
            :hatMusicBrainzArtistId "9fb0217a-e50c-4aba-8d39-9238edbf0844" .
 
@@ -8114,14 +8055,14 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Louane
 :Louane rdf:type owl:NamedIndividual ,
-                 :Musikdarbieter ;
+                 :Musikdarbieter ,
+                 :Musiker ;
         :hatGenre <http://www.wikidata.org/entity/Q2187392> ,
                   <http://www.wikidata.org/entity/Q37073> ,
                   <http://www.wikidata.org/entity/Q7118426> ,
                   <http://www.wikidata.org/entity/Q7915876> ,
                   <http://www.wikidata.org/entity/Q817138> ;
         :kommtAus :Frankreich ;
-        :wikidataType <http://www.wikidata.org/entity/Q5> ;
         :hatGeburtsdatum "1996-11-26T00:00:00Z"^^xsd:dateTime ;
         :hatGeschlecht "weiblich"@de ;
         :hatName "Louane"@de ;
@@ -8197,7 +8138,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                           <http://www.wikidata.org/entity/Q16324115> ,
                           <http://www.wikidata.org/entity/Q99730956> ;
              :kommtAus :Daenemark ;
-             :wikidataType <http://www.wikidata.org/entity/Q215380> ;
              :hatName "Lukas Graham"@de ;
              :hatMusicBrainzArtistId "124cec07-44f1-4a99-9aaa-96a5bb9ec0bd" .
 
@@ -8396,7 +8336,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                          :Musikdarbieter ;
                 :hatGenre <http://www.wikidata.org/entity/Q1641839> ;
                 :kommtAus :Norwegen ;
-                :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                 :hatName "Major Parkinson"@de ;
                 :hatMusicBrainzArtistId "170d3a45-40ba-4bca-a637-4c9da84fa0c5" .
 
@@ -8425,7 +8364,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Mali
 :Mali rdf:type owl:NamedIndividual ,
                :Land ;
-      :hatEinwohneranzahl 20250833 ;
+      :hatEinwohneranzahl 20250833 ,
+                          20250833 ;
       :hatName "Mali"@de .
 
 
@@ -8477,7 +8417,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                     :hatGenre <http://www.wikidata.org/entity/Q208239> ,
                               <http://www.wikidata.org/entity/Q371745> ;
                     :kommtAus :Kuba ;
-                    :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                     :hatName "Manolito y su Trabuco"@de ;
                     :hatMusicBrainzArtistId "eb52c208-4f1a-4c50-b03c-906ba38b1a49" .
 
@@ -8520,7 +8459,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/ManuKatché
 :ManuKatché rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q205049> ,
                       <http://www.wikidata.org/entity/Q2064394> ,
                       <http://www.wikidata.org/entity/Q217467> ,
@@ -8528,7 +8468,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       <http://www.wikidata.org/entity/Q49451> ,
                       <http://www.wikidata.org/entity/Q8341> ;
             :kommtAus :Frankreich ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1958-10-27T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Manu Katché"@de ;
@@ -8600,10 +8539,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MariBoine
 :MariBoine rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q205049> ;
            :kommtAus :Norwegen ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1956-11-08T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "weiblich"@de ;
            :hatName "Mari Boine"@de ;
@@ -8640,11 +8579,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MariaJoão
 :MariaJoão rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q8341> ,
                      <http://www.wikidata.org/entity/Q837389> ;
            :kommtAus :Portugal ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1956-06-27T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "weiblich"@de ;
            :hatName "Maria João"@de ;
@@ -8703,12 +8642,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MaritLarsen
 :MaritLarsen rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q11700058> ,
                        <http://www.wikidata.org/entity/Q286080> ,
                        <http://www.wikidata.org/entity/Q37073> ;
              :kommtAus :Norwegen ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1983-07-01T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "weiblich"@de ;
              :hatName "Marit Larsen"@de ;
@@ -8724,10 +8663,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MariusNeset
 :MariusNeset rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q8341> ;
              :kommtAus :Norwegen ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1985-01-02T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "männlich"@de ;
              :hatName "Marius Neset"@de ;
@@ -8776,7 +8715,6 @@ xsd:gYear rdf:type rdfs:Datatype .
           :hatGenre <http://www.wikidata.org/entity/Q37073> ,
                     <http://www.wikidata.org/entity/Q8341> ;
           :kommtAus :Spanien ;
-          :wikidataType <http://www.wikidata.org/entity/Q215380> ;
           :hatName "Marlango"@de ;
           :hatMusicBrainzArtistId "1a2bd2b1-7fe4-4b09-9ae8-96d2a519bf9a" .
 
@@ -8839,11 +8777,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MaxHerre
 :MaxHerre rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ;
           :hatGenre <http://www.wikidata.org/entity/Q37073> ,
                     <http://www.wikidata.org/entity/Q846833> ;
           :kommtAus :Deutschland ;
-          :wikidataType <http://www.wikidata.org/entity/Q5> ;
           :hatGeburtsdatum "1973-04-22T00:00:00Z"^^xsd:dateTime ;
           :hatGeschlecht "männlich"@de ;
           :hatName "Max Herre"@de ;
@@ -8873,10 +8811,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MaxMutzke
 :MaxMutzke rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q37073> ;
            :kommtAus :Deutschland ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1981-05-21T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "männlich"@de ;
            :hatName "Max Mutzke"@de ;
@@ -8892,10 +8830,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MaxProsa
 :MaxProsa rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ;
           :hatGenre <http://www.wikidata.org/entity/Q7366> ;
           :kommtAus :Deutschland ;
-          :wikidataType <http://www.wikidata.org/entity/Q5> ;
           :hatGeburtsdatum "1990-01-01T00:00:00Z"^^xsd:dateTime ;
           :hatGeschlecht "männlich"@de ;
           :hatName "Max Prosa"@de ;
@@ -8911,10 +8849,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Maxim
 :Maxim rdf:type owl:NamedIndividual ,
-                :Musikdarbieter ;
+                :Musikdarbieter ,
+                :Musiker ;
        :hatGenre <http://www.wikidata.org/entity/Q517415> ;
        :kommtAus :Deutschland ;
-       :wikidataType <http://www.wikidata.org/entity/Q5> ;
        :hatGeburtsdatum "1982-05-15T00:00:00Z"^^xsd:dateTime ;
        :hatGeschlecht "männlich"@de ;
        :hatName "Maxim"@de ;
@@ -8992,12 +8930,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MercedesSosa
 :MercedesSosa rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q235858> ,
                         <http://www.wikidata.org/entity/Q2420447> ,
                         <http://www.wikidata.org/entity/Q43343> ;
               :kommtAus :Argentinien ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1935-07-09T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "weiblich"@de ;
               :hatName "Mercedes Sosa"@de ;
@@ -9026,12 +8964,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MichGerber
 :MichGerber rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q1136331> ,
                       <http://www.wikidata.org/entity/Q205560> ,
                       <http://www.wikidata.org/entity/Q37073> ;
             :kommtAus :Schweiz ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1957-01-01T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Mich Gerber"@de ;
@@ -9047,10 +8985,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MichaelKaeshammer
 :MichaelKaeshammer rdf:type owl:NamedIndividual ,
-                            :Musikdarbieter ;
+                            :Musikdarbieter ,
+                            :Musiker ;
                    :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                    :kommtAus :Kanada ;
-                   :wikidataType <http://www.wikidata.org/entity/Q5> ;
                    :hatGeburtsdatum "1977-01-07T00:00:00Z"^^xsd:dateTime ;
                    :hatGeschlecht "männlich"@de ;
                    :hatName "Michael Kaeshammer"@de ;
@@ -9095,10 +9033,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MichaelSchiefel
 :MichaelSchiefel rdf:type owl:NamedIndividual ,
-                          :Musikdarbieter ;
+                          :Musikdarbieter ,
+                          :Musiker ;
                  :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                  :kommtAus :Deutschland ;
-                 :wikidataType <http://www.wikidata.org/entity/Q5> ;
                  :hatGeburtsdatum "1970-04-15T00:00:00Z"^^xsd:dateTime ;
                  :hatGeschlecht "männlich"@de ;
                  :hatName "Michael Schiefel"@de ;
@@ -9163,7 +9101,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       :Italien ,
                       :UK ,
                       :USA ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Mighty Oaks"@de ;
             :hatMusicBrainzArtistId "ffa6c35e-4398-4200-8bd8-915f5d470304" .
 
@@ -9189,7 +9126,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       <http://www.wikidata.org/entity/Q2118402> ,
                       <http://www.wikidata.org/entity/Q598929> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Milliarden"@de ;
             :hatMusicBrainzArtistId "25cb62f5-ebcf-413f-bba1-d9f55edd44dd" .
 
@@ -9203,11 +9139,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Milow
 :Milow rdf:type owl:NamedIndividual ,
-                :Musikdarbieter ;
+                :Musikdarbieter ,
+                :Musiker ;
        :hatGenre <http://www.wikidata.org/entity/Q186472> ,
                  <http://www.wikidata.org/entity/Q286080> ;
        :kommtAus :Belgien ;
-       :wikidataType <http://www.wikidata.org/entity/Q5> ;
        :hatGeburtsdatum "1981-07-14T00:00:00Z"^^xsd:dateTime ;
        :hatGeschlecht "männlich"@de ;
        :hatName "Milow"@de ;
@@ -9223,7 +9159,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MiriamMakeba
 :MiriamMakeba rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q11399> ,
                         <http://www.wikidata.org/entity/Q17111414> ,
                         <http://www.wikidata.org/entity/Q205049> ,
@@ -9231,7 +9168,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                         <http://www.wikidata.org/entity/Q8341> ,
                         <http://www.wikidata.org/entity/Q972634> ;
               :kommtAus :Suedafrika ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1932-03-03T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "weiblich"@de ;
               :hatName "Miriam Makeba"@de ;
@@ -9261,14 +9197,14 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/MissLi
 :MissLi rdf:type owl:NamedIndividual ,
-                 :Musikdarbieter ;
+                 :Musikdarbieter ,
+                 :Musiker ;
         :hatGenre <http://www.wikidata.org/entity/Q105527> ,
                   <http://www.wikidata.org/entity/Q131183> ,
                   <http://www.wikidata.org/entity/Q37073> ,
                   <http://www.wikidata.org/entity/Q8341> ,
                   <http://www.wikidata.org/entity/Q9759> ;
         :kommtAus :Schweden ;
-        :wikidataType <http://www.wikidata.org/entity/Q5> ;
         :hatGeburtsdatum "1982-07-21T00:00:00Z"^^xsd:dateTime ;
         :hatGeschlecht "weiblich"@de ;
         :hatName "Miss Li"@de ;
@@ -9305,7 +9241,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                 <http://www.wikidata.org/entity/Q58194472> ,
                                 <http://www.wikidata.org/entity/Q95831638> ;
                    :kommtAus :Deutschland ;
-                   :wikidataType <http://www.wikidata.org/entity/Q1684430> ;
                    :hatName "Moka Efti Orchestra"@de ;
                    :hatMusicBrainzArtistId "513bd484-11fd-47f5-9560-4622338ef16c" .
 
@@ -9469,7 +9404,6 @@ xsd:gYear rdf:type rdfs:Datatype .
             :hatMitglied <http://www.wikidata.org/entity/Q3377583> ,
                          <http://www.wikidata.org/entity/Q3743815> ;
             :kommtAus :Italien ;
-            :wikidataType <http://www.wikidata.org/entity/Q9212979> ;
             :hatName "Musica Nuda"@de ;
             :hatMusicBrainzArtistId "b7840712-9e9a-4acb-a40a-8e337bd060f3" .
 
@@ -9514,7 +9448,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                      :Musikdarbieter ;
             :hatGenre <http://www.wikidata.org/entity/Q186472> ;
             :kommtAus :Australien ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Naked Raven"@de ;
             :hatMusicBrainzArtistId "ff181983-a11a-4311-8392-0d3c7d72bc6f" .
 
@@ -9655,11 +9588,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/NilsLandgren
 :NilsLandgren rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q38656> ,
                         <http://www.wikidata.org/entity/Q8341> ;
               :kommtAus :Schweden ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1956-02-15T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Nils Landgren"@de ;
@@ -9738,10 +9671,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/NilsWuelker
 :NilsWuelker rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q8341> ;
              :kommtAus :Deutschland ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1977-08-17T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "männlich"@de ;
              :hatName "Nils Wülker"@de ;
@@ -9778,12 +9711,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/NinaHagen
 :NinaHagen rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q203775> ,
                      <http://www.wikidata.org/entity/Q3071> ,
                      <http://www.wikidata.org/entity/Q646679> ;
            :kommtAus :Deutschland ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1955-03-11T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "weiblich"@de ;
            :hatName "Nina Hagen"@de ;
@@ -9806,14 +9739,14 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Nneka
 :Nneka rdf:type owl:NamedIndividual ,
-                :Musikdarbieter ;
+                :Musikdarbieter ,
+                :Musiker ;
        :hatGenre <http://www.wikidata.org/entity/Q131272> ,
                  <http://www.wikidata.org/entity/Q37073> ,
                  <http://www.wikidata.org/entity/Q45981> ,
                  <http://www.wikidata.org/entity/Q740911> ;
        :kommtAus :Deutschland ,
                  :Nigeria ;
-       :wikidataType <http://www.wikidata.org/entity/Q5> ;
        :hatGeburtsdatum "1980-12-24T00:00:00Z"^^xsd:dateTime ;
        :hatGeschlecht "weiblich"@de ;
        :hatName "Nneka"@de ;
@@ -9859,7 +9792,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Norwegen
 :Norwegen rdf:type owl:NamedIndividual ,
                    :Land ;
-          :hatEinwohneranzahl 5504329 ;
+          :hatEinwohneranzahl 5550203 ,
+                              5550203 ;
           :hatName "Norwegen"@de .
 
 
@@ -9872,7 +9806,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                :hatMitglied <http://www.wikidata.org/entity/Q3287902> ,
                             <http://www.wikidata.org/entity/Q7207860> ;
                :kommtAus :Frankreich ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Nouvelle Vague"@de ;
                :hatMusicBrainzArtistId "b017a7ae-e5ee-4675-bb13-c83346134971" .
 
@@ -9896,7 +9829,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                 :Musikdarbieter ;
        :hatGenre <http://www.wikidata.org/entity/Q817138> ;
        :kommtAus :Deutschland ;
-       :wikidataType <http://www.wikidata.org/entity/Q215380> ;
        :hatName "Nylon"@de ;
        :hatMusicBrainzArtistId "5dd9c552-ac93-4491-a8a2-e322843266c4" .
 
@@ -9927,7 +9859,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       :Musikdarbieter ;
              :hatGenre <http://www.wikidata.org/entity/Q9794> ;
              :kommtAus :Spanien ;
-             :wikidataType <http://www.wikidata.org/entity/Q215380> ;
              :hatName "Ojos de Brujo"@de ;
              :hatMusicBrainzArtistId "ab1b3f93-99ba-4a5b-868f-e412ab0a57fb" .
 
@@ -9962,11 +9893,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/OmaraPortuondo
 :OmaraPortuondo rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q223861> ,
                           <http://www.wikidata.org/entity/Q837389> ;
                 :kommtAus :Kuba ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1930-10-29T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "weiblich"@de ;
                 :hatName "Omara Portuondo"@de ;
@@ -9999,7 +9930,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                      :Musikdarbieter ;
             :hatGenre <http://www.wikidata.org/entity/Q43343> ;
             :kommtAus :Portugal ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "OqueStrada"@de ;
             :hatMusicBrainzArtistId "68914e77-a44b-4761-8859-b3af255b1421" .
 
@@ -10018,7 +9948,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                            <http://www.wikidata.org/entity/Q4428744> ,
                            <http://www.wikidata.org/entity/Q8030395> ;
                  :kommtAus :Senegal ;
-                 :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                  :hatName "Orchestra Baobab"@de ;
                  :hatMusicBrainzArtistId "30331c85-26d4-4daa-9f66-3075cac4c20b" .
 
@@ -10070,7 +9999,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                          :Musikdarbieter ;
                 :hatGenre <http://www.wikidata.org/entity/Q164444> ;
                 :kommtAus :Japan ;
-                :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                 :hatName "Osaka Monaurail"@de ;
                 :hatMusicBrainzArtistId "8e3c4aff-f449-4682-a912-d59e6ddc9234" .
 
@@ -10112,10 +10040,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/PabloZiegler
 :PabloZiegler rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q14390274> ;
               :kommtAus :Argentinien ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1944-09-02T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Pablo Ziegler"@de ;
@@ -10195,7 +10123,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       <http://www.wikidata.org/entity/Q123521647> ,
                       <http://www.wikidata.org/entity/Q123521666> ;
          :kommtAus :Australien ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "Parcels"@de ;
          :hatMusicBrainzArtistId "5318e774-f5b6-4ee0-82cb-4dcf398c3ff8" .
 
@@ -10209,10 +10136,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/PascalComelade
 :PascalComelade rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q1413570> ;
                 :kommtAus :Frankreich ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1955-06-30T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "männlich"@de ;
                 :hatName "Pascal Comelade"@de ;
@@ -10294,7 +10221,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                      :Musikdarbieter ;
             :hatGenre <http://www.wikidata.org/entity/Q205560> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "Pentatones"@de ;
             :hatMusicBrainzArtistId "bc95d6b0-e71c-4caf-bacf-ac3dd26007c0" .
 
@@ -10343,10 +10269,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/PhilippPoisel
 :PhilippPoisel rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                :kommtAus :Deutschland ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1983-06-18T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "männlich"@de ;
                :hatName "Philipp Poisel"@de ;
@@ -10433,7 +10359,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Portugal
 :Portugal rdf:type owl:NamedIndividual ,
                    :Land ;
-          :hatEinwohneranzahl 10347892 ;
+          :hatEinwohneranzahl 10347892 ,
+                              10347892 ;
           :hatName "Portugal"@de .
 
 
@@ -10512,7 +10439,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       :Musikdarbieter ;
              :hatGenre <http://www.wikidata.org/entity/Q8341> ;
              :kommtAus :Deutschland ;
-             :wikidataType <http://www.wikidata.org/entity/Q215380> ;
              :hatName "Quadro Nuevo"@de ;
              :hatMusicBrainzArtistId "9f033b2f-3eb1-4f6e-90e2-ddfd694dbde8" .
 
@@ -10547,14 +10473,14 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/RachidTaha
 :RachidTaha rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q11399> ,
                       <http://www.wikidata.org/entity/Q205049> ,
                       <http://www.wikidata.org/entity/Q2961766> ,
                       <http://www.wikidata.org/entity/Q839029> ;
             :kommtAus :Algerien ,
                       :Frankreich ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1958-09-18T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Rachid Taha"@de ;
@@ -10620,7 +10546,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                         <http://www.wikidata.org/entity/Q90783> ,
                         <http://www.wikidata.org/entity/Q95727> ;
            :kommtAus :Deutschland ;
-           :wikidataType <http://www.wikidata.org/entity/Q215380> ;
            :hatName "Rainbirds"@de ;
            :hatMusicBrainzArtistId "7d3747f7-938e-40a1-aea2-f60193c9362e" .
 
@@ -10637,7 +10562,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                  :Musikdarbieter ;
         :hatGenre <http://www.wikidata.org/entity/Q11401> ;
         :kommtAus :Deutschland ;
-        :wikidataType <http://www.wikidata.org/entity/Q215380> ;
         :hatName "Rakede"@de ;
         :hatMusicBrainzArtistId "68908e66-217f-4f58-b0c9-6fc5b9506cc6" .
 
@@ -10785,12 +10709,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/RebekkaBakken
 :RebekkaBakken rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q37073> ,
                          <http://www.wikidata.org/entity/Q43343> ,
                          <http://www.wikidata.org/entity/Q8341> ;
                :kommtAus :Norwegen ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1970-04-04T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "weiblich"@de ;
                :hatName "Rebekka Bakken"@de ;
@@ -10841,10 +10765,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/RenéAubry
 :RenéAubry rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q612024> ;
            :kommtAus :Frankreich ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1956-01-01T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "männlich"@de ;
            :hatName "René Aubry"@de ;
@@ -10931,10 +10855,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/RigmorGustafsson
 :RigmorGustafsson rdf:type owl:NamedIndividual ,
-                           :Musikdarbieter ;
+                           :Musikdarbieter ,
+                           :Musiker ;
                   :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                   :kommtAus :Schweden ;
-                  :wikidataType <http://www.wikidata.org/entity/Q5> ;
                   :hatGeburtsdatum "1966-04-12T00:00:00Z"^^xsd:dateTime ;
                   :hatGeschlecht "weiblich"@de ;
                   :hatName "Rigmor Gustafsson"@de ;
@@ -11021,11 +10945,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/RobertoFonseca
 :RobertoFonseca rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q8341> ,
                           <http://www.wikidata.org/entity/Q837389> ;
                 :kommtAus :Kuba ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1975-03-29T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "männlich"@de ;
                 :hatName "Roberto Fonseca"@de ;
@@ -11062,10 +10986,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/RobotKoch
 :RobotKoch rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q9778> ;
            :kommtAus :Deutschland ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1977-01-01T00:00:00Z"^^xsd:dateTime ,
                             "1977-10-07T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "männlich"@de ;
@@ -11096,10 +11020,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/RolandSchneider
 :RolandSchneider rdf:type owl:NamedIndividual ,
-                          :Musikdarbieter ;
+                          :Musikdarbieter ,
+                          :Musiker ;
                  :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                  :kommtAus :Deutschland ;
-                 :wikidataType <http://www.wikidata.org/entity/Q5> ;
                  :hatGeburtsdatum "1937-06-03T00:00:00Z"^^xsd:dateTime ;
                  :hatGeschlecht "männlich"@de ;
                  :hatName "Roland Schneider"@de ;
@@ -11144,10 +11068,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/RubénGonzález
 :RubénGonzález rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q4428744> ;
                :kommtAus :Kuba ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1919-05-26T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "männlich"@de ;
                :hatName "Rubén González"@de ;
@@ -11188,7 +11112,6 @@ xsd:gYear rdf:type rdfs:Datatype .
           :hatMitglied <http://www.wikidata.org/entity/Q123575726> ;
           :kommtAus :Russland ,
                     :Öesterreich ;
-          :wikidataType <http://www.wikidata.org/entity/Q215380> ;
           :hatName "Russkaja"@de ;
           :hatMusicBrainzArtistId "ada5f7ba-30da-4527-a4b0-e9b9989b6642" .
 
@@ -11262,7 +11185,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                :hatGenre <http://www.wikidata.org/entity/Q512410> ;
                :hatMitglied <http://www.wikidata.org/entity/Q15486560> ;
                :kommtAus :Pakistan ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Sabri Brothers"@de ;
                :hatMusicBrainzArtistId "758cdd59-8341-4500-a7b7-37341258dc15" .
 
@@ -11304,10 +11226,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/SamyDeluxe
 :SamyDeluxe rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q11401> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1977-12-19T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "männlich"@de ;
             :hatName "Samy Deluxe"@de ;
@@ -11379,14 +11301,14 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/SarahMcCoy
 :SarahMcCoy rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q11399> ,
                       <http://www.wikidata.org/entity/Q131272> ,
                       <http://www.wikidata.org/entity/Q37073> ,
                       <http://www.wikidata.org/entity/Q8341> ,
                       <http://www.wikidata.org/entity/Q9759> ;
             :kommtAus :VereinigteStaaten ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1985-05-27T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "weiblich"@de ;
             :hatName "Sarah McCoy"@de ;
@@ -11437,14 +11359,15 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Schweden
 :Schweden rdf:type owl:NamedIndividual ,
                    :Land ;
-          :hatEinwohneranzahl 10548336 ;
+          :hatEinwohneranzahl 10551707 ;
           :hatName "Schweden"@de .
 
 
 ###  http://example.org/kulturarena/Schweiz
 :Schweiz rdf:type owl:NamedIndividual ,
                   :Land ;
-         :hatEinwohneranzahl 8902308 ;
+         :hatEinwohneranzahl 8902308 ,
+                             8902308 ;
          :hatName "Schweiz"@de .
 
 
@@ -11485,11 +11408,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/SelahSue
 :SelahSue rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ;
           :hatGenre <http://www.wikidata.org/entity/Q131272> ,
                     <http://www.wikidata.org/entity/Q45981> ;
           :kommtAus :Belgien ;
-          :wikidataType <http://www.wikidata.org/entity/Q5> ;
           :hatGeburtsdatum "1989-05-03T00:00:00Z"^^xsd:dateTime ;
           :hatGeschlecht "weiblich"@de ;
           :hatName "Selah Sue"@de ;
@@ -11507,7 +11430,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Senegal
 :Senegal rdf:type owl:NamedIndividual ,
                   :Land ;
-         :hatEinwohneranzahl 16876720 ;
+         :hatEinwohneranzahl 16876720 ,
+                             16876720 ;
          :hatName "Senegal"@de .
 
 
@@ -11519,10 +11443,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/SergentGarcia
 :SergentGarcia rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q205049> ;
                :kommtAus :Frankreich ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1964-01-01T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "männlich"@de ;
                :hatName "Sergent Garcia"@de ;
@@ -11538,11 +11462,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/Seven
 :Seven rdf:type owl:NamedIndividual ,
-                :Musikdarbieter ;
+                :Musikdarbieter ,
+                :Musiker ;
        :hatGenre <http://www.wikidata.org/entity/Q131272> ,
                  <http://www.wikidata.org/entity/Q846833> ;
        :kommtAus :Schweiz ;
-       :wikidataType <http://www.wikidata.org/entity/Q5> ;
        :hatGeburtsdatum "1978-10-18T00:00:00Z"^^xsd:dateTime ;
        :hatGeschlecht "männlich"@de ;
        :hatName "Seven"@de ;
@@ -11563,7 +11487,6 @@ xsd:gYear rdf:type rdfs:Datatype .
               :hatGenre <http://www.wikidata.org/entity/Q14390274> ;
               :hatMitglied <http://www.wikidata.org/entity/Q16559334> ;
               :kommtAus :Argentinien ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "Sexteto Mayor"@de ;
               :hatMusicBrainzArtistId "02294a9c-c924-4a59-877d-3ee98ee05ae1" .
 
@@ -11609,7 +11532,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                :hatGenre <http://www.wikidata.org/entity/Q4428744> ;
                :hatMitglied <http://www.wikidata.org/entity/Q1360997> ;
                :kommtAus :Kuba ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Sierra Maestra"@de ;
                :hatMusicBrainzArtistId "017f5df4-c30c-4799-95f7-997bd5b88df7" .
 
@@ -11637,10 +11559,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/SiljeNergaard
 :SiljeNergaard rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                :kommtAus :Norwegen ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1966-06-19T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "weiblich"@de ;
                :hatName "Silje Nergaard"@de ;
@@ -11847,7 +11769,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                <http://www.wikidata.org/entity/Q99609924> ,
                                <http://www.wikidata.org/entity/Q99609930> ;
                   :kommtAus :Japan ;
-                  :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                   :hatName "Soil & „Pimp“ Sessions"@de ;
                   :hatMusicBrainzArtistId "b8e2848f-f5e1-448d-94cf-990c2983c05c" .
 
@@ -11961,11 +11882,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/SophieHunger
 :SophieHunger rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q235858> ,
                         <http://www.wikidata.org/entity/Q43343> ;
               :kommtAus :Schweiz ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1983-03-31T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "weiblich"@de ;
               :hatName "Sophie Hunger"@de ;
@@ -12016,7 +11937,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                     <http://www.wikidata.org/entity/Q61740468> ,
                     <http://www.wikidata.org/entity/Q61740479> ;
        :kommtAus :Deutschland ;
-       :wikidataType <http://www.wikidata.org/entity/Q215380> ;
        :hatName "Spark"@de ;
        :hatMusicBrainzArtistId "79abbae7-1e16-4e9b-8171-41df0a8dcca4" .
 
@@ -12064,7 +11984,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                   <http://www.wikidata.org/entity/Q2074168> ,
                                   <http://www.wikidata.org/entity/Q99688760> ;
                      :kommtAus :Deutschland ;
-                     :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                      :hatName "Sportfreunde Stiller"@de ;
                      :hatMusicBrainzArtistId "35581de7-591f-424f-9c64-7b22fd45605e" .
 
@@ -12115,7 +12034,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                            :Musikdarbieter ;
                   :hatGenre <http://www.wikidata.org/entity/Q1752683> ;
                   :kommtAus :DemokratischeRepublikKongo ;
-                  :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                   :hatName "Staff Benda Bilili"@de ;
                   :hatMusicBrainzArtistId "18a163e6-befd-475b-b9f0-3531c72db7fe" .
 
@@ -12186,7 +12104,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Suedafrika
 :Suedafrika rdf:type owl:NamedIndividual ,
                      :Land ;
-            :hatEinwohneranzahl 62027503 ;
+            :hatEinwohneranzahl 62027503 ,
+                                62027503 ;
             :hatName "Südafrika"@de .
 
 
@@ -12212,10 +12131,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/SusanWeinert
 :SusanWeinert rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q8341> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1965-06-24T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "weiblich"@de ;
               :hatName "Susan Weinert"@de ;
@@ -12336,10 +12255,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/TaniaLibertad
 :TaniaLibertad rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q727781> ;
                :kommtAus :Peru ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1952-10-24T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "weiblich"@de ;
                :hatName "Tania Libertad"@de ;
@@ -12633,7 +12552,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                         <http://www.wikidata.org/entity/Q8341> ;
               :hatMitglied <http://www.wikidata.org/entity/Q7088352> ;
               :kommtAus :Australien ;
-              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
               :hatName "The Cat Empire"@de ;
               :hatMusicBrainzArtistId "a530492f-8806-4bd7-9c14-80c237eb92fe" .
 
@@ -12750,7 +12668,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                        :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                        :hatMitglied <http://www.wikidata.org/entity/Q1772804> ;
                        :kommtAus :Israel ;
-                       :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                        :hatName "The Idan Raichel Project"@de ;
                        :hatMusicBrainzArtistId "37a7b868-d5e8-41bd-ba24-4a3d2dafd11e" ,
                                                "8e6a0856-2040-4859-ad8a-33384e861158" .
@@ -12824,7 +12741,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                      :Musikdarbieter ;
             :hatGenre <http://www.wikidata.org/entity/Q842324> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
             :hatName "The Notwist"@de ;
             :hatMusicBrainzArtistId "f180cec2-9421-4417-a841-c7372090d13d" .
 
@@ -12948,7 +12864,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                            :Musikdarbieter ;
                   :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                   :kommtAus :USA ;
-                  :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                   :hatName "The Sun Ra Arkestra"@de ;
                   :hatMusicBrainzArtistId "d9733f21-71d7-4fa7-813d-67eca0f0eaaf" .
 
@@ -13025,10 +12940,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/TheesUhlmann
 :TheesUhlmann rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q37073> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1974-04-16T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Thees Uhlmann"@de ;
@@ -13058,10 +12973,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/ThomasD
 :ThomasD rdf:type owl:NamedIndividual ,
-                  :Musikdarbieter ;
+                  :Musikdarbieter ,
+                  :Musiker ;
          :hatGenre <http://www.wikidata.org/entity/Q454071> ;
          :kommtAus :Deutschland ;
-         :wikidataType <http://www.wikidata.org/entity/Q5> ;
          :hatGeburtsdatum "1968-12-30T00:00:00Z"^^xsd:dateTime ;
          :hatGeschlecht "männlich"@de ;
          :hatName "Thomas D"@de ;
@@ -13081,7 +12996,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                           :Musikdarbieter ;
                  :hatGenre <http://www.wikidata.org/entity/Q9778> ;
                  :kommtAus :Deutschland ;
-                 :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                  :hatName "Tied & Tickled Trio"@de ;
                  :hatMusicBrainzArtistId "178220ff-ecd6-4fd2-aa0d-79940a6219a2" .
 
@@ -13123,10 +13037,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/TillBroenner
 :TillBroenner rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q8341> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1971-05-06T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Till Brönner"@de ;
@@ -13233,8 +13147,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                          <http://www.wikidata.org/entity/Q1682069> ,
                          <http://www.wikidata.org/entity/Q692945> ;
             :kommtAus :Deutschland ;
-            :wikidataType <http://www.wikidata.org/entity/Q215380> ,
-                          <http://www.wikidata.org/entity/Q5741069> ;
             :hatName "Tocotronic"@de ;
             :hatMusicBrainzArtistId "7717539b-33aa-45d5-b88d-9e627172db19" .
 
@@ -13275,11 +13187,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/TomOdell
 :TomOdell rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ;
           :hatGenre <http://www.wikidata.org/entity/Q11700058> ,
                     <http://www.wikidata.org/entity/Q842324> ;
           :kommtAus :VereinigtesKoenigreich ;
-          :wikidataType <http://www.wikidata.org/entity/Q5> ;
           :hatGeburtsdatum "1990-11-24T00:00:00Z"^^xsd:dateTime ;
           :hatGeschlecht "männlich"@de ;
           :hatName "Tom Odell"@de ;
@@ -13443,7 +13355,7 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Tuerkei
 :Tuerkei rdf:type owl:NamedIndividual ,
                   :Land ;
-         :hatEinwohneranzahl 85279553 ;
+         :hatEinwohneranzahl 85372377 ;
          :hatName "Türkei"@de .
 
 
@@ -13483,7 +13395,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                     <http://www.wikidata.org/entity/Q723418> ,
                     <http://www.wikidata.org/entity/Q9794> ;
           :kommtAus :Spanien ;
-          :wikidataType <http://www.wikidata.org/entity/Q215380> ;
           :hatName "Txarango"@de ;
           :hatMusicBrainzArtistId "b3ce2d90-8d74-4ca5-87ac-473012cc2491" .
 
@@ -13572,12 +13483,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/UteLemper
 :UteLemper rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ;
            :hatGenre <http://www.wikidata.org/entity/Q27976507> ,
                      <http://www.wikidata.org/entity/Q8341> ,
                      <http://www.wikidata.org/entity/Q9730> ;
            :kommtAus :Deutschland ;
-           :wikidataType <http://www.wikidata.org/entity/Q5> ;
            :hatGeburtsdatum "1963-07-04T00:00:00Z"^^xsd:dateTime ;
            :hatGeschlecht "weiblich"@de ;
            :hatName "Ute Lemper"@de ;
@@ -13693,8 +13604,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                         :Musikdarbieter ;
                :hatGenre <http://www.wikidata.org/entity/Q185298> ;
                :kommtAus :Kuba ;
-               :wikidataType <http://www.wikidata.org/entity/Q19351429> ,
-                             <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Vocal Sampling"@de ;
                :hatMusicBrainzArtistId "3cbb7e6e-341e-40f4-93c5-6d93e073d49f" .
 
@@ -13732,7 +13641,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                           :Musikdarbieter ;
                  :hatGenre <http://www.wikidata.org/entity/Q842324> ;
                  :kommtAus :Deutschland ;
-                 :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                  :hatName "Von Wegen Lisbeth"@de ;
                  :hatMusicBrainzArtistId "ff0fd469-60c7-4bef-acd0-8f5858cc6d19" .
 
@@ -13760,10 +13668,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/VoodooJuergens
 :VoodooJuergens rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ;
                 :hatGenre <http://www.wikidata.org/entity/Q700423> ;
                 :kommtAus :Öesterreich ;
-                :wikidataType <http://www.wikidata.org/entity/Q5> ;
                 :hatGeburtsdatum "1983-08-02T00:00:00Z"^^xsd:dateTime ;
                 :hatGeschlecht "männlich"@de ;
                 :hatName "Voodoo Jürgens"@de ;
@@ -13807,10 +13715,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/WallisBird
 :WallisBird rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ;
             :hatGenre <http://www.wikidata.org/entity/Q43343> ;
             :kommtAus :Irland ;
-            :wikidataType <http://www.wikidata.org/entity/Q5> ;
             :hatGeburtsdatum "1982-01-29T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "weiblich"@de ;
             :hatName "Wallis Bird"@de ;
@@ -13844,7 +13752,6 @@ xsd:gYear rdf:type rdfs:Datatype .
        :hatGenre <http://www.wikidata.org/entity/Q37073> ;
        :hatMitglied <http://www.wikidata.org/entity/Q61840056> ;
        :kommtAus :Öesterreich ;
-       :wikidataType <http://www.wikidata.org/entity/Q215380> ;
        :hatName "Wanda"@de ;
        :hatMusicBrainzArtistId "06e3bce0-c612-4a5f-b095-9ffed1e4a656" .
 
@@ -13861,7 +13768,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                             :Musikdarbieter ;
                    :hatGenre <http://www.wikidata.org/entity/Q43343> ;
                    :kommtAus :Polen ;
-                   :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                    :hatName "Warsaw Village Band"@de ;
                    :hatMusicBrainzArtistId "ddc7e73b-2872-45fe-81e3-4f643607a42c" .
 
@@ -13945,7 +13851,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                             <http://www.wikidata.org/entity/Q72429> ,
                             <http://www.wikidata.org/entity/Q9294579> ;
                :kommtAus :Deutschland ;
-               :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                :hatName "Wir sind Helden"@de ;
                :hatMusicBrainzArtistId "908fedf4-548a-430f-b806-38fca9507dc4" .
 
@@ -13980,12 +13885,12 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/YannTiersen
 :YannTiersen rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ;
              :hatGenre <http://www.wikidata.org/entity/Q11399> ,
                        <http://www.wikidata.org/entity/Q14378> ,
                        <http://www.wikidata.org/entity/Q572901> ;
              :kommtAus :Frankreich ;
-             :wikidataType <http://www.wikidata.org/entity/Q5> ;
              :hatGeburtsdatum "1970-06-23T00:00:00Z"^^xsd:dateTime ;
              :hatGeschlecht "männlich"@de ;
              :hatName "Yann Tiersen"@de ;
@@ -14001,10 +13906,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/YasmineHamdan
 :YasmineHamdan rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                :kommtAus :Libanon ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1976-01-01T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "weiblich"@de ;
                :hatName "Yasmine Hamdan"@de ;
@@ -14077,7 +13982,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       <http://www.wikidata.org/entity/Q64146761> ;
          :kommtAus :Belgien ,
                    :Zaire ;
-         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
          :hatName "Zap Mama"@de ;
          :hatMusicBrainzArtistId "50c0ec9a-a2a3-4888-a8b0-a0cf565e5ac7" .
 
@@ -14153,11 +14057,11 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/ÓlafurArnalds
 :ÓlafurArnalds rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ;
                :hatGenre <http://www.wikidata.org/entity/Q1640319> ,
                          <http://www.wikidata.org/entity/Q193207> ;
                :kommtAus :Island ;
-               :wikidataType <http://www.wikidata.org/entity/Q5> ;
                :hatGeburtsdatum "1986-11-03T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "männlich"@de ;
                :hatName "Ólafur Arnalds"@de ;
@@ -14174,7 +14078,8 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Öesterreich
 :Öesterreich rdf:type owl:NamedIndividual ,
                       :Land ;
-             :hatEinwohneranzahl 8979894 ;
+             :hatEinwohneranzahl 8979894 ,
+                                 8979894 ;
              :hatName "Österreich"@de .
 
 
@@ -14183,7 +14088,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                                      :Musikdarbieter ;
                                             :hatGenre <http://www.wikidata.org/entity/Q183504> ;
                                             :kommtAus :Deutschland ;
-                                            :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                                             :hatName "1000 Robota"@de ;
                                             :hatMusicBrainzArtistId "e48995e0-6ff9-43ba-b942-9f0875fcc712" .
 
@@ -14206,7 +14110,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                                         <http://www.wikidata.org/entity/Q1664230> ,
                                                         <http://www.wikidata.org/entity/Q85881633> ;
                                            :kommtAus :Deutschland ;
-                                           :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                                            :hatName "17 Hippies"@de ;
                                            :hatMusicBrainzArtistId "8315641a-6dca-40fd-a893-d247e4db84c3" .
 
@@ -14223,7 +14126,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                                   :Musikdarbieter ;
                                          :hatGenre <http://www.wikidata.org/entity/Q37073> ;
                                          :kommtAus :Deutschland ;
-                                         :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                                          :hatName "2ersitz"@de ;
                                          :hatMusicBrainzArtistId "edf49200-e158-4681-be43-1c6f5244d2bc" .
 
@@ -14242,7 +14144,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                               :hatMitglied <http://www.wikidata.org/entity/Q1662702> ,
                                                            <http://www.wikidata.org/entity/Q1682382> ;
                                               :kommtAus :Deutschland ;
-                                              :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                                               :hatName "2raumwohnung"@de ;
                                               :hatMusicBrainzArtistId "5579a23d-c411-4930-987d-ff89d77c1c12" .
 
@@ -14341,10 +14242,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                             :hatName "Tobias Pongratz"@de .
 
 
-###  http://www.wikidata.org/entity/Q10648343
-<http://www.wikidata.org/entity/Q10648343> rdf:type owl:NamedIndividual .
-
-
 ###  http://www.wikidata.org/entity/Q108604119
 <http://www.wikidata.org/entity/Q108604119> rdf:type owl:NamedIndividual ,
                                                      :Musiker ;
@@ -14365,10 +14262,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                          :kommtAus <http://www.wikidata.org/entity/Q183> ;
                                          :hatGeschlecht "männlich"@de ;
                                          :hatName "Christopher Blenkinsop"@de .
-
-
-###  http://www.wikidata.org/entity/Q1135557
-<http://www.wikidata.org/entity/Q1135557> rdf:type owl:NamedIndividual .
 
 
 ###  http://www.wikidata.org/entity/Q1136331
@@ -14538,10 +14431,6 @@ xsd:gYear rdf:type rdfs:Datatype .
 <http://www.wikidata.org/entity/Q131183> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
                                          :hatName "Cabaret"@de .
-
-
-###  http://www.wikidata.org/entity/Q131186
-<http://www.wikidata.org/entity/Q131186> rdf:type owl:NamedIndividual .
 
 
 ###  http://www.wikidata.org/entity/Q131272
@@ -14829,10 +14718,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                           :hatName "Mischa Cheung"@de .
 
 
-###  http://www.wikidata.org/entity/Q1684430
-<http://www.wikidata.org/entity/Q1684430> rdf:type owl:NamedIndividual .
-
-
 ###  http://www.wikidata.org/entity/Q170611
 <http://www.wikidata.org/entity/Q170611> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
@@ -14963,18 +14848,10 @@ xsd:gYear rdf:type rdfs:Datatype .
                                          :hatName "Ambient"@de .
 
 
-###  http://www.wikidata.org/entity/Q19351429
-<http://www.wikidata.org/entity/Q19351429> rdf:type owl:NamedIndividual .
-
-
-###  http://www.wikidata.org/entity/Q19464263
-<http://www.wikidata.org/entity/Q19464263> rdf:type owl:NamedIndividual .
-
-
 ###  http://www.wikidata.org/entity/Q20
 <http://www.wikidata.org/entity/Q20> rdf:type owl:NamedIndividual ,
                                               :Land ;
-                                     :hatEinwohneranzahl 5504329 ;
+                                     :hatEinwohneranzahl 5550203 ;
                                      :hatName "Norwegen"@de .
 
 
@@ -15030,10 +14907,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                           :hatName "Philippe A. Kayser"@de .
 
 
-###  http://www.wikidata.org/entity/Q2088357
-<http://www.wikidata.org/entity/Q2088357> rdf:type owl:NamedIndividual .
-
-
 ###  http://www.wikidata.org/entity/Q21155073
 <http://www.wikidata.org/entity/Q21155073> rdf:type owl:NamedIndividual ,
                                                     :Musiker ;
@@ -15064,10 +14937,6 @@ xsd:gYear rdf:type rdfs:Datatype .
 <http://www.wikidata.org/entity/Q212944> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
                                          :hatName "Klezmer"@de .
-
-
-###  http://www.wikidata.org/entity/Q215380
-<http://www.wikidata.org/entity/Q215380> rdf:type owl:NamedIndividual .
 
 
 ###  http://www.wikidata.org/entity/Q216271
@@ -15137,10 +15006,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                           :hatName "Suzie Kerstgens"@de .
 
 
-###  http://www.wikidata.org/entity/Q2393314
-<http://www.wikidata.org/entity/Q2393314> rdf:type owl:NamedIndividual .
-
-
 ###  http://www.wikidata.org/entity/Q241
 <http://www.wikidata.org/entity/Q241> rdf:type owl:NamedIndividual ,
                                                :Land ;
@@ -15161,10 +15026,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                            :kommtAus <http://www.wikidata.org/entity/Q142> ;
                                            :hatGeschlecht "männlich"@de ;
                                            :hatName "Q24287231" .
-
-
-###  http://www.wikidata.org/entity/Q2491498
-<http://www.wikidata.org/entity/Q2491498> rdf:type owl:NamedIndividual .
 
 
 ###  http://www.wikidata.org/entity/Q2512346
@@ -15208,10 +15069,6 @@ xsd:gYear rdf:type rdfs:Datatype .
 <http://www.wikidata.org/entity/Q2798694> rdf:type owl:NamedIndividual ,
                                                    :Genre ;
                                           :hatName "Marabi"@de .
-
-
-###  http://www.wikidata.org/entity/Q281643
-<http://www.wikidata.org/entity/Q281643> rdf:type owl:NamedIndividual .
 
 
 ###  http://www.wikidata.org/entity/Q2836542
@@ -15306,10 +15163,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                               :Land ;
                                      :hatEinwohneranzahl 331449281 ;
                                      :hatName "Vereinigte Staaten"@de .
-
-
-###  http://www.wikidata.org/entity/Q3046146
-<http://www.wikidata.org/entity/Q3046146> rdf:type owl:NamedIndividual .
 
 
 ###  http://www.wikidata.org/entity/Q3071
@@ -15525,7 +15378,7 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://www.wikidata.org/entity/Q43
 <http://www.wikidata.org/entity/Q43> rdf:type owl:NamedIndividual ,
                                               :Land ;
-                                     :hatEinwohneranzahl 85279553 ;
+                                     :hatEinwohneranzahl 85372377 ;
                                      :hatName "Türkei"@de .
 
 
@@ -15635,10 +15488,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                          :hatName "Andrea Ritter"@de .
 
 
-###  http://www.wikidata.org/entity/Q5
-<http://www.wikidata.org/entity/Q5> rdf:type owl:NamedIndividual .
-
-
 ###  http://www.wikidata.org/entity/Q51077829
 <http://www.wikidata.org/entity/Q51077829> rdf:type owl:NamedIndividual ,
                                                     :Musiker ;
@@ -15700,10 +15549,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                          :hatName "Minimal Music"@de .
 
 
-###  http://www.wikidata.org/entity/Q5741069
-<http://www.wikidata.org/entity/Q5741069> rdf:type owl:NamedIndividual .
-
-
 ###  http://www.wikidata.org/entity/Q58194472
 <http://www.wikidata.org/entity/Q58194472> rdf:type owl:NamedIndividual ,
                                                     :Musiker ;
@@ -15741,10 +15586,6 @@ xsd:gYear rdf:type rdfs:Datatype .
 <http://www.wikidata.org/entity/Q602561> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
                                          :hatName "Electroswing"@de .
-
-
-###  http://www.wikidata.org/entity/Q61002
-<http://www.wikidata.org/entity/Q61002> rdf:type owl:NamedIndividual .
 
 
 ###  http://www.wikidata.org/entity/Q612024
@@ -16027,7 +15868,14 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://www.wikidata.org/entity/Q801
 <http://www.wikidata.org/entity/Q801> rdf:type owl:NamedIndividual ,
                                                :Land ;
-                                      :hatEinwohneranzahl 9797120 ;
+                                      :hatEinwohneranzahl 7412200 ,
+                                                          8463400 ,
+                                                          8654900 ,
+                                                          872700 ,
+                                                          8796200 ,
+                                                          8891800 ,
+                                                          9093000 ,
+                                                          9840000 ;
                                       :hatName "Israel"@de .
 
 
@@ -16183,10 +16031,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                                       :hatName "Mali"@de .
 
 
-###  http://www.wikidata.org/entity/Q9212979
-<http://www.wikidata.org/entity/Q9212979> rdf:type owl:NamedIndividual .
-
-
 ###  http://www.wikidata.org/entity/Q9294579
 <http://www.wikidata.org/entity/Q9294579> rdf:type owl:NamedIndividual ,
                                                    :Musiker ;
@@ -16329,4 +16173,26 @@ xsd:gYear rdf:type rdfs:Datatype .
                                            :hatName "Magnus Larsson"@de .
 
 
-###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Genre
+                :Konzert
+                :Land
+                :Musikdarbieter
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Genre
+                :Konzert
+                :Land
+                :Musiker
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.26) https://github.com/owlcs/owlapi

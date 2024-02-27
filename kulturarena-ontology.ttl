@@ -35,7 +35,13 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/hatGenre
 :hatGenre rdf:type owl:ObjectProperty ;
-          rdfs:domain :Musikdarbieter ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Musikdarbieter
+                                      :Musikensemble
+                                      :Musiker
+                                      :Solist
+                                    )
+                      ] ;
           rdfs:range :Genre ;
           rdfs:comment "gibt das Genre eines Musikdarbieters an"@de ;
           rdfs:label "hatGenre"@de .
@@ -78,13 +84,6 @@ xsd:gYear rdf:type rdfs:Datatype .
           rdfs:range :Land ;
           rdfs:comment "gibt das Herkunftsland einer Entität an"@de ;
           rdfs:label "kommtAus"@de .
-
-
-###  http://example.org/kulturarena/wikidataType
-:wikidataType rdf:type owl:ObjectProperty ;
-              rdfs:domain :Musikdarbieter ;
-              rdfs:comment "gibt den Wikidata-Typ einer Entität an"@de ;
-              rdfs:label "wikidataType"@de .
 
 
 #################################################################
@@ -179,21 +178,13 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Musikensemble
 :Musikensemble rdf:type owl:Class ;
                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                     owl:onProperty :wikidataType ;
-                                     owl:someValuesFrom [ rdf:type owl:Class ;
-                                                          owl:complementOf [ rdf:type owl:Class ;
-                                                                             owl:oneOf ( <http://www.wikidata.org/entity/Q5>
-                                                                                       )
-                                                                           ]
-                                                        ]
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
                                      owl:onProperty :hatMitglied ;
                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                      owl:onClass :Musiker
                                    ] ;
                rdfs:subClassOf :Musikdarbieter ;
-               owl:disjointWith :Solist ;
+               owl:disjointWith :Musiker ,
+                                :Solist ;
                rdfs:comment "Musikensembles bestehen aus mehreren Musikern"@de ;
                rdfs:label "Musikensemble"@de .
 
@@ -207,10 +198,7 @@ xsd:gYear rdf:type rdfs:Datatype .
 ###  http://example.org/kulturarena/Solist
 :Solist rdf:type owl:Class ;
         owl:equivalentClass [ owl:intersectionOf ( :Musikdarbieter
-                                                   [ rdf:type owl:Restriction ;
-                                                     owl:onProperty :wikidataType ;
-                                                     owl:hasValue <http://www.wikidata.org/entity/Q5>
-                                                   ]
+                                                   :Musiker
                                                  ) ;
                               rdf:type owl:Class
                             ] ;
@@ -239,6 +227,18 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 
 #################################################################
+#    Assertions
+#################################################################
+
+[ rdf:type     owl:AllDisjointClasses ;
+     owl:members  ( :Konzert  :Musikdarbieter :Land :Genre ) ] .
+
+
+[  rdf:type     owl:AllDisjointClasses ;
+     owl:members  ( :Konzert  :Musiker :Land :Genre ) ] .
+
+
+#################################################################
 #    Individuals
 #################################################################
 
@@ -262,7 +262,6 @@ xsd:gYear rdf:type rdfs:Datatype .
                       :hatGenre <http://www.wikidata.org/entity/Q212944> ;
                       :hatMitglied <http://www.wikidata.org/entity/Q1523765> ;
                       :kommtAus :Niederlande ;
-                      :wikidataType <http://www.wikidata.org/entity/Q215380> ;
                       :hatName "Amsterdam Klezmer Band"@de ;
                       :hatMusicBrainzArtistId "28e27f86-3eba-4e17-9d04-f47b3be48e96" .
 
@@ -276,10 +275,10 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 ###  http://example.org/kulturarena/AndreasDorau
 :AndreasDorau rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ;
               :hatGenre <http://www.wikidata.org/entity/Q646679> ;
               :kommtAus :Deutschland ;
-              :wikidataType <http://www.wikidata.org/entity/Q5> ;
               :hatGeburtsdatum "1964-01-19T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Andreas Dorau"@de ;
@@ -321,19 +320,15 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 
 ###  http://www.wikidata.org/entity/Q212944
-<http://www.wikidata.org/entity/Q212944> rdf:type owl:NamedIndividual .
-
-
-###  http://www.wikidata.org/entity/Q215380
-<http://www.wikidata.org/entity/Q215380> rdf:type owl:NamedIndividual .
-
-
-###  http://www.wikidata.org/entity/Q5
-<http://www.wikidata.org/entity/Q5> rdf:type owl:NamedIndividual .
+<http://www.wikidata.org/entity/Q212944> rdf:type owl:NamedIndividual ,
+                                                  :Genre ;
+                                         :hatName "Klezmer"@de .
 
 
 ###  http://www.wikidata.org/entity/Q646679
-<http://www.wikidata.org/entity/Q646679> rdf:type owl:NamedIndividual .
+<http://www.wikidata.org/entity/Q646679> rdf:type owl:NamedIndividual ,
+                                                  :Genre ;
+                                         :hatName "Neue Deutsche Welle"@de .
 
 
 ###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

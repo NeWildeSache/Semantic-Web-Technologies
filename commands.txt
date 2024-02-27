@@ -23,10 +23,10 @@ REASONING
 apache-jena-fuseki-4.10.0/fuseki-server --conf=kulturarena-fuseki-configuration.ttl
 
 ./robot -vvv \
- merge --input kulturarena-data.ttl \
- reason --reasoner hermit \
- --axiom-generators "SubClass EquivalentClass DisjointClasses ClassAssertion" \
- --output kulturarena-inferred.ttl
+      merge --input kulturarena-data.ttl \
+      reason --reasoner hermit \
+      --axiom-generators "SubClass EquivalentClass DisjointClasses ClassAssertion" \
+      --output kulturarena-inferred.ttl
 
 
 ./robot -vvv \
