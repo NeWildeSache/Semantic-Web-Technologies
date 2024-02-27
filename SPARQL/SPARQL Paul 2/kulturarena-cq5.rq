@@ -1,7 +1,0 @@
-PREFIX ex: <http://example.org/kulturarena/>
-
-SELECT ?genre ?mbid
-WHERE {
-  ex:YasmineHamdan ex:hatGenre ?genre.
-  ex:YasmineHamdan ex:hatMusicBrainzID ?mbid.
-}

@@ -1,6 +1,0 @@
-PREFIX ex: <http://example.org/kulturarena/>
-
-SELECT (COUNT(?concert) AS ?count)
-WHERE {
-  ?concert ex:hatKuenstler ex:BOY.
-}

@@ -1,8 +1,0 @@
-PREFIX ex: <http://example.org/kulturarena/>
-
-SELECT ?artist
-WHERE {
-  ?concert ex:hatKuenstler ?artist.
-  ?concert ex:hatDatum ?date.
-  FILTER (?date = 2015)
-}
