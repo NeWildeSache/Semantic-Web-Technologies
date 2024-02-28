@@ -31,11 +31,11 @@ WHERE {
     SELECT DISTINCT ?name ?ID ?genre ?genreLabel ?geschlechtLabel ?geburtsdatum ?landLabel ?bevoelkerung
     WHERE {
         ?darbieter rdfs:label ?name .
-        ?darbieter wdt:P434 ?ID .
-        ?darbieter wdt:P136 ?genre .
-        OPTIONAL{?darbieter wdt:P27 ?citizenship .
-                ?citizenship wdt:P1082 ?bevoelkerung . }
-        ?citizenship rdfs:label ?landLabel .          
+        ?darbieter wdt:P27 ?citizenship .
+        ?citizenship rdfs:label ?landLabel .
+        OPTIONAL{?citizenship wdt:P1082 ?bevoelkerung .}
+        OPTIONAL{?darbieter wdt:P434 ?ID .}
+        OPTIONAL{?darbieter wdt:P136 ?genre .}
         OPTIONAL{?darbieter wdt:P21 ?geschlecht }
         OPTIONAL{?darbieter wdt:P569 ?geburtsdatum . }
 
@@ -44,9 +44,9 @@ WHERE {
         FILTER (?darbieter != wd:Q1403672 ) .
 
         SERVICE wikibase:label {
-        bd:serviceParam wikibase:language "de".
-        ?genre rdfs:label ?genreLabel .
-        ?geschlecht rdfs:label ?geschlechtLabel .
+          bd:serviceParam wikibase:language "de".
+          ?genre rdfs:label ?genreLabel .
+          ?geschlecht rdfs:label ?geschlechtLabel .
         }
       
   }

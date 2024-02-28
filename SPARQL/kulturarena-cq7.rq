@@ -6,7 +6,10 @@ PREFIX : <http://example.org/kulturarena/>
 # CQ7: Wie hoch ist der Frauenanteil und Männeranteil unter den Musikdarbietern (Solist*innen und Ensemble-Mitglieder), bei denen Daten zum Geschlecht vorliegen, je Jahr?
 # Jahr, Frauenanteil, Männeranteil
 
-SELECT ?jahr ((COUNT(?weiblicherDarbieter)+COUNT(?weiblichesMitglied)) / (COUNT(?weiblicherDarbieter)+COUNT(?maennlicherDarbieter)+COUNT(?weiblichesMitglied)+COUNT(?maennlichesMitglied)) AS ?frauenanteil) ((COUNT(?maennlicherDarbieter)+COUNT(?maennlichesMitglied)) / (COUNT(?weiblicherDarbieter)+COUNT(?maennlicherDarbieter)+COUNT(?weiblichesMitglied)+COUNT(?maennlichesMitglied)) AS ?männeranteil)
+SELECT ?jahr ((COUNT(?weiblicherDarbieter)+COUNT(?weiblichesMitglied)) / (COUNT(?weiblicherDarbieter)+COUNT(?maennlicherDarbieter)
++COUNT(?weiblichesMitglied)+COUNT(?maennlichesMitglied)) AS ?frauenanteil) 
+((COUNT(?maennlicherDarbieter)+COUNT(?maennlichesMitglied)) / (COUNT(?weiblicherDarbieter)+COUNT(?maennlicherDarbieter)
++COUNT(?weiblichesMitglied)+COUNT(?maennlichesMitglied)) AS ?männeranteil)
 WHERE {
   ?Konzert :fandStattImJahr ?jahr .
   

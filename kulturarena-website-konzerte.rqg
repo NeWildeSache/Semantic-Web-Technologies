@@ -33,7 +33,8 @@ GENERATE {
     .
 }
 SOURCE <https://www.kulturarena.de/kuenstler-zu-gast-in-jena.html> AS ?html
-ITERATOR iter:CSSPath(?html, "#article-17 > div > div:nth-child(3) > table > tbody > tr:not(:has(td.headline))", "tr td:nth-child(1)/text()", "tr td:nth-child(2)/text()", "tr td:nth-child(3)/text()") AS ?row ?artist ?countries ?years
+ITERATOR iter:CSSPath(?html, "#article-17 > div > div:nth-child(3) > table > tbody > tr:not(:has(td.headline))", 
+                            "tr td:nth-child(1)/text()", "tr td:nth-child(2)/text()", "tr td:nth-child(3)/text()") AS ?row ?artist ?countries ?years
 WHERE {
     # remove special characters from artist name
     BIND(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(?artist, "ä", "ae"), "ö", "oe"), "ü", "ue"), "Ä", "Ae"), "Ö", "Öe"), "Ü", "Ue") AS ?almostSafeArtist)

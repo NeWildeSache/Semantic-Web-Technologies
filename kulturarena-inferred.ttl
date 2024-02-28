@@ -364,14 +364,20 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Aegypten
 :Aegypten rdf:type owl:NamedIndividual ,
                    :Land ;
+          :hatEinwohneranzahl 94798827 ;
           :hatName "Ägypten"@de .
 
 
 ###  http://example.org/kulturarena/AfelBocoum
 :AfelBocoum rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ,
+                     :Solist ;
             :kommtAus :Mali ;
-            :hatName "Afel Bocoum"@de .
+            :hatGeburtsdatum "1955-01-01T00:00:00Z"^^xsd:dateTime ;
+            :hatGeschlecht "männlich"@de ;
+            :hatName "Afel Bocoum"@de ;
+            :hatMusicBrainzArtistId "d09eb662-bd34-4837-9e74-21afcd5373e3" .
 
 
 ###  http://example.org/kulturarena/AfelBocoumKonzert2004
@@ -408,7 +414,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :AfroCubanAllStars rdf:type owl:NamedIndividual ,
                             :Musikdarbieter ;
                    :kommtAus :Kuba ;
-                   :hatName "Afro-Cuban All Stars"@de .
+                   :hatName "Afro-Cuban All Stars"@de ;
+                   :hatMusicBrainzArtistId "7744962e-b74f-47e0-b77f-83a2d31dfd31" .
 
 
 ###  http://example.org/kulturarena/AfroCubanAllStarsKonzert1998
@@ -534,9 +541,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/AliHassanKuban
 :AliHassanKuban rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ,
+                         :Solist ;
                 :kommtAus :Aegypten ;
-                :hatName "Ali Hassan Kuban"@de .
+                :hatGeburtsdatum "1929-12-29T00:00:00Z"^^xsd:dateTime ;
+                :hatGeschlecht "männlich"@de ;
+                :hatName "Ali Hassan Kuban"@de ;
+                :hatMusicBrainzArtistId "5937b73f-7baf-4a55-af51-38e600c0993f" .
 
 
 ###  http://example.org/kulturarena/AliHassanKubanKonzert1993
@@ -617,9 +629,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/AlliNeumann
 :AlliNeumann rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ,
+                      :Solist ;
              :kommtAus :Deutschland ;
-             :hatName "Alli Neumann"@de .
+             :hatGeburtsdatum "2000-01-01T00:00:00Z"^^xsd:dateTime ;
+             :hatGeschlecht "weiblich"@de ;
+             :hatName "Alli Neumann"@de ;
+             :hatMusicBrainzArtistId "a2e7d9e7-f675-431a-802a-2778e1462964" .
 
 
 ###  http://example.org/kulturarena/AlliNeumannKonzert2022
@@ -794,10 +811,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/AndromedaMegaExpressOrchestra
 :AndromedaMegaExpressOrchestra rdf:type owl:NamedIndividual ,
                                         :Musikdarbieter ;
-                               :hatGenre <http://www.wikidata.org/entity/Q105527> ;
                                :kommtAus :Deutschland ;
-                               :hatName "Andromeda Mega Express Orchestra"@de ;
-                               :hatMusicBrainzArtistId "4ac89cc7-331e-4476-b23c-ca3d469224d0" .
+                               :hatName "Andromeda Mega Express Orchestra"@de .
 
 
 ###  http://example.org/kulturarena/AndromedaMegaExpressOrchestraKonzert2017
@@ -871,9 +886,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/AnnaAaron
 :AnnaAaron rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ,
+                    :Solist ;
            :kommtAus :Schweiz ;
-           :hatName "Anna Aaron"@de .
+           :hatGeburtsdatum "1985-01-29T00:00:00Z"^^xsd:dateTime ;
+           :hatGeschlecht "weiblich"@de ;
+           :hatName "Anna Aaron"@de ;
+           :hatMusicBrainzArtistId "bae6429c-ed6e-4144-8a19-598cc641f990" .
 
 
 ###  http://example.org/kulturarena/AnnaAaronKonzert2014
@@ -1107,13 +1127,9 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/ArmenianNavyBand
 :ArmenianNavyBand rdf:type owl:NamedIndividual ,
-                           :Musikdarbieter ,
-                           :Musikensemble ;
-                  :hatGenre <http://www.wikidata.org/entity/Q8341> ;
-                  :hatMitglied <http://www.wikidata.org/entity/Q713757> ;
+                           :Musikdarbieter ;
                   :kommtAus :Armenien ;
-                  :hatName "Armenian Navy Band"@de ;
-                  :hatMusicBrainzArtistId "5ead7b56-3e5f-49a1-aa27-d15bf05e2bec" .
+                  :hatName "Armenian Navy Band"@de .
 
 
 ###  http://example.org/kulturarena/ArmenianNavyBandKonzert2001
@@ -1621,7 +1637,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :Bauchklang rdf:type owl:NamedIndividual ,
                      :Musikdarbieter ;
             :kommtAus :Öesterreich ;
-            :hatName "Bauchklang"@de .
+            :hatName "Bauchklang"@de ;
+            :hatMusicBrainzArtistId "bfd88f45-f0f8-4fae-a895-d96cc8732181" .
 
 
 ###  http://example.org/kulturarena/BauchklangKonzert2012
@@ -1692,9 +1709,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/BeneAperdannier
 :BeneAperdannier rdf:type owl:NamedIndividual ,
-                          :Musikdarbieter ;
+                          :Musikdarbieter ,
+                          :Musiker ,
+                          :Solist ;
                  :kommtAus :Deutschland ;
-                 :hatName "Bene Aperdannier"@de .
+                 :hatGeburtsdatum "1974-01-01T00:00:00Z"^^xsd:dateTime ;
+                 :hatGeschlecht "männlich"@de ;
+                 :hatName "Bene Aperdannier"@de ;
+                 :hatMusicBrainzArtistId "05c79843-429c-4858-b853-73810199d1b8" .
 
 
 ###  http://example.org/kulturarena/BeneAperdannierKonzert2021
@@ -1924,9 +1946,12 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/BlackSeaDahu
 :BlackSeaDahu rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musikensemble ;
+              :hatMitglied <http://www.wikidata.org/entity/Q77658563> ;
               :kommtAus :Schweiz ;
-              :hatName "Black Sea Dahu"@de .
+              :hatName "Black Sea Dahu"@de ;
+              :hatMusicBrainzArtistId "ffe6a97a-12e3-4d9d-a179-886eb0e5924c" .
 
 
 ###  http://example.org/kulturarena/BlackSeaDahuKonzert2022
@@ -1954,9 +1979,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/BlickBassy
 :BlickBassy rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ,
+                     :Solist ;
             :kommtAus :Kamerun ;
-            :hatName "Blick Bassy"@de .
+            :hatGeburtsdatum "1974-01-01T00:00:00Z"^^xsd:dateTime ;
+            :hatGeschlecht "männlich"@de ;
+            :hatName "Blick Bassy"@de ;
+            :hatMusicBrainzArtistId "4aa2bed2-ad19-402f-8c5c-2c0e24e4d729" .
 
 
 ###  http://example.org/kulturarena/BlickBassyKonzert2017
@@ -2090,9 +2120,12 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/BrassAgainst
 :BrassAgainst rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musikensemble ;
+              :hatMitglied <http://www.wikidata.org/entity/Q110997134> ;
               :kommtAus :VereinigteStaaten ;
-              :hatName "Brass Against"@de .
+              :hatName "Brass Against"@de ;
+              :hatMusicBrainzArtistId "80792351-8417-4e77-ab2c-8708b07cb45a" .
 
 
 ###  http://example.org/kulturarena/BrassAgainstKonzert2019
@@ -2252,6 +2285,7 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Burundi
 :Burundi rdf:type owl:NamedIndividual ,
                   :Land ;
+         :hatEinwohneranzahl 11530580 ;
          :hatName "Burundi"@de .
 
 
@@ -2535,14 +2569,9 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/CharlieCunningham
 :CharlieCunningham rdf:type owl:NamedIndividual ,
-                            :Musikdarbieter ,
-                            :Musiker ,
-                            :Solist ;
-                   :hatGenre <http://www.wikidata.org/entity/Q1317816> ;
+                            :Musikdarbieter ;
                    :kommtAus :Großbritannien ;
-                   :hatGeschlecht "männlich"@de ;
-                   :hatName "Charlie Cunningham"@de ;
-                   :hatMusicBrainzArtistId "73ed4066-c55b-496c-bb1a-1238937a2361" .
+                   :hatName "Charlie Cunningham"@de .
 
 
 ###  http://example.org/kulturarena/CharlieCunninghamKonzert2017
@@ -2745,9 +2774,15 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/ChristianLoeffler
 :ChristianLoeffler rdf:type owl:NamedIndividual ,
-                            :Musikdarbieter ;
+                            :Musikdarbieter ,
+                            :Musiker ,
+                            :Solist ;
                    :kommtAus :Deutschland ;
-                   :hatName "Christian Löffler"@de .
+                   :hatGeburtsdatum "1963-01-01T00:00:00Z"^^xsd:dateTime ,
+                                    "1985-04-05T00:00:00Z"^^xsd:dateTime ;
+                   :hatGeschlecht "männlich"@de ;
+                   :hatName "Christian Löffler"@de ;
+                   :hatMusicBrainzArtistId "a0d91c38-f5dc-487b-9b30-b67de1e7489e" .
 
 
 ###  http://example.org/kulturarena/ChristianLoefflerKonzert2019
@@ -2774,8 +2809,12 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/Cimafunk
 :Cimafunk rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ,
+                   :Solist ;
           :kommtAus :Kuba ;
+          :hatGeburtsdatum "1989-04-07T00:00:00Z"^^xsd:dateTime ;
+          :hatGeschlecht "männlich"@de ;
           :hatName "Cimafunk"@de .
 
 
@@ -2884,9 +2923,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/CoraFrost
 :CoraFrost rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ,
+                    :Solist ;
            :kommtAus :Deutschland ;
-           :hatName "Cora Frost"@de .
+           :hatGeburtsdatum "1963-01-01T00:00:00Z"^^xsd:dateTime ;
+           :hatGeschlecht "weiblich"@de ;
+           :hatName "Cora Frost"@de ;
+           :hatMusicBrainzArtistId "6e3df72e-956b-4199-b98c-3e61b9b40a04" .
 
 
 ###  http://example.org/kulturarena/CoraFrostKonzert1998
@@ -2928,9 +2972,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/CulturedPearls
 :CulturedPearls rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musikensemble ;
+                :hatMitglied <http://www.wikidata.org/entity/Q25815175> ,
+                             <http://www.wikidata.org/entity/Q69917289> ,
+                             <http://www.wikidata.org/entity/Q750713> ;
                 :kommtAus :Deutschland ;
-                :hatName "Cultured Pearls"@de .
+                :hatName "Cultured Pearls"@de ;
+                :hatMusicBrainzArtistId "6f98b1f5-6803-4f7a-9740-3eda9af6ddce" .
 
 
 ###  http://example.org/kulturarena/CulturedPearlsKonzert1996
@@ -3119,6 +3168,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/DançasOcultas
 :DançasOcultas rdf:type owl:NamedIndividual ,
                         :Musikdarbieter ;
+               :hatGenre <http://www.wikidata.org/entity/Q205049> ,
+                         <http://www.wikidata.org/entity/Q9730> ;
                :kommtAus :Portugal ;
                :hatName "Danças Ocultas"@de .
 
@@ -3546,6 +3597,7 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/DominikanischeRepublik
 :DominikanischeRepublik rdf:type owl:NamedIndividual ,
                                  :Land ;
+                        :hatEinwohneranzahl 10403761 ;
                         :hatName "Dominikanische Republik"@de .
 
 
@@ -3609,9 +3661,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/DubFX
 :DubFX rdf:type owl:NamedIndividual ,
-                :Musikdarbieter ;
+                :Musikdarbieter ,
+                :Musiker ,
+                :Solist ;
        :kommtAus :Australien ;
-       :hatName "Dub FX"@de .
+       :hatGeburtsdatum "1983-06-11T00:00:00Z"^^xsd:dateTime ;
+       :hatGeschlecht "männlich"@de ;
+       :hatName "Dub FX"@de ;
+       :hatMusicBrainzArtistId "4623daa8-d17f-4e76-a39d-fd22408463f1" .
 
 
 ###  http://example.org/kulturarena/DubFXKonzert2018
@@ -3675,9 +3732,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/Ebow
 :Ebow rdf:type owl:NamedIndividual ,
-               :Musikdarbieter ;
+               :Musikdarbieter ,
+               :Musiker ,
+               :Solist ;
       :kommtAus :Deutschland ;
-      :hatName "Ebow"@de .
+      :hatGeburtsdatum "1990-02-08T00:00:00Z"^^xsd:dateTime ;
+      :hatGeschlecht "weiblich"@de ;
+      :hatName "Ebow"@de ;
+      :hatMusicBrainzArtistId "a2f40e07-0ada-4eb7-b128-c005ee07335f" .
 
 
 ###  http://example.org/kulturarena/EbowKonzert2022
@@ -3916,13 +3978,9 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/EmirKusturicaTheNoSmokingOrchestra
 :EmirKusturicaTheNoSmokingOrchestra rdf:type owl:NamedIndividual ,
-                                             :Musikdarbieter ,
-                                             :Musikensemble ;
-                                    :hatGenre <http://www.wikidata.org/entity/Q211573> ;
-                                    :hatMitglied <http://www.wikidata.org/entity/Q94882> ;
+                                             :Musikdarbieter ;
                                     :kommtAus :Serbien ;
-                                    :hatName "Emir Kusturica & The No Smoking Orchestra"@de ;
-                                    :hatMusicBrainzArtistId "76dc461d-2503-4b24-a187-930cfd139243" .
+                                    :hatName "Emir Kusturica & The No Smoking Orchestra"@de .
 
 
 ###  http://example.org/kulturarena/EmirKusturicaTheNoSmokingOrchestraKonzert2000
@@ -3957,9 +4015,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/EnzoAvitabile
 :EnzoAvitabile rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ,
+                        :Solist ;
                :kommtAus :Italien ;
-               :hatName "Enzo Avitabile"@de .
+               :hatGeburtsdatum "1955-03-01T00:00:00Z"^^xsd:dateTime ;
+               :hatGeschlecht "männlich"@de ;
+               :hatName "Enzo Avitabile"@de ;
+               :hatMusicBrainzArtistId "f0d88199-754c-43b3-b121-74331563d060" .
 
 
 ###  http://example.org/kulturarena/EnzoAvitabileKonzert2005
@@ -3974,7 +4037,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :Erdmoebel rdf:type owl:NamedIndividual ,
                     :Musikdarbieter ;
            :kommtAus :Deutschland ;
-           :hatName "Erdmöbel"@de .
+           :hatName "Erdmöbel"@de ;
+           :hatMusicBrainzArtistId "003b2747-b74a-46c1-a51e-aeaffe88256c" .
 
 
 ###  http://example.org/kulturarena/ErdmoebelKonzert2007
@@ -4132,9 +4196,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/Faber
 :Faber rdf:type owl:NamedIndividual ,
-                :Musikdarbieter ;
+                :Musikdarbieter ,
+                :Musiker ,
+                :Solist ;
        :kommtAus :Schweiz ;
-       :hatName "Faber"@de .
+       :hatGeburtsdatum "1993-04-18T00:00:00Z"^^xsd:dateTime ;
+       :hatGeschlecht "männlich"@de ;
+       :hatName "Faber"@de ;
+       :hatMusicBrainzArtistId "41e55ccc-c01d-4e3e-9ea0-daced36c9cf3" .
 
 
 ###  http://example.org/kulturarena/FaberKonzert2017
@@ -4401,9 +4470,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/FilBoRiva
 :FilBoRiva rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ,
+                    :Solist ;
            :kommtAus :Italien ;
-           :hatName "Fil Bo Riva"@de .
+           :hatGeburtsdatum "1995-01-01T00:00:00Z"^^xsd:dateTime ;
+           :hatGeschlecht "männlich"@de ;
+           :hatName "Fil Bo Riva"@de ;
+           :hatMusicBrainzArtistId "4f87bbd6-ce60-40f4-9c57-92d43e0f6c5b" .
 
 
 ###  http://example.org/kulturarena/FilBoRivaKonzert2017
@@ -4639,9 +4713,13 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/FranciscoUlloa
 :FranciscoUlloa rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ,
+                         :Solist ;
                 :kommtAus :DominikanischeRepublik ;
-                :hatName "Francisco Ulloa"@de .
+                :hatGeschlecht "männlich"@de ;
+                :hatName "Francisco Ulloa"@de ;
+                :hatMusicBrainzArtistId "a69f2856-5e67-46a1-83a3-fad5f8588462" .
 
 
 ###  http://example.org/kulturarena/FranciscoUlloaKonzert1992
@@ -4686,7 +4764,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :FrankSpilkerGruppe rdf:type owl:NamedIndividual ,
                              :Musikdarbieter ;
                     :kommtAus :Deutschland ;
-                    :hatName "Frank Spilker Gruppe"@de .
+                    :hatName "Frank Spilker Gruppe"@de ;
+                    :hatMusicBrainzArtistId "19523c3f-4cfd-42e8-b088-c6f89effe432" .
 
 
 ###  http://example.org/kulturarena/FrankSpilkerGruppeKonzert2008
@@ -4970,10 +5049,15 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/GannaGryniva
 :GannaGryniva rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ,
+                       :Solist ;
               :kommtAus :Deutschland ,
                         :Ukraine ;
-              :hatName "Ganna Gryniva"@de .
+              :hatGeburtsdatum "1989-07-04T00:00:00Z"^^xsd:dateTime ;
+              :hatGeschlecht "weiblich"@de ;
+              :hatName "Ganna Gryniva"@de ;
+              :hatMusicBrainzArtistId "40f7995c-db14-427e-a9b2-e8bb19dff0c9" .
 
 
 ###  http://example.org/kulturarena/GannaGrynivaKonzert2023
@@ -5057,9 +5141,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/GerhardPolt
 :GerhardPolt rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ,
+                      :Solist ;
              :kommtAus :Deutschland ;
-             :hatName "Gerhard Polt"@de .
+             :hatGeburtsdatum "1942-05-07T00:00:00Z"^^xsd:dateTime ;
+             :hatGeschlecht "männlich"@de ;
+             :hatName "Gerhard Polt"@de ;
+             :hatMusicBrainzArtistId "290323a0-69cd-4868-9a6d-c054b024fd41" .
 
 
 ###  http://example.org/kulturarena/GerhardPoltKonzert2023
@@ -5094,7 +5183,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :GeschwisterPfister rdf:type owl:NamedIndividual ,
                              :Musikdarbieter ;
                     :kommtAus :Deutschland ;
-                    :hatName "Geschwister Pfister"@de .
+                    :hatName "Geschwister Pfister"@de ;
+                    :hatMusicBrainzArtistId "8260ef3c-896a-4ed6-800e-99f867caff18" .
 
 
 ###  http://example.org/kulturarena/GeschwisterPfisterKonzert1993
@@ -5179,7 +5269,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :GiantRooks rdf:type owl:NamedIndividual ,
                      :Musikdarbieter ;
             :kommtAus :Deutschland ;
-            :hatName "Giant Rooks"@de .
+            :hatName "Giant Rooks"@de ;
+            :hatMusicBrainzArtistId "917f3950-9a2a-4c0b-804c-06b1ffddd0c5" .
 
 
 ###  http://example.org/kulturarena/GiantRooksKonzert2019
@@ -5214,9 +5305,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/GisbertZuKnyphausen
 :GisbertZuKnyphausen rdf:type owl:NamedIndividual ,
-                              :Musikdarbieter ;
+                              :Musikdarbieter ,
+                              :Musiker ,
+                              :Solist ;
                      :kommtAus :Deutschland ;
-                     :hatName "Gisbert zu Knyphausen"@de .
+                     :hatGeburtsdatum "1979-04-23T00:00:00Z"^^xsd:dateTime ;
+                     :hatGeschlecht "männlich"@de ;
+                     :hatName "Gisbert zu Knyphausen"@de ;
+                     :hatMusicBrainzArtistId "08291c80-d48a-4c3d-a6f8-4541f72f931a" .
 
 
 ###  http://example.org/kulturarena/GisbertZuKnyphausenKonzert2019
@@ -5577,7 +5673,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :Gustav rdf:type owl:NamedIndividual ,
                  :Musikdarbieter ;
         :kommtAus :Öesterreich ;
-        :hatName "Gustav"@de .
+        :hatName "Gustav"@de ;
+        :hatMusicBrainzArtistId "5284c532-a968-47c0-b55d-386dfbdbe016" .
 
 
 ###  http://example.org/kulturarena/GustavKonzert2010
@@ -5590,9 +5687,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/GustavPeterWoehler
 :GustavPeterWoehler rdf:type owl:NamedIndividual ,
-                             :Musikdarbieter ;
+                             :Musikdarbieter ,
+                             :Musiker ,
+                             :Solist ;
                     :kommtAus :Deutschland ;
-                    :hatName "Gustav Peter Wöhler"@de .
+                    :hatGeburtsdatum "1956-07-31T00:00:00Z"^^xsd:dateTime ;
+                    :hatGeschlecht "männlich"@de ;
+                    :hatName "Gustav Peter Wöhler"@de ;
+                    :hatMusicBrainzArtistId "88f346a6-7f05-4931-bbfa-ed0e72bbcc4c" .
 
 
 ###  http://example.org/kulturarena/GustavPeterWoehlerKonzert2011
@@ -5671,9 +5773,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/HamidBaroudi
 :HamidBaroudi rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ,
+                       :Solist ;
               :kommtAus :Algerien ;
-              :hatName "Hamid Baroudi"@de .
+              :hatGeburtsdatum "1960-02-20T00:00:00Z"^^xsd:dateTime ;
+              :hatGeschlecht "männlich"@de ;
+              :hatName "Hamid Baroudi"@de ;
+              :hatMusicBrainzArtistId "ce4a046a-1bca-4076-90b6-6c653c035f29" .
 
 
 ###  http://example.org/kulturarena/HamidBaroudiKonzert1996
@@ -6076,6 +6183,7 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Indien
 :Indien rdf:type owl:NamedIndividual ,
                  :Land ;
+        :hatEinwohneranzahl 1326093247 ;
         :hatName "Indien"@de .
 
 
@@ -6099,6 +6207,7 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Iran
 :Iran rdf:type owl:NamedIndividual ,
                :Land ;
+      :hatEinwohneranzahl 86758304 ;
       :hatName "Iran"@de .
 
 
@@ -6333,10 +6442,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/JanGarbarekGroup
 :JanGarbarekGroup rdf:type owl:NamedIndividual ,
                            :Musikdarbieter ;
-                  :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                   :kommtAus :Norwegen ;
-                  :hatName "Jan Garbarek Group"@de ;
-                  :hatMusicBrainzArtistId "ade18e14-d868-44ee-994b-51587e587f72" .
+                  :hatName "Jan Garbarek Group"@de .
 
 
 ###  http://example.org/kulturarena/JanGarbarekGroupKonzert2007
@@ -6459,7 +6566,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :JazzrauschBigband rdf:type owl:NamedIndividual ,
                             :Musikdarbieter ;
                    :kommtAus :Deutschland ;
-                   :hatName "Jazzrausch Bigband"@de .
+                   :hatName "Jazzrausch Bigband"@de ;
+                   :hatMusicBrainzArtistId "079afcf6-5bf8-421c-b65b-9264dee16090" .
 
 
 ###  http://example.org/kulturarena/JazzrauschBigbandKonzert2022
@@ -6594,11 +6702,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Jeremias
 :Jeremias rdf:type owl:NamedIndividual ,
                    :Musikdarbieter ;
-          :hatGenre <http://www.wikidata.org/entity/Q164444> ,
-                    <http://www.wikidata.org/entity/Q484641> ;
           :kommtAus :Deutschland ;
-          :hatName "Jeremias"@de ;
-          :hatMusicBrainzArtistId "c685e7be-102b-4d4e-889d-6de82d32ba6c" .
+          :hatName "Jeremias"@de .
 
 
 ###  http://example.org/kulturarena/JeremiasKonzert2022
@@ -6633,9 +6738,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/JesperMunk
 :JesperMunk rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ,
+                     :Solist ;
             :kommtAus :Deutschland ;
-            :hatName "Jesper Munk"@de .
+            :hatGeburtsdatum "1992-05-31T00:00:00Z"^^xsd:dateTime ;
+            :hatGeschlecht "männlich"@de ;
+            :hatName "Jesper Munk"@de ;
+            :hatMusicBrainzArtistId "30d36ef2-b590-466e-b1d6-9dbe6923af00" .
 
 
 ###  http://example.org/kulturarena/JesperMunkKonzert2016
@@ -7357,6 +7467,7 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Kamerun
 :Kamerun rdf:type owl:NamedIndividual ,
                   :Land ;
+         :hatEinwohneranzahl 24053727 ;
          :hatName "Kamerun"@de .
 
 
@@ -7431,9 +7542,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/KatFrankie
 :KatFrankie rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ,
+                     :Solist ;
             :kommtAus :Australien ;
-            :hatName "Kat Frankie"@de .
+            :hatGeburtsdatum "1978-07-08T00:00:00Z"^^xsd:dateTime ;
+            :hatGeschlecht "weiblich"@de ;
+            :hatName "Kat Frankie"@de ;
+            :hatMusicBrainzArtistId "e19dfb4a-6b17-4669-a9df-e77bd7b2b529" .
 
 
 ###  http://example.org/kulturarena/KatFrankieKonzert2013
@@ -7522,10 +7638,15 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/KhadjaNin
 :KhadjaNin rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ,
+                    :Solist ;
            :kommtAus :Belgien ,
                      :Burundi ;
-           :hatName "Khadja Nin"@de .
+           :hatGeburtsdatum "1959-06-27T00:00:00Z"^^xsd:dateTime ;
+           :hatGeschlecht "weiblich"@de ;
+           :hatName "Khadja Nin"@de ;
+           :hatMusicBrainzArtistId "1a472ec5-97b1-482d-b17a-9a3d6b3dbcaf" .
 
 
 ###  http://example.org/kulturarena/KhadjaNinKonzert1997
@@ -7561,9 +7682,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/KimmoPohjonen
 :KimmoPohjonen rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ,
+                        :Solist ;
                :kommtAus :Finnland ;
-               :hatName "Kimmo Pohjonen"@de .
+               :hatGeburtsdatum "1964-08-16T00:00:00Z"^^xsd:dateTime ;
+               :hatGeschlecht "männlich"@de ;
+               :hatName "Kimmo Pohjonen"@de ;
+               :hatMusicBrainzArtistId "1a769035-7a50-45ad-aa21-471852f635a7" .
 
 
 ###  http://example.org/kulturarena/KimmoPohjonenKonzert2003
@@ -7741,9 +7867,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/KonstantinWecker
 :KonstantinWecker rdf:type owl:NamedIndividual ,
-                           :Musikdarbieter ;
+                           :Musikdarbieter ,
+                           :Musiker ,
+                           :Solist ;
                   :kommtAus :Deutschland ;
-                  :hatName "Konstantin Wecker"@de .
+                  :hatGeburtsdatum "1947-06-01T00:00:00Z"^^xsd:dateTime ;
+                  :hatGeschlecht "männlich"@de ;
+                  :hatName "Konstantin Wecker"@de ;
+                  :hatMusicBrainzArtistId "4e1d5be7-6736-4af3-8ac8-619fabc57818" .
 
 
 ###  http://example.org/kulturarena/KonstantinWeckerKonzert1996
@@ -7793,11 +7924,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/KraakSmaak
 :KraakSmaak rdf:type owl:NamedIndividual ,
                      :Musikdarbieter ;
-            :hatGenre <http://www.wikidata.org/entity/Q105637110> ,
-                      <http://www.wikidata.org/entity/Q9778> ;
             :kommtAus :Niederlande ;
-            :hatName "Kraak & Smaak"@de ;
-            :hatMusicBrainzArtistId "472fcf2f-eaa2-44a2-8e8f-2ecd23cd0fc7" .
+            :hatName "Kraak & Smaak"@de .
 
 
 ###  http://example.org/kulturarena/KraakSmaakKonzert2023
@@ -7857,7 +7985,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :Kummerbuben rdf:type owl:NamedIndividual ,
                       :Musikdarbieter ;
              :kommtAus :Schweiz ;
-             :hatName "Kummerbuben"@de .
+             :hatName "Kummerbuben"@de ;
+             :hatMusicBrainzArtistId "c37cf3e4-30a0-43cf-947a-4ef5cbd3aa0d" .
 
 
 ###  http://example.org/kulturarena/KummerbubenKonzert2012
@@ -7907,10 +8036,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/LaCaravanePasse
 :LaCaravanePasse rdf:type owl:NamedIndividual ,
                           :Musikdarbieter ;
-                 :hatGenre <http://www.wikidata.org/entity/Q11399> ;
                  :kommtAus :Frankreich ;
-                 :hatName "La Caravane Passe"@de ;
-                 :hatMusicBrainzArtistId "d9f213fe-10fe-4f47-a443-2301fae4673c" .
+                 :hatName "La Caravane Passe"@de .
 
 
 ###  http://example.org/kulturarena/LaCaravanePasseKonzert2014
@@ -8369,10 +8496,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Lhasa
 :Lhasa rdf:type owl:NamedIndividual ,
                 :Musikdarbieter ;
-       :hatGenre <http://www.wikidata.org/entity/Q1317816> ;
        :kommtAus :USA ;
-       :hatName "Lhasa"@de ;
-       :hatMusicBrainzArtistId "a5d95e54-676d-46d1-bbfa-0d41dcb7178b" .
+       :hatName "Lhasa"@de .
 
 
 ###  http://example.org/kulturarena/LhasaKonzert2004
@@ -8480,10 +8605,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/LolaMarsh
 :LolaMarsh rdf:type owl:NamedIndividual ,
                     :Musikdarbieter ;
-           :hatGenre <http://www.wikidata.org/entity/Q842324> ;
            :kommtAus :Israel ;
-           :hatName "Lola Marsh"@de ;
-           :hatMusicBrainzArtistId "9fb0217a-e50c-4aba-8d39-9238edbf0844" .
+           :hatName "Lola Marsh"@de .
 
 
 ###  http://example.org/kulturarena/LolaMarshKonzert2022
@@ -8519,7 +8642,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :LosDeAbajo rdf:type owl:NamedIndividual ,
                      :Musikdarbieter ;
             :kommtAus :Mexiko ;
-            :hatName "Los de Abajo"@de .
+            :hatName "Los de Abajo"@de ;
+            :hatMusicBrainzArtistId "d66d4816-4864-41b5-973a-061ca1aaf32d" .
 
 
 ###  http://example.org/kulturarena/LosDeAbajoKonzert2003
@@ -8588,10 +8712,15 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/LubomyrMelnyk
 :LubomyrMelnyk rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ;
+                        :Musikdarbieter ,
+                        :Musiker ,
+                        :Solist ;
                :kommtAus :Kanada ,
                          :Ukraine ;
-               :hatName "Lubomyr Melnyk"@de .
+               :hatGeburtsdatum "1948-12-22T00:00:00Z"^^xsd:dateTime ;
+               :hatGeschlecht "männlich"@de ;
+               :hatName "Lubomyr Melnyk"@de ;
+               :hatMusicBrainzArtistId "d39d2f12-8202-4f76-ae5b-b29a11902168" .
 
 
 ###  http://example.org/kulturarena/LubomyrMelnykKonzert2015
@@ -8849,6 +8978,7 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Maharaja
 :Maharaja rdf:type owl:NamedIndividual ,
                    :Musikdarbieter ;
+          :hatGenre <http://www.wikidata.org/entity/Q130232> ;
           :kommtAus :Indien ;
           :hatName "Maharaja"@de .
 
@@ -8904,7 +9034,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :Malky rdf:type owl:NamedIndividual ,
                 :Musikdarbieter ;
        :kommtAus :Deutschland ;
-       :hatName "Malky"@de .
+       :hatName "Malky"@de ;
+       :hatMusicBrainzArtistId "e01aa837-bf39-42a8-9069-32b9ff8cb087" .
 
 
 ###  http://example.org/kulturarena/MalkyKonzert2015
@@ -9662,8 +9793,11 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/MieskuoroHuutajat
 :MieskuoroHuutajat rdf:type owl:NamedIndividual ,
                             :Musikdarbieter ;
+                   :hatGenre <http://www.wikidata.org/entity/Q842256> ,
+                             <http://www.wikidata.org/entity/Q93204> ;
                    :kommtAus :Finnland ;
-                   :hatName "Mieskuoro Huutajat"@de .
+                   :hatName "Mieskuoro Huutajat"@de ;
+                   :hatMusicBrainzArtistId "8c5eb973-9e3b-4c4a-9f65-f85beea535fc" .
 
 
 ###  http://example.org/kulturarena/MieskuoroHuutajatKonzert2000
@@ -9810,8 +9944,12 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/MohammadRezaMortazavi
 :MohammadRezaMortazavi rdf:type owl:NamedIndividual ,
-                                :Musikdarbieter ;
+                                :Musikdarbieter ,
+                                :Musiker ,
+                                :Solist ;
                        :kommtAus :Iran ;
+                       :hatGeburtsdatum "1978-09-17T00:00:00Z"^^xsd:dateTime ;
+                       :hatGeschlecht "männlich"@de ;
                        :hatName "Mohammad Reza Mortazavi"@de .
 
 
@@ -9884,9 +10022,16 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/MoopMama
 :MoopMama rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musikensemble ;
+          :hatMitglied <http://www.wikidata.org/entity/Q100416304> ,
+                       <http://www.wikidata.org/entity/Q111703523> ,
+                       <http://www.wikidata.org/entity/Q111703524> ,
+                       <http://www.wikidata.org/entity/Q111703526> ,
+                       <http://www.wikidata.org/entity/Q15455641> ;
           :kommtAus :Deutschland ;
-          :hatName "Moop Mama"@de .
+          :hatName "Moop Mama"@de ;
+          :hatMusicBrainzArtistId "1f73ba2e-c116-4c50-b1ff-a99bded21722" .
 
 
 ###  http://example.org/kulturarena/MoopMamaKonzert2018
@@ -9941,7 +10086,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :MotionTrio rdf:type owl:NamedIndividual ,
                      :Musikdarbieter ;
             :kommtAus :Polen ;
-            :hatName "Motion Trio"@de .
+            :hatName "Motion Trio"@de ;
+            :hatMusicBrainzArtistId "6d51f16c-cb64-4321-ab54-70ffe5e156b1" .
 
 
 ###  http://example.org/kulturarena/MotionTrioKonzert2018
@@ -9970,7 +10116,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :Mozartband rdf:type owl:NamedIndividual ,
                      :Musikdarbieter ;
             :kommtAus :Öesterreich ;
-            :hatName "Mozartband"@de .
+            :hatName "Mozartband"@de ;
+            :hatMusicBrainzArtistId "d5f77f03-fddc-4e8c-86b8-d73d3cc311d2" .
 
 
 ###  http://example.org/kulturarena/MozartbandKonzert2004
@@ -10154,9 +10301,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/NicoSemsrott
 :NicoSemsrott rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ,
+                       :Solist ;
               :kommtAus :Deutschland ;
-              :hatName "Nico Semsrott"@de .
+              :hatGeburtsdatum "1986-03-11T00:00:00Z"^^xsd:dateTime ;
+              :hatGeschlecht "männlich"@de ;
+              :hatName "Nico Semsrott"@de ;
+              :hatMusicBrainzArtistId "c1f857d8-00be-4352-b74d-0a065dd3cab6" .
 
 
 ###  http://example.org/kulturarena/NicoSemsrottKonzert2012
@@ -10204,7 +10356,8 @@ owl:Nothing owl:disjointWith owl:Thing .
               :hatGenre <http://www.wikidata.org/entity/Q38656> ,
                         <http://www.wikidata.org/entity/Q8341> ;
               :kommtAus :Schweden ;
-              :hatGeburtsdatum "1956-02-15T00:00:00Z"^^xsd:dateTime ;
+              :hatGeburtsdatum "1923-08-19T00:00:00Z"^^xsd:dateTime ,
+                               "1956-02-15T00:00:00Z"^^xsd:dateTime ;
               :hatGeschlecht "männlich"@de ;
               :hatName "Nils Landgren"@de ;
               :hatMusicBrainzArtistId "aed70c67-7e5a-42e6-9103-b8c2942e98a2" .
@@ -10318,9 +10471,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/NinaAttal
 :NinaAttal rdf:type owl:NamedIndividual ,
-                    :Musikdarbieter ;
+                    :Musikdarbieter ,
+                    :Musiker ,
+                    :Solist ;
            :kommtAus :Frankreich ;
-           :hatName "Nina Attal"@de .
+           :hatGeburtsdatum "1992-04-01T00:00:00Z"^^xsd:dateTime ;
+           :hatGeschlecht "weiblich"@de ;
+           :hatName "Nina Attal"@de ;
+           :hatMusicBrainzArtistId "f3fef54b-96b2-4f47-bb9c-1030e9f5e4c3" .
 
 
 ###  http://example.org/kulturarena/NinaAttalKonzert2015
@@ -10429,6 +10587,8 @@ owl:Nothing owl:disjointWith owl:Thing .
                         :Musikdarbieter ,
                         :Musikensemble ;
                :hatGenre <http://www.wikidata.org/entity/Q1141081> ,
+                         <http://www.wikidata.org/entity/Q130232> ,
+                         <http://www.wikidata.org/entity/Q157394> ,
                          <http://www.wikidata.org/entity/Q187760> ,
                          <http://www.wikidata.org/entity/Q486263> ;
                :hatMitglied <http://www.wikidata.org/entity/Q3287902> ,
@@ -10712,7 +10872,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :PamPamIda rdf:type owl:NamedIndividual ,
                     :Musikdarbieter ;
            :kommtAus :Deutschland ;
-           :hatName "Pam Pam Ida"@de .
+           :hatName "Pam Pam Ida"@de ;
+           :hatMusicBrainzArtistId "5b481dff-e892-4cb8-8b8d-fd178eb77f41" .
 
 
 ###  http://example.org/kulturarena/PamPamIdaKonzert2018
@@ -11044,7 +11205,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :Provinz rdf:type owl:NamedIndividual ,
                   :Musikdarbieter ;
          :kommtAus :Deutschland ;
-         :hatName "Provinz"@de .
+         :hatName "Provinz"@de ;
+         :hatMusicBrainzArtistId "c722fdba-6fc0-46e8-932d-9e817d6730b2" .
 
 
 ###  http://example.org/kulturarena/ProvinzKonzert2022
@@ -11164,9 +11326,15 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/RainaldGrebe
 :RainaldGrebe rdf:type owl:NamedIndividual ,
-                       :Musikdarbieter ;
+                       :Musikdarbieter ,
+                       :Musiker ,
+                       :Solist ;
               :kommtAus :Deutschland ;
-              :hatName "Rainald Grebe"@de .
+              :hatGeburtsdatum "1971-01-01T00:00:00Z"^^xsd:dateTime ,
+                               "1971-04-14T00:00:00Z"^^xsd:dateTime ;
+              :hatGeschlecht "männlich"@de ;
+              :hatName "Rainald Grebe"@de ;
+              :hatMusicBrainzArtistId "f9f122e2-75b8-48ef-97ee-d5109b3a8424" .
 
 
 ###  http://example.org/kulturarena/RainaldGrebeFortunaEhrenfeld
@@ -11895,13 +12063,9 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/SabriBrothers
 :SabriBrothers rdf:type owl:NamedIndividual ,
-                        :Musikdarbieter ,
-                        :Musikensemble ;
-               :hatGenre <http://www.wikidata.org/entity/Q512410> ;
-               :hatMitglied <http://www.wikidata.org/entity/Q15486560> ;
+                        :Musikdarbieter ;
                :kommtAus :Pakistan ;
-               :hatName "Sabri Brothers"@de ;
-               :hatMusicBrainzArtistId "758cdd59-8341-4500-a7b7-37341258dc15" .
+               :hatName "Sabri Brothers"@de .
 
 
 ###  http://example.org/kulturarena/SabriBrothersKonzert1995
@@ -12032,7 +12196,9 @@ owl:Nothing owl:disjointWith owl:Thing .
                       <http://www.wikidata.org/entity/Q8341> ,
                       <http://www.wikidata.org/entity/Q9759> ;
             :kommtAus :VereinigteStaaten ;
-            :hatGeburtsdatum "1985-05-27T00:00:00Z"^^xsd:dateTime ;
+            :hatGeburtsdatum "1976-01-01T00:00:00Z"^^xsd:dateTime ,
+                             "1980-01-01T00:00:00Z"^^xsd:dateTime ,
+                             "1985-05-27T00:00:00Z"^^xsd:dateTime ;
             :hatGeschlecht "weiblich"@de ;
             :hatName "Sarah McCoy"@de ;
             :hatMusicBrainzArtistId "1db39276-7187-4bb0-b70d-ed064cdb8581" .
@@ -12050,7 +12216,9 @@ owl:Nothing owl:disjointWith owl:Thing .
 :ScalaKolacnyBrothers rdf:type owl:NamedIndividual ,
                                :Musikdarbieter ;
                       :kommtAus :Belgien ;
-                      :hatName "Scala & Kolacny Brothers"@de .
+                      :hatName "Scala & Kolacny Brothers"@de ;
+                      :hatMusicBrainzArtistId "1dd13698-ce0f-438e-85af-d97cdd967056" ,
+                                              "39d9579f-f311-4a3a-a4eb-21136908dcc7" .
 
 
 ###  http://example.org/kulturarena/ScalaKolacnyBrothersKonzert2007
@@ -12063,9 +12231,15 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/SchneiderTM
 :SchneiderTM rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ,
+                      :Solist ;
              :kommtAus :Deutschland ;
-             :hatName "Schneider TM"@de .
+             :hatGeburtsdatum "1970-01-01T00:00:00Z"^^xsd:dateTime ;
+             :hatGeschlecht "männlich"@de ;
+             :hatName "Schneider TM"@de ;
+             :hatMusicBrainzArtistId "dce1f80c-3f1c-4a04-9a15-19fc005c2536" ,
+                                     "f46bcf3f-d8e4-498d-b213-3f308e257a6b" .
 
 
 ###  http://example.org/kulturarena/SchneiderTMKonzert2006
@@ -12326,9 +12500,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/SilvanaDeluigi
 :SilvanaDeluigi rdf:type owl:NamedIndividual ,
-                         :Musikdarbieter ;
+                         :Musikdarbieter ,
+                         :Musiker ,
+                         :Solist ;
                 :kommtAus :Argentinien ;
-                :hatName "Silvana Deluigi"@de .
+                :hatGeburtsdatum "1960-11-27T00:00:00Z"^^xsd:dateTime ;
+                :hatGeschlecht "weiblich"@de ;
+                :hatName "Silvana Deluigi"@de ;
+                :hatMusicBrainzArtistId "2ab519b6-5e0a-4357-a8e2-acf561e08973" .
 
 
 ###  http://example.org/kulturarena/SilvanaDeluigiKonzert1999
@@ -12342,6 +12521,7 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Silvester
 :Silvester rdf:type owl:NamedIndividual ,
                     :Musikdarbieter ;
+           :hatGenre <http://www.wikidata.org/entity/Q37073> ;
            :kommtAus :Deutschland ;
            :hatName "Silvester"@de .
 
@@ -12372,7 +12552,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :SingerPur rdf:type owl:NamedIndividual ,
                     :Musikdarbieter ;
            :kommtAus :Deutschland ;
-           :hatName "Singer Pur"@de .
+           :hatName "Singer Pur"@de ;
+           :hatMusicBrainzArtistId "cd08a02d-7d94-439a-8d98-d992052c6cc7" .
 
 
 ###  http://example.org/kulturarena/SingerPurKonzert2003
@@ -12467,9 +12648,15 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/Socalled
 :Socalled rdf:type owl:NamedIndividual ,
-                   :Musikdarbieter ;
+                   :Musikdarbieter ,
+                   :Musiker ,
+                   :Solist ;
           :kommtAus :Kanada ;
-          :hatName "Socalled"@de .
+          :hatGeburtsdatum "1976-12-28T00:00:00Z"^^xsd:dateTime ;
+          :hatGeschlecht "männlich"@de ;
+          :hatName "Socalled"@de ;
+          :hatMusicBrainzArtistId "2867812b-4a04-45c2-9b74-a7d457fb84fd" ,
+                                  "4ce02135-3f54-4edd-9ff0-dfcfe008581a" .
 
 
 ###  http://example.org/kulturarena/SocalledKonzert2009
@@ -12800,10 +12987,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/StaffBendaBilili
 :StaffBendaBilili rdf:type owl:NamedIndividual ,
                            :Musikdarbieter ;
-                  :hatGenre <http://www.wikidata.org/entity/Q1752683> ;
                   :kommtAus :DemokratischeRepublikKongo ;
-                  :hatName "Staff Benda Bilili"@de ;
-                  :hatMusicBrainzArtistId "18a163e6-befd-475b-b9f0-3531c72db7fe" .
+                  :hatName "Staff Benda Bilili"@de .
 
 
 ###  http://example.org/kulturarena/StaffBendaBililiKonzert2010
@@ -13427,7 +13612,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :TheExcitements rdf:type owl:NamedIndividual ,
                          :Musikdarbieter ;
                 :kommtAus :Spanien ;
-                :hatName "The Excitements"@de .
+                :hatName "The Excitements"@de ;
+                :hatMusicBrainzArtistId "506d3635-a4a2-4716-aaca-cf27f4a60bb7" .
 
 
 ###  http://example.org/kulturarena/TheExcitementsKonzert2018
@@ -13680,10 +13866,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/TheSunRaArkestra
 :TheSunRaArkestra rdf:type owl:NamedIndividual ,
                            :Musikdarbieter ;
-                  :hatGenre <http://www.wikidata.org/entity/Q8341> ;
                   :kommtAus :USA ;
-                  :hatName "The Sun Ra Arkestra"@de ;
-                  :hatMusicBrainzArtistId "d9733f21-71d7-4fa7-813d-67eca0f0eaaf" .
+                  :hatName "The Sun Ra Arkestra"@de .
 
 
 ###  http://example.org/kulturarena/TheSunRaArkestraKonzert2023
@@ -13961,7 +14145,8 @@ owl:Nothing owl:disjointWith owl:Thing .
 :TingvallTrio rdf:type owl:NamedIndividual ,
                        :Musikdarbieter ;
               :kommtAus :Deutschland ;
-              :hatName "Tingvall Trio"@de .
+              :hatName "Tingvall Trio"@de ;
+              :hatMusicBrainzArtistId "51b553fa-1604-4110-ba48-f54e38f50678" .
 
 
 ###  http://example.org/kulturarena/TingvallTrioKonzert2022
@@ -14283,6 +14468,7 @@ owl:Nothing owl:disjointWith owl:Thing .
 ###  http://example.org/kulturarena/Ukraine
 :Ukraine rdf:type owl:NamedIndividual ,
                   :Land ;
+         :hatEinwohneranzahl 41167335 ;
          :hatName "Ukraine"@de .
 
 
@@ -14481,8 +14667,16 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/VolkerBraun
 :VolkerBraun rdf:type owl:NamedIndividual ,
-                      :Musikdarbieter ;
+                      :Musikdarbieter ,
+                      :Musiker ,
+                      :Solist ;
+             :hatGenre <http://www.wikidata.org/entity/Q11635> ,
+                       <http://www.wikidata.org/entity/Q482> ,
+                       <http://www.wikidata.org/entity/Q49084> ,
+                       <http://www.wikidata.org/entity/Q8261> ;
              :kommtAus :Deutschland ;
+             :hatGeburtsdatum "1939-05-07T00:00:00Z"^^xsd:dateTime ;
+             :hatGeschlecht "männlich"@de ;
              :hatName "Volker Braun"@de .
 
 
@@ -14664,9 +14858,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/Wilhelmine
 :Wilhelmine rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ,
+                     :Solist ;
             :kommtAus :Deutschland ;
-            :hatName "Wilhelmine"@de .
+            :hatGeburtsdatum "1990-01-01T00:00:00Z"^^xsd:dateTime ;
+            :hatGeschlecht "weiblich"@de ;
+            :hatName "Wilhelmine"@de ;
+            :hatMusicBrainzArtistId "634f7899-4c40-4015-a765-fdcc4d3e3cc4" .
 
 
 ###  http://example.org/kulturarena/WilhelmineKonzert2023
@@ -14693,9 +14892,14 @@ owl:Nothing owl:disjointWith owl:Thing .
 
 ###  http://example.org/kulturarena/WimMertens
 :WimMertens rdf:type owl:NamedIndividual ,
-                     :Musikdarbieter ;
+                     :Musikdarbieter ,
+                     :Musiker ,
+                     :Solist ;
             :kommtAus :Belgien ;
-            :hatName "Wim Mertens"@de .
+            :hatGeburtsdatum "1953-05-14T00:00:00Z"^^xsd:dateTime ;
+            :hatGeschlecht "männlich"@de ;
+            :hatName "Wim Mertens"@de ;
+            :hatMusicBrainzArtistId "bc2fd8bc-91ea-4b7e-a52e-d67bea5c0313" .
 
 
 ###  http://example.org/kulturarena/WimMertensKonzert2002
@@ -14949,7 +15153,8 @@ owl:Nothing owl:disjointWith owl:Thing .
                :hatGenre <http://www.wikidata.org/entity/Q1640319> ,
                          <http://www.wikidata.org/entity/Q193207> ;
                :kommtAus :Island ;
-               :hatGeburtsdatum "1986-11-03T00:00:00Z"^^xsd:dateTime ;
+               :hatGeburtsdatum "1954-01-05T00:00:00Z"^^xsd:dateTime ,
+                                "1986-11-03T00:00:00Z"^^xsd:dateTime ;
                :hatGeschlecht "männlich"@de ;
                :hatName "Ólafur Arnalds"@de ;
                :hatMusicBrainzArtistId "6655955b-1c1e-4bcb-84e4-81bcd9efab30" .
@@ -15044,6 +15249,14 @@ owl:Nothing owl:disjointWith owl:Thing .
                                                          :fandStattImJahr "2010"^^xsd:gYear .
 
 
+###  http://www.wikidata.org/entity/Q100416304
+<http://www.wikidata.org/entity/Q100416304> rdf:type owl:NamedIndividual ,
+                                                     :Musiker ;
+                                            :kommtAus <http://www.wikidata.org/entity/Q183> ;
+                                            :hatGeschlecht "männlich"@de ;
+                                            :hatName "Peter Laib"@de .
+
+
 ###  http://www.wikidata.org/entity/Q100736302
 <http://www.wikidata.org/entity/Q100736302> rdf:type owl:NamedIndividual ,
                                                      :Musiker ;
@@ -15103,12 +15316,6 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :hatName "Fusion"@de .
 
 
-###  http://www.wikidata.org/entity/Q105637110
-<http://www.wikidata.org/entity/Q105637110> rdf:type owl:NamedIndividual ,
-                                                     :Genre ;
-                                            :hatName "Q105637110" .
-
-
 ###  http://www.wikidata.org/entity/Q1062400
 <http://www.wikidata.org/entity/Q1062400> rdf:type owl:NamedIndividual ,
                                                    :Genre ;
@@ -15151,6 +15358,35 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :kommtAus <http://www.wikidata.org/entity/Q183> ;
                                          :hatGeschlecht "männlich"@de ;
                                          :hatName "Christopher Blenkinsop"@de .
+
+
+###  http://www.wikidata.org/entity/Q110997134
+<http://www.wikidata.org/entity/Q110997134> rdf:type owl:NamedIndividual ,
+                                                     :Musiker ;
+                                            :hatGeschlecht "weiblich"@de ;
+                                            :hatName "Q110997134" .
+
+
+###  http://www.wikidata.org/entity/Q111703523
+<http://www.wikidata.org/entity/Q111703523> rdf:type owl:NamedIndividual ,
+                                                     :Musiker ;
+                                            :kommtAus <http://www.wikidata.org/entity/Q183> ;
+                                            :hatGeschlecht "männlich"@de ;
+                                            :hatName "Q111703523" .
+
+
+###  http://www.wikidata.org/entity/Q111703524
+<http://www.wikidata.org/entity/Q111703524> rdf:type owl:NamedIndividual ,
+                                                     :Musiker ;
+                                            :hatGeschlecht "männlich"@de ;
+                                            :hatName "Q111703524" .
+
+
+###  http://www.wikidata.org/entity/Q111703526
+<http://www.wikidata.org/entity/Q111703526> rdf:type owl:NamedIndividual ,
+                                                     :Musiker ;
+                                            :hatGeschlecht "männlich"@de ;
+                                            :hatName "Q111703526" .
 
 
 ###  http://www.wikidata.org/entity/Q1136331
@@ -15205,6 +15441,12 @@ owl:Nothing owl:disjointWith owl:Thing .
                                           :kommtAus <http://www.wikidata.org/entity/Q183> ;
                                           :hatGeschlecht "männlich"@de ;
                                           :hatName "Daniel Koschitzki"@de .
+
+
+###  http://www.wikidata.org/entity/Q11635
+<http://www.wikidata.org/entity/Q11635> rdf:type owl:NamedIndividual ,
+                                                 :Genre ;
+                                        :hatName "Theater"@de .
 
 
 ###  http://www.wikidata.org/entity/Q1165195
@@ -15296,12 +15538,6 @@ owl:Nothing owl:disjointWith owl:Thing .
                                           :hatName "Musik der Roma"@de .
 
 
-###  http://www.wikidata.org/entity/Q129286
-<http://www.wikidata.org/entity/Q129286> rdf:type owl:NamedIndividual ,
-                                                  :Land ;
-                                         :hatName "Britisch-Indien"@de .
-
-
 ###  http://www.wikidata.org/entity/Q1298934
 <http://www.wikidata.org/entity/Q1298934> rdf:type owl:NamedIndividual ,
                                                    :Genre ;
@@ -15314,6 +15550,12 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :kommtAus <http://www.wikidata.org/entity/Q20> ;
                                          :hatGeschlecht "männlich"@de ;
                                          :hatName "Anders Aarum"@de .
+
+
+###  http://www.wikidata.org/entity/Q130232
+<http://www.wikidata.org/entity/Q130232> rdf:type owl:NamedIndividual ,
+                                                  :Genre ;
+                                         :hatName "Filmdrama"@de .
 
 
 ###  http://www.wikidata.org/entity/Q131183
@@ -15455,13 +15697,12 @@ owl:Nothing owl:disjointWith owl:Thing .
                                            :hatName "Florian Sump"@de .
 
 
-###  http://www.wikidata.org/entity/Q15486560
-<http://www.wikidata.org/entity/Q15486560> rdf:type owl:NamedIndividual ,
+###  http://www.wikidata.org/entity/Q15455641
+<http://www.wikidata.org/entity/Q15455641> rdf:type owl:NamedIndividual ,
                                                     :Musiker ;
-                                           :kommtAus <http://www.wikidata.org/entity/Q129286> ,
-                                                     <http://www.wikidata.org/entity/Q843> ;
+                                           :kommtAus <http://www.wikidata.org/entity/Q183> ;
                                            :hatGeschlecht "männlich"@de ;
-                                           :hatName "Ghulam Farid Sabri"@de .
+                                           :hatName "Menzel Mutzke"@de .
 
 
 ###  http://www.wikidata.org/entity/Q15621649
@@ -15470,6 +15711,12 @@ owl:Nothing owl:disjointWith owl:Thing .
                                            :kommtAus <http://www.wikidata.org/entity/Q183> ;
                                            :hatGeschlecht "weiblich"@de ;
                                            :hatName "Vanessa Mason"@de .
+
+
+###  http://www.wikidata.org/entity/Q157394
+<http://www.wikidata.org/entity/Q157394> rdf:type owl:NamedIndividual ,
+                                                  :Genre ;
+                                         :hatName "Fantasyfilm"@de .
 
 
 ###  http://www.wikidata.org/entity/Q15833010
@@ -15617,12 +15864,6 @@ owl:Nothing owl:disjointWith owl:Thing .
 <http://www.wikidata.org/entity/Q17111414> rdf:type owl:NamedIndividual ,
                                                     :Genre ;
                                            :hatName "Q17111414" .
-
-
-###  http://www.wikidata.org/entity/Q1752683
-<http://www.wikidata.org/entity/Q1752683> rdf:type owl:NamedIndividual ,
-                                                   :Genre ;
-                                          :hatName "Soukous"@de .
 
 
 ###  http://www.wikidata.org/entity/Q1772804
@@ -15804,12 +16045,6 @@ owl:Nothing owl:disjointWith owl:Thing .
                                            :hatName "Solveig Heilo"@de .
 
 
-###  http://www.wikidata.org/entity/Q211573
-<http://www.wikidata.org/entity/Q211573> rdf:type owl:NamedIndividual ,
-                                                  :Genre ;
-                                         :hatName "Garage Rock"@de .
-
-
 ###  http://www.wikidata.org/entity/Q2118402
 <http://www.wikidata.org/entity/Q2118402> rdf:type owl:NamedIndividual ,
                                                    :Genre ;
@@ -15930,6 +16165,14 @@ owl:Nothing owl:disjointWith owl:Thing .
                                                :Land ;
                                       :hatEinwohneranzahl 62027503 ;
                                       :hatName "Südafrika"@de .
+
+
+###  http://www.wikidata.org/entity/Q25815175
+<http://www.wikidata.org/entity/Q25815175> rdf:type owl:NamedIndividual ,
+                                                    :Musiker ;
+                                           :kommtAus <http://www.wikidata.org/entity/Q183> ;
+                                           :hatGeschlecht "männlich"@de ;
+                                           :hatName "Peter Hinderthür"@de .
 
 
 ###  http://www.wikidata.org/entity/Q2692738
@@ -16243,13 +16486,6 @@ owl:Nothing owl:disjointWith owl:Thing .
                                      :hatName "Österreich"@de .
 
 
-###  http://www.wikidata.org/entity/Q403
-<http://www.wikidata.org/entity/Q403> rdf:type owl:NamedIndividual ,
-                                               :Land ;
-                                      :hatEinwohneranzahl 7022268 ;
-                                      :hatName "Serbien"@de .
-
-
 ###  http://www.wikidata.org/entity/Q408
 <http://www.wikidata.org/entity/Q408> rdf:type owl:NamedIndividual ,
                                                :Land ;
@@ -16262,13 +16498,6 @@ owl:Nothing owl:disjointWith owl:Thing .
                                                :Land ;
                                       :hatEinwohneranzahl 47327407 ;
                                       :hatName "Argentinien"@de .
-
-
-###  http://www.wikidata.org/entity/Q43
-<http://www.wikidata.org/entity/Q43> rdf:type owl:NamedIndividual ,
-                                              :Land ;
-                                     :hatEinwohneranzahl 85372377 ;
-                                     :hatName "Türkei"@de .
 
 
 ###  http://www.wikidata.org/entity/Q43217885
@@ -16317,6 +16546,12 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :hatName "Eva Briegel"@de .
 
 
+###  http://www.wikidata.org/entity/Q482
+<http://www.wikidata.org/entity/Q482> rdf:type owl:NamedIndividual ,
+                                               :Genre ;
+                                      :hatName "Dichtkunst"@de .
+
+
 ###  http://www.wikidata.org/entity/Q483740
 <http://www.wikidata.org/entity/Q483740> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
@@ -16363,6 +16598,12 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :hatName "Bolero"@de .
 
 
+###  http://www.wikidata.org/entity/Q49084
+<http://www.wikidata.org/entity/Q49084> rdf:type owl:NamedIndividual ,
+                                                 :Genre ;
+                                        :hatName "Kurzgeschichte"@de .
+
+
 ###  http://www.wikidata.org/entity/Q49451
 <http://www.wikidata.org/entity/Q49451> rdf:type owl:NamedIndividual ,
                                                  :Genre ;
@@ -16383,12 +16624,6 @@ owl:Nothing owl:disjointWith owl:Thing .
                                            :kommtAus <http://www.wikidata.org/entity/Q298> ;
                                            :hatGeschlecht "männlich"@de ;
                                            :hatName "Q51077829" .
-
-
-###  http://www.wikidata.org/entity/Q512410
-<http://www.wikidata.org/entity/Q512410> rdf:type owl:NamedIndividual ,
-                                                  :Genre ;
-                                         :hatName "Qawwali"@de .
 
 
 ###  http://www.wikidata.org/entity/Q517415
@@ -16623,6 +16858,14 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :hatName "Alexander Veljanov"@de .
 
 
+###  http://www.wikidata.org/entity/Q69917289
+<http://www.wikidata.org/entity/Q69917289> rdf:type owl:NamedIndividual ,
+                                                    :Musiker ;
+                                           :kommtAus <http://www.wikidata.org/entity/Q183> ;
+                                           :hatGeschlecht "männlich"@de ;
+                                           :hatName "Bela Brauckmann"@de .
+
+
 ###  http://www.wikidata.org/entity/Q700423
 <http://www.wikidata.org/entity/Q700423> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
@@ -16657,15 +16900,6 @@ owl:Nothing owl:disjointWith owl:Thing .
                                                   :Land ;
                                          :hatEinwohneranzahl 63250000 ;
                                          :hatName "Bundesrepublik Deutschland bis 1990"@de .
-
-
-###  http://www.wikidata.org/entity/Q713757
-<http://www.wikidata.org/entity/Q713757> rdf:type owl:NamedIndividual ,
-                                                  :Musiker ;
-                                         :kommtAus <http://www.wikidata.org/entity/Q30> ,
-                                                   <http://www.wikidata.org/entity/Q43> ;
-                                         :hatGeschlecht "männlich"@de ;
-                                         :hatName "Arto Tunçboyacıyan"@de .
 
 
 ###  http://www.wikidata.org/entity/Q7207860
@@ -16724,6 +16958,14 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :hatName "Ragga"@de .
 
 
+###  http://www.wikidata.org/entity/Q750713
+<http://www.wikidata.org/entity/Q750713> rdf:type owl:NamedIndividual ,
+                                                  :Musiker ;
+                                         :kommtAus <http://www.wikidata.org/entity/Q183> ;
+                                         :hatGeschlecht "weiblich"@de ;
+                                         :hatName "Astrid North"@de .
+
+
 ###  http://www.wikidata.org/entity/Q753679
 <http://www.wikidata.org/entity/Q753679> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
@@ -16734,6 +16976,13 @@ owl:Nothing owl:disjointWith owl:Thing .
 <http://www.wikidata.org/entity/Q775614> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
                                          :hatName "Neofolk"@de .
+
+
+###  http://www.wikidata.org/entity/Q77658563
+<http://www.wikidata.org/entity/Q77658563> rdf:type owl:NamedIndividual ,
+                                                    :Musiker ;
+                                           :hatGeschlecht "weiblich"@de ;
+                                           :hatName "Q77658563" .
 
 
 ###  http://www.wikidata.org/entity/Q7800608
@@ -16780,11 +17029,10 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :hatName "Electronica"@de .
 
 
-###  http://www.wikidata.org/entity/Q83286
-<http://www.wikidata.org/entity/Q83286> rdf:type owl:NamedIndividual ,
-                                                 :Land ;
-                                        :hatEinwohneranzahl 23724919 ;
-                                        :hatName "Sozialistische Föderative Republik Jugoslawien"@de .
+###  http://www.wikidata.org/entity/Q8261
+<http://www.wikidata.org/entity/Q8261> rdf:type owl:NamedIndividual ,
+                                                :Genre ;
+                                       :hatName "Roman"@de .
 
 
 ###  http://www.wikidata.org/entity/Q8341
@@ -16805,17 +17053,16 @@ owl:Nothing owl:disjointWith owl:Thing .
                                          :hatName "Raï"@de .
 
 
+###  http://www.wikidata.org/entity/Q842256
+<http://www.wikidata.org/entity/Q842256> rdf:type owl:NamedIndividual ,
+                                                  :Genre ;
+                                         :hatName "Musikfilm"@de .
+
+
 ###  http://www.wikidata.org/entity/Q842324
 <http://www.wikidata.org/entity/Q842324> rdf:type owl:NamedIndividual ,
                                                   :Genre ;
                                          :hatName "Indie-Pop"@de .
-
-
-###  http://www.wikidata.org/entity/Q843
-<http://www.wikidata.org/entity/Q843> rdf:type owl:NamedIndividual ,
-                                               :Land ;
-                                      :hatEinwohneranzahl 223773700 ;
-                                      :hatName "Pakistan"@de .
 
 
 ###  http://www.wikidata.org/entity/Q844245
@@ -16928,14 +17175,10 @@ owl:Nothing owl:disjointWith owl:Thing .
                                           :hatName "Pola Roy"@de .
 
 
-###  http://www.wikidata.org/entity/Q94882
-<http://www.wikidata.org/entity/Q94882> rdf:type owl:NamedIndividual ,
-                                                 :Musiker ;
-                                        :kommtAus <http://www.wikidata.org/entity/Q142> ,
-                                                  <http://www.wikidata.org/entity/Q403> ,
-                                                  <http://www.wikidata.org/entity/Q83286> ;
-                                        :hatGeschlecht "männlich"@de ;
-                                        :hatName "Emir Kusturica"@de .
+###  http://www.wikidata.org/entity/Q93204
+<http://www.wikidata.org/entity/Q93204> rdf:type owl:NamedIndividual ,
+                                                 :Genre ;
+                                        :hatName "Dokumentarfilm"@de .
 
 
 ###  http://www.wikidata.org/entity/Q95199889

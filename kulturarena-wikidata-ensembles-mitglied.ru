@@ -36,12 +36,12 @@ WHERE {
     SELECT DISTINCT ?name ?ID ?genre ?genreLabel ?landLabel ?bevoelkerung ?mitglied ?mitgliedName ?mitgliedGeschlechtLabel ?mitgliedGeburtsdatum ?mitgliedLand ?mitgliedLandLabel ?mitgliedLandBevoelkerung
     WHERE {
       ?darbieter rdfs:label ?name .
-      ?darbieter wdt:P434 ?ID .
-      ?darbieter wdt:P136 ?genre .
-      OPTIONAL{?darbieter wdt:P495 ?origin .
-            ?origin wdt:P1082 ?bevoelkerung . }
+      ?darbieter wdt:P495 ?origin .
       ?origin rdfs:label ?landLabel .
- 
+      OPTIONAL{?origin wdt:P1082 ?bevoelkerung .}
+      OPTIONAL{?darbieter wdt:P434 ?ID .}
+      OPTIONAL{?darbieter wdt:P136 ?genre .}
+
       OPTIONAL{?darbieter wdt:P527 ?mitglied .
               OPTIONAL{?mitglied wdt:P21 ?mitgliedGeschlecht . }
               OPTIONAL{?mitglied wdt:P569 ?mitgliedGeburtsdatum . }
