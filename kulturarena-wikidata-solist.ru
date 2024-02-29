@@ -10,13 +10,13 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 
 
 INSERT {
-?knownDarbieter :hatGenre ?genre ;
+?knownDarbieter :hatGenre ?genreIRI ;
     :hatMusicBrainzArtistId ?ID ;
     :hatGeschlecht ?geschlechtLabel ;
     :hatGeburtsdatum ?geburtsdatum ;
     :hatMitglied ?mitglied .
 ?knownDarbieter a :Musiker .
-?genre a :Genre ; 
+?genreIRI a :Genre ; 
     :hatName ?genreLabel . 
 ?land :hatEinwohneranzahl ?bevoelkerung .
 }
@@ -30,26 +30,26 @@ WHERE {
   SERVICE <https://query.wikidata.org/sparql> {
     SELECT DISTINCT ?name ?ID ?genre ?genreLabel ?geschlechtLabel ?geburtsdatum ?landLabel ?bevoelkerung
     WHERE {
-        ?darbieter rdfs:label ?name .
-        ?darbieter wdt:P27 ?citizenship .
-        ?citizenship rdfs:label ?landLabel .
-        OPTIONAL{?citizenship wdt:P1082 ?bevoelkerung .}
-        OPTIONAL{?darbieter wdt:P434 ?ID .}
-        OPTIONAL{?darbieter wdt:P136 ?genre .}
-        OPTIONAL{?darbieter wdt:P21 ?geschlecht }
-        OPTIONAL{?darbieter wdt:P569 ?geburtsdatum . }
+      ?darbieter rdfs:label ?name .
+      ?darbieter wdt:P27 ?citizenship .
+      ?citizenship rdfs:label ?landLabel .
+      OPTIONAL{?citizenship wdt:P1082 ?bevoelkerung .}
+      OPTIONAL{?darbieter wdt:P434 ?ID .}
+      OPTIONAL{?darbieter wdt:P136 ?genre .}
+      OPTIONAL{?darbieter wdt:P21 ?geschlecht }
+      OPTIONAL{?darbieter wdt:P569 ?geburtsdatum . }
 
-        ?darbieter wdt:P31 ?type .
-        FILTER (?type = wd:Q5) .
-        FILTER (?darbieter != wd:Q1403672 ) .
+      ?darbieter wdt:P31 ?type .
+      FILTER (?type = wd:Q5) .
+      FILTER (?darbieter != wd:Q1403672 ) .
 
-        SERVICE wikibase:label {
-          bd:serviceParam wikibase:language "de".
-          ?genre rdfs:label ?genreLabel .
-          ?geschlecht rdfs:label ?geschlechtLabel .
-        }
-      
-  }
-} 
+      SERVICE wikibase:label {
+        bd:serviceParam wikibase:language "de".
+        ?genre rdfs:label ?genreLabel .
+        ?geschlecht rdfs:label ?geschlechtLabel .
+      }
+    }
+  } 
+  BIND(IRI(CONCAT("http://example.org/kulturarena/",REPLACE(?genreLabel," ",""))) AS ?genreIRI) .
 }
 

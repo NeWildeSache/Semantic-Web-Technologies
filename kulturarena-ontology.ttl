@@ -227,7 +227,7 @@ xsd:gYear rdf:type rdfs:Datatype .
 
 
 #################################################################
-#    Assertions
+#    General axioms
 #################################################################
 
 [ rdf:type     owl:AllDisjointClasses ;

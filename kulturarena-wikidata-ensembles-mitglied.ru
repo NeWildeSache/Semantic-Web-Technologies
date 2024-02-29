@@ -7,21 +7,22 @@ PREFIX bd:       <http://www.bigdata.com/rdf#>
 PREFIX wd:       <http://www.wikidata.org/entity/>
 PREFIX wdt:      <http://www.wikidata.org/prop/direct/>
 PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX fun: <http://w3id.org/sparql-generate/fn/>
 
 
 INSERT {
-?knownDarbieter :hatGenre ?genre ;
+?knownDarbieter :hatGenre ?genreIRI ;
     :hatMusicBrainzArtistId ?ID ;
-    :hatMitglied ?mitglied .
-?genre a :Genre ; 
+    :hatMitglied ?mitgliedIRI .
+?genreIRI a :Genre ; 
     :hatName ?genreLabel.
 ?land :hatEinwohneranzahl ?bevoelkerung .
-?mitglied a :Musiker ;
+?mitgliedIRI a :Musiker ;
     :hatName ?mitgliedName ;
     :hatGeschlecht ?mitgliedGeschlechtLabel ;
     :hatGeburtsdatum ?geburtsdatum ;
-    :kommtAus ?mitgliedLand .
-?mitgliedLand a :Land ;
+    :kommtAus ?mitgliedLandIRI .
+?mitgliedLandIRI a :Land ;
     :hatName ?mitgliedLandLabel ;
     :hatEinwohneranzahl ?mitgliedLandBevoelkerung .
 }
@@ -60,8 +61,10 @@ WHERE {
         ?mitglied rdfs:label ?mitgliedName .
         ?genre rdfs:label ?genreLabel .
       }
-      
     } 
   } 
+  BIND(IRI(CONCAT("http://example.org/kulturarena/",REPLACE(?genreLabel," ",""))) AS ?genreIRI) .
+  BIND(IRI(CONCAT("http://example.org/kulturarena/",REPLACE(?mitgliedName," ",""))) AS ?mitgliedIRI) .
+  BIND(IRI(CONCAT("http://example.org/kulturarena/",REPLACE(?mitgliedLandLabel," ",""))) AS ?mitgliedLandIRI) .
 }
 
