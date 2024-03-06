@@ -8,7 +8,7 @@ PREFIX :     <http://example.org/kulturarena/>
 # CQ8: Welche Musikdarbieter stammen aus dem bevölkerungsreichsten vertretenen Land?
 # (Musikdarbietern-IRI, Musikdarbietern-Name, Herkunftsland-Name)
 
-SELECT DISTINCT ?darbieter ?name ?land
+SELECT DISTINCT ?darbieter ?name ?landname 
 WHERE {
   {
   SELECT ?land (MAX(?einwohnerzahl) AS ?maxEinwohnerzahl)
@@ -22,4 +22,5 @@ WHERE {
   ?konzert :hatMusikdarbieter ?darbieter .
   ?darbieter :kommtAus ?land ;
              :hatName ?name .
+  ?land :hatName ?landname .
 } 
